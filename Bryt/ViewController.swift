@@ -24,7 +24,7 @@ let Token = ""
 let SubscribeToSelf = false
 
 
-class ViewController: UIViewController,    {
+class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
     
     
     

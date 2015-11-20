@@ -68,6 +68,7 @@
 		E16859151BFFA754006F971E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E16859171BFFA75B006F971E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E16859191BFFA7ED006F971E /* OpenTok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenTok.framework; path = Pods/OpenTok/OpenTok.framework; sourceTree = "<group>"; };
+		E16859211BFFC31D006F971E /* Bryt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bryt-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		FF9B28798EB4A055DEFCF8AE /* Pods-Bryt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +164,7 @@
 				E12E634E1BE3F05900BDDC76 /* Assets.xcassets */,
 				E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */,
 				E12E63531BE3F05900BDDC76 /* Info.plist */,
+				E168591C1BFFBC78006F971E /* Supporting Files */,
 			);
 			path = Bryt;
 			sourceTree = "<group>";
@@ -183,6 +185,14 @@
 				E12E63691BE3F05900BDDC76 /* Info.plist */,
 			);
 			path = BrytUITests;
+			sourceTree = "<group>";
+		};
+		E168591C1BFFBC78006F971E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E16859211BFFC31D006F971E /* Bryt-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,9 +530,11 @@
 				);
 				INFOPLIST_FILE = Bryt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = bguru.Bryt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bryt-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -539,9 +551,11 @@
 				);
 				INFOPLIST_FILE = Bryt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = bguru.Bryt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bryt-Bridging-Header.h";
 			};
 			name = Release;
 		};
