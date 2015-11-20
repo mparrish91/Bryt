@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84CBF7B16A3FFEFD011545C9 /* Pods_Bryt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7016448606E2EC5B9428B670 /* Pods_Bryt.framework */; };
 		E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63471BE3F05900BDDC76 /* AppDelegate.swift */; };
 		E12E634A1BE3F05900BDDC76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63491BE3F05900BDDC76 /* ViewController.swift */; };
 		E12E634D1BE3F05900BDDC76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E634B1BE3F05900BDDC76 /* Main.storyboard */; };
@@ -14,6 +15,15 @@
 		E12E63521BE3F05900BDDC76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */; };
 		E12E635D1BE3F05900BDDC76 /* BrytTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E635C1BE3F05900BDDC76 /* BrytTests.swift */; };
 		E12E63681BE3F05900BDDC76 /* BrytUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63671BE3F05900BDDC76 /* BrytUITests.swift */; };
+		E168590A1BFFA697006F971E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859091BFFA697006F971E /* VideoToolbox.framework */; };
+		E168590C1BFFA69E006F971E /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E168590B1BFFA69E006F971E /* GLKit.framework */; };
+		E168590E1BFFA6F3006F971E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E168590D1BFFA6F3006F971E /* CoreTelephony.framework */; };
+		E16859101BFFA738006F971E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E168590F1BFFA738006F971E /* CoreVideo.framework */; };
+		E16859121BFFA741006F971E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859111BFFA741006F971E /* CoreMedia.framework */; };
+		E16859141BFFA74B006F971E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859131BFFA74B006F971E /* CoreGraphics.framework */; };
+		E16859161BFFA754006F971E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859151BFFA754006F971E /* AudioToolbox.framework */; };
+		E16859181BFFA75B006F971E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859171BFFA75B006F971E /* AVFoundation.framework */; };
+		E168591A1BFFA7ED006F971E /* OpenTok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859191BFFA7ED006F971E /* OpenTok.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7016448606E2EC5B9428B670 /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C40BF97C4E7D4758D696F014 /* Pods-Bryt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.debug.xcconfig"; sourceTree = "<group>"; };
 		E12E63441BE3F05900BDDC76 /* Bryt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bryt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E63471BE3F05900BDDC76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E12E63491BE3F05900BDDC76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +59,16 @@
 		E12E63631BE3F05900BDDC76 /* BrytUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrytUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E63671BE3F05900BDDC76 /* BrytUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrytUITests.swift; sourceTree = "<group>"; };
 		E12E63691BE3F05900BDDC76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E16859091BFFA697006F971E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		E168590B1BFFA69E006F971E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		E168590D1BFFA6F3006F971E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E168590F1BFFA738006F971E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E16859111BFFA741006F971E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E16859131BFFA74B006F971E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E16859151BFFA754006F971E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E16859171BFFA75B006F971E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E16859191BFFA7ED006F971E /* OpenTok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenTok.framework; path = Pods/OpenTok/OpenTok.framework; sourceTree = "<group>"; };
+		FF9B28798EB4A055DEFCF8AE /* Pods-Bryt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +76,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E168591A1BFFA7ED006F971E /* OpenTok.framework in Frameworks */,
+				E16859181BFFA75B006F971E /* AVFoundation.framework in Frameworks */,
+				E16859161BFFA754006F971E /* AudioToolbox.framework in Frameworks */,
+				E16859141BFFA74B006F971E /* CoreGraphics.framework in Frameworks */,
+				E16859121BFFA741006F971E /* CoreMedia.framework in Frameworks */,
+				E16859101BFFA738006F971E /* CoreVideo.framework in Frameworks */,
+				E168590E1BFFA6F3006F971E /* CoreTelephony.framework in Frameworks */,
+				E168590C1BFFA69E006F971E /* GLKit.framework in Frameworks */,
+				E168590A1BFFA697006F971E /* VideoToolbox.framework in Frameworks */,
+				84CBF7B16A3FFEFD011545C9 /* Pods_Bryt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,13 +106,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36CFF497953CBD45483ED071 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C40BF97C4E7D4758D696F014 /* Pods-Bryt.debug.xcconfig */,
+				FF9B28798EB4A055DEFCF8AE /* Pods-Bryt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D6691F773C1604587FA2B619 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E16859191BFFA7ED006F971E /* OpenTok.framework */,
+				E16859171BFFA75B006F971E /* AVFoundation.framework */,
+				E16859151BFFA754006F971E /* AudioToolbox.framework */,
+				E16859131BFFA74B006F971E /* CoreGraphics.framework */,
+				E16859111BFFA741006F971E /* CoreMedia.framework */,
+				E168590F1BFFA738006F971E /* CoreVideo.framework */,
+				E168590D1BFFA6F3006F971E /* CoreTelephony.framework */,
+				7016448606E2EC5B9428B670 /* Pods_Bryt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E12E633B1BE3F05900BDDC76 = {
 			isa = PBXGroup;
 			children = (
+				E16859091BFFA697006F971E /* VideoToolbox.framework */,
+				E168590B1BFFA69E006F971E /* GLKit.framework */,
 				E12E63461BE3F05900BDDC76 /* Bryt */,
 				E12E635B1BE3F05900BDDC76 /* BrytTests */,
 				E12E63661BE3F05900BDDC76 /* BrytUITests */,
 				E12E63451BE3F05900BDDC76 /* Products */,
+				36CFF497953CBD45483ED071 /* Pods */,
+				D6691F773C1604587FA2B619 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +192,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E12E636C1BE3F05900BDDC76 /* Build configuration list for PBXNativeTarget "Bryt" */;
 			buildPhases = (
+				8CD785FB32458E5FBF788A05 /* Check Pods Manifest.lock */,
 				E12E63401BE3F05900BDDC76 /* Sources */,
 				E12E63411BE3F05900BDDC76 /* Frameworks */,
 				E12E63421BE3F05900BDDC76 /* Resources */,
+				2479CCF6882028E969B8121A /* Embed Pods Frameworks */,
+				9075583F59DEA2BB1A6FF2D3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +256,7 @@
 				TargetAttributes = {
 					E12E63431BE3F05900BDDC76 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = QF43K5VRQT;
 					};
 					E12E63571BE3F05900BDDC76 = {
 						CreatedOnToolsVersion = 7.1;
@@ -250,6 +314,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2479CCF6882028E969B8121A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bryt/Pods-Bryt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CD785FB32458E5FBF788A05 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9075583F59DEA2BB1A6FF2D3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bryt/Pods-Bryt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E12E63401BE3F05900BDDC76 /* Sources */ = {
@@ -397,23 +509,39 @@
 		};
 		E12E636D1BE3F05900BDDC76 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C40BF97C4E7D4758D696F014 /* Pods-Bryt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/OpenTok",
+				);
 				INFOPLIST_FILE = Bryt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bguru.Bryt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		E12E636E1BE3F05900BDDC76 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF9B28798EB4A055DEFCF8AE /* Pods-Bryt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/OpenTok",
+				);
 				INFOPLIST_FILE = Bryt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bguru.Bryt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +612,7 @@
 				E12E636E1BE3F05900BDDC76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E12E636F1BE3F05900BDDC76 /* Build configuration list for PBXNativeTarget "BrytTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +621,7 @@
 				E12E63711BE3F05900BDDC76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E12E63721BE3F05900BDDC76 /* Build configuration list for PBXNativeTarget "BrytUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +630,7 @@
 				E12E63741BE3F05900BDDC76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
