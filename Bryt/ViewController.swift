@@ -6,7 +6,9 @@
 //  Copyright © 2015 Bryt. All rights reserved.
 //
 
+
 import UIKit
+import Parse
 
 let videoWidth : CGFloat = 320
 let videoHeight : CGFloat = 240
@@ -14,19 +16,17 @@ let videoHeight : CGFloat = 240
 // *** Fill the following variables using your own Project info  ***
 // ***          https://dashboard.tokbox.com/projects            ***
 // Replace with your OpenTok API key
-let ApiKey = ""
+let ApiKey = "45403342"
 // Replace with your generated session ID
-let SessionID = ""
+let SessionID = "2_MX40NTQwMzM0Mn5-MTQ0ODA3MTA0OTkwN345bms5T25DQ1FHc3dWWm43TUhwRFdHSkJ-UH4"
 // Replace with your generated token
-let Token = ""
+let Token = "T1==cGFydG5lcl9pZD00NTQwMzM0MiZzaWc9NmZmMmU1YjAyNmM1ZjgwZDE0OWZhZDAwNjgxM2E2ODVjYjM4MjJhNjpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5UUXdNek0wTW41LU1UUTBPREEzTVRBME9Ua3dOMzQ1Ym1zNVQyNURRMUZIYzNkV1dtNDNUVWh3UkZkSFNrSi1VSDQmY3JlYXRlX3RpbWU9MTQ0ODA3MTA3MiZub25jZT0wLjUyNDM3MjM3NzY3MTgzMDImZXhwaXJlX3RpbWU9MTQ0ODA3NDU1NyZjb25uZWN0aW9uX2RhdGE9"
 
 // Change to YES to subscribe to your own stream.
 let SubscribeToSelf = false
 
 
 class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
-    
-    
     
     var session : OTSession?
     var publisher : OTPublisher?
@@ -57,6 +57,13 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         loginButton.layer.cornerRadius = 5
         loginButton.layer.borderWidth = 1
         loginButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            print("Object has been saved.")
+        }
     }
 
     override func didReceiveMemoryWarning() {
