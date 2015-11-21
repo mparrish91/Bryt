@@ -30,10 +30,89 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 return
             }
         } else {
-            print(No session with recieverID exists)
+            print("No session with recieverID exists")
             inputDict
         }
     
     }
+    }
+    
+    
+    class func storeToParse(inputDict:Dictionary<String, AnyObject>) {
+        
+        
+        let activeSession = PFObject(className: "ActiveSessions")
+        let callerID = inputDict["callerID"]
+        
+        if (callerID != nil) {
+            activeSession["callerID"] = callerID
+        }
+        
+        
+        let bAudio = inputDict["isAudio"]?.boolValue
+        activeSession["isAudio"] = bAudio?.toInt()
+        
+        let bVideo = inputDict["isAudio"]?.boolValue
+        activeSession["isVideo"] = bVideo?.toInt()
+
+        
+        let recieverID = inputDict["receiverID"]
+        
+        if (recieverID != nil) {
+            activeSession["recieverID"] = callerID
+        }
+     
+        
+        //callerTitle
+        let callerTitle = inputDict["callerTitle"]
+        
+        if (recieverID != nil) {
+            activeSession["CallerTitle"] = CallerTitle
+        }
+        
+    
+        
+        activeSession.saveInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                    // Do something
+                    return
+                }
+            } else {
+                print(No session with recieverID exists)
+                inputDict
+            }
+        
+        }
+        
+        
+        
+        
+    }
     
 }
+
+
+
+
+extension Bool {
+    
+    func toInt () ->Int? {
+        
+        switch self {
+            
+        case false:
+            
+            return 0
+            
+        case true:
+            
+            return 1
+            
+        default:
+            
+            return nil
+            
+        }
+        
+}
+
