@@ -241,7 +241,6 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             let al = UIAlertView(title: "OTError", message: message, delegate: nil, cancelButtonTitle: "OK")
         }
     }
-    
 }
 
 
