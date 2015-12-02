@@ -67,27 +67,55 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let callerTitle = inputDict["callerTitle"]
         
         if (recieverID != nil) {
-            activeSession["CallerTitle"] = CallerTitle
+            activeSession["CallerTitle"] = callerTitle
         }
         
     
         
-        activeSession.saveInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil {
-                    // Do something
-                    return
-                }
+//        activeSession.saveInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+//            if error == nil {
+//                    // Do something
+//                    return
+//                }
+//            } else {
+//                print(No session with recieverID exists)
+//                inputDict
+//            }
+//        
+//        }
+        
+        
+        activeSession.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if success == true {
+                print("Score created with ID: \(activeSession.objectId)")
+                
+                print("sessionID: \(activeSession["sessionID"]), publisherToken: \(activeSession["publisherToken"]), subscriberToken: \(activeSession["subscriberToken"])")
+
             } else {
-                print(No session with recieverID exists)
-                inputDict
+                let description = error?.localizedDescription
+
+                
+                print("savesession error!!! \(description)")
+                
+                var saveAlert = UIAlertController(title: "Savesession Error", message: "Failed to save outgoing call session. Please try again \(description)", preferredStyle: UIAlertControllerStyle.Alert)
+                
+//                ViewController.presentViewController(<#T##UIViewController#>)
             }
-        
         }
+            }
+
         
-        
-        
+        class func showUserTitlePrompt {
+            
+            
+        }
+    
+    class func anonymousLogin{
         
     }
+        
+
     
 }
 
