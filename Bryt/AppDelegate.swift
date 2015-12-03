@@ -14,6 +14,22 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var userTitle: String?
+    
+    var callerTitle: String?
+    var sessionID: String?
+    var publisherToken: String?
+    var subscriberToken: String?
+    
+    var bFullyLoggedIn: Bool?
+    
+    var currentLocation: CLLocation?
+    var appTimer: NSTimer?
+
+
+
+    
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
