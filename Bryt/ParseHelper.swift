@@ -10,25 +10,27 @@ import Foundation
 import Parse
 
 protocol AlertProtocol : NSObjectProtocol {
-    
-    func loadNewScreen(controller: UIViewController) -> Void;
-    func showAlert(message: String);
+    func showAlert(message: String)
 }
+
 
 class ParseHelper: NSObject {
     
     var viewController:UIViewController?
     var test:String?
     @IBOutlet var userNameField: UITextField?
-    weak var delegate: AlertProtocol?
-
+    var userNameText: UILabel?
+    var delegate: AlertProtocol?
 
 //will initiate the call by saving session
 //if there is a session already existing, do not save,
 //just pop an alert
 
 class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
+    
     let recieverID = inputDict["recieverID"]
+    
+    
     
     //check if the recipient is either the caller or receiver in one of the activesessions.
     let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
@@ -122,7 +124,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
         if((delegate?.respondsToSelector("showAlert:")) != nil)
         {
-            delegate?.showAlert(message);
+            delegate?.showAlert(message)
         }
         
         
@@ -147,20 +149,61 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         class func showUserTitlePrompt() {
             
             
-            
             let userNameAlert = UIAlertController(title: "LiveSessions", message:"Enter your name", preferredStyle: UIAlertControllerStyle.Alert)
-            userNameAlert.addTextFieldWithConfigurationHandler(addTextField)
+            userNameAlert.addTextFieldWithConfigurationHandler(nil)
             
-            userNameAlert.addAction(UIAlertAction(title: :"Ok", style: UIAlertActionStyle.Default, handler: userNameEntered))
-
+            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                
+                userNameText.text = (alert.textFields![0] as UITextField).text})
             
+                userNameAlert.addAction(action)
             
-        }
+                //second action cancels the alert view:
+                userNameAlert.addAction(UIAlertAction(
+                title: "Cancel",
+                style: UIAlertActionStyle.Cancel,
+                handler: nil
+                ))
+            
+            //present the alert:
+            //    presentViewController(alert, animated: true, completion: nil)
+            
+    }
     
-    class func anonymousLogin{
+    class func anonymousLogin() {
+        let loggedInUser = PFUser.currentUser()
+        
+        if (loggedInUser != nil) {
+            showUserTitlePrompt()
+            return
+        }
+        
+        PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
+            if (error != nil) {
+                let description = error?.localizedDescription
+                print("Failed to login anonymously. Please try again. \(description)")
+                let msg  = "Failed to save outgoing call session. Please try again \(description)"
+                
+                showAlert(msg)
+                
+            } else{
+                
+                var loggedInUser = PFUser()
+                loggedInUser = user!
+                showUserTitlePrompt()
+            }
+        
+        })
+    }
+    
+    
+    class func testMyAlert() {
+        anonymousLogin()
+        
+        
         
     }
-        
+    
 
     
 }
@@ -194,3 +237,4 @@ extension Bool {
         
 }
 
+}
