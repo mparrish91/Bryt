@@ -9,11 +9,18 @@
 import Foundation
 import Parse
 
+protocol AlertProtocol : NSObjectProtocol {
+    
+    func loadNewScreen(controller: UIViewController) -> Void;
+    func showAlert(message: String);
+}
+
 class ParseHelper: NSObject {
     
     var viewController:UIViewController?
     var test:String?
     @IBOutlet var userNameField: UITextField?
+    weak var delegate: AlertProtocol?
 
 
 //will initiate the call by saving session
@@ -98,23 +105,31 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             } else {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
+                let msg  = "Failed to save outgoing call session. Please try again \(description)"
                 
-                var saveAlert = UIAlertController(title: "Savesession Error", message: "Failed to save outgoing call session. Please try again \(description)", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                
+                showAlert(msg)
                 
             }
         }
             }
     
     class func showAlert(message: String){
-        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+//        
+////        ViewController.presentViewController(<#T##UIViewController#>)
         
-        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+        if((delegate?.respondsToSelector("showAlert:")) != nil)
+        {
+            delegate?.showAlert(message);
+        }
         
-//        ViewController.presentViewController(<#T##UIViewController#>)
+        
     }
-    
+
+
+
     
     func userNameEntered(alert: UIAlertAction!){
         // store the new word
@@ -149,6 +164,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
     
 }
+
+
+
+
 
 
 

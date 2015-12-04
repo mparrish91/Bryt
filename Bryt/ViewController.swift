@@ -235,12 +235,26 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     
     // MARK: - Helpers
     
+//    func showAlert(message: String) {
+//        // show alertview on main UI
+//        dispatch_async(dispatch_get_main_queue()) {
+//            let al = UIAlertView(title: "OTError", message: message, delegate: nil, cancelButtonTitle: "OK")
+//        }
+//    }
+    
+    
     func showAlert(message: String) {
         // show alertview on main UI
         dispatch_async(dispatch_get_main_queue()) {
-            let al = UIAlertView(title: "OTError", message: message, delegate: nil, cancelButtonTitle: "OK")
+            
+            let al = UIAlertController(title: "OTError", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            al.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+            
+            self.presentViewController(al, animated: true, completion: nil)
         }
     }
+
 }
 
 
