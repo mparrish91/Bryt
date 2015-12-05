@@ -16,8 +16,6 @@ protocol AlertProtocol : NSObjectProtocol {
 
 class ParseHelper: NSObject {
     
-    var viewController:UIViewController?
-    var test:String?
     @IBOutlet var userNameField: UITextField?
     var userNameText: UILabel?
     var delegate: AlertProtocol?
@@ -36,17 +34,13 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
     var query = PFQuery(className:"ActiveSessions", predicate:predicate)
     
-    query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+    query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
         if error == nil {
-            for object in objects! {
-                // Do something
             NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
-
-                return
-            }
+            return
         } else {
-            print("No session with recieverID exists")
-            //storeToParse
+            print("No session with recieverID exists.")
+            storeToParse(inputDict)
         }
     
     }
@@ -55,14 +49,12 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
     class func storeToParse(inputDict:Dictionary<String, AnyObject>) {
         
-        
         let activeSession = PFObject(className: "ActiveSessions")
         let callerID = inputDict["callerID"]
         
         if (callerID != nil) {
             activeSession["callerID"] = callerID
         }
-        
         
         let bAudio = inputDict["isAudio"]?.boolValue
         activeSession["isAudio"] = bAudio?.toInt()
@@ -72,7 +64,6 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
         
         let recieverID = inputDict["receiverID"]
-        
         if (recieverID != nil) {
             activeSession["recieverID"] = callerID
         }
@@ -80,37 +71,26 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
         //callerTitle
         let callerTitle = inputDict["callerTitle"]
-        
         if (recieverID != nil) {
             activeSession["CallerTitle"] = callerTitle
         }
         
-    
         activeSession.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
-            if success == true {
-                print("Score created with ID: \(activeSession.objectId)")
-                
+            if (error == nil) {
                 print("sessionID: \(activeSession["sessionID"]), publisherToken: \(activeSession["publisherToken"]), subscriberToken: \(activeSession["subscriberToken"])")
-                
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.sessionID = activeSession["sessionID"] as? String
-                appDelegate.subscriberToken = activeSession["sessionID"] as? String
-                appDelegate.publisherToken = activeSession["sessionID"] as? String
-                appDelegate.callerTitle = activeSession["sessionID"] as? String
-
+                appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
+                appDelegate.publisherToken = activeSession["publisherToken"] as? String
+                appDelegate.callerTitle = activeSession["callerTitle"] as? String
                 NSNotificationCenter.defaultCenter().postNotificationName("kSessionSavedNotification", object: nil)
-
-
-
             } else {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                
                 showAlert(msg)
-                
             }
         }
             }
