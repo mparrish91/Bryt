@@ -36,7 +36,8 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
-    
+    var m_userArray = NSMutableArray()
+    var m_recieverID =  String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -254,6 +255,44 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             self.presentViewController(al, animated: true, completion: nil)
         }
     }
+    
+    //Called in repsonse of kLoggedInNotification
+    func didLogin() {
+        
+    }
+    
+    func startVideoChat(sender:AnyObject) {
+        let button = UIButton()
+        
+        if button.tag < 0 //out of bounds
+        {
+            showAlert("User is no longer online.")
+            return
+        }
+        
+        let dict = m_userArray[button.tag]
+        let recieverID = dict["userID"]
+        m_recieverID = recieverID!!.copy() as! String
+        goToStreamingVC()
+        
+    }
+    
+    
+    func goToStreamingVC()
+    {
+        performSegueWithIdentifier("StreamingSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "StreamingSegue"){
+            let navController = segue.destinationViewController
+            let streamingVC = navController.topViewController as!
+            
+            
+            if 
+        }
+    }
+    
 
 }
 

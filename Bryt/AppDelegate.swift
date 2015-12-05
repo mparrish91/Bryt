@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var bFullyLoggedIn: Bool?
     
     var currentLocation: CLLocation?
-    var appTimer: NSTimer?
+    weak var appTimer: NSTimer?
 
 
 
@@ -69,6 +69,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func fireListeningTimer() {
+        
+        if (appTimer == nil){
+            return
+            appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick"),userInfo: nil, repeats: true)
+        }
+    }
+    
+    func onTick(timer: NSTimer){
+        print("OnTick")
+//        ParseHelper.pollParseForActiveSessions
     }
 
 
