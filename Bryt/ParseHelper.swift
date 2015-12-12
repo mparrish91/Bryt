@@ -92,18 +92,14 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-//                showAlert(msg)        question
+                showAlert(msg)        
             }
         }
     }
 
 
-
     
-    
-//    
-//    // no way to present to VC also storage of text is messed up
-//    //login prompt
+//      login prompt
     class func showUserTitlePrompt() {
         
         //present the AlertViewController
@@ -124,7 +120,15 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let alertController = DBAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
-            NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.userTitle = alertController.textFields![0].text
+            appDelegate.bFullyLoggedIn = true
+            
+            //fire appdelegat timer
+            appDelegate.fireListeningTimer()
+            NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
+
 
         })
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
@@ -140,30 +144,25 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
         let textField = alertController.textFields![0]
         textField.placeholder = "Enter your login ID"
-//        presentViewController(alertController, animated: true, completion: nil)
-        
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.userTitle = alertController.textFields![0].text
-        appDelegate.bFullyLoggedIn = true
-        
-        //fire appdelegate timer
-        appDelegate.fireListeningTimer()
-        NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
         
         alertController.show()
 
+        
+        
+        //will probably use somewhere else
+        NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+
+        
+
     }
     
-//
-//    
-//    
+    
 //    //works
     class func anonymousLogin() {
         let loggedInUser = PFUser.currentUser()
         
         if (loggedInUser != nil) {
-//            showUserTitlePrompt()
+            showUserTitlePrompt()
             return
         }
         
@@ -172,17 +171,17 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("Failed to login anonymously. Please try again. \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-//                showAlert(msg)
+                showAlert(msg)
             } else{
                 var loggedInUser = PFUser()
                 loggedInUser = user!
-//                showUserTitlePrompt()
+                showUserTitlePrompt()
             }
             
         })
     }
-//
-//    
+
+    
     class func showAlert(message: String){
         let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
