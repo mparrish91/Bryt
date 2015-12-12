@@ -16,9 +16,10 @@ protocol AlertProtocol : NSObjectProtocol {
 
 class ParseHelper: NSObject {
     
-    @IBOutlet var userNameField: UITextField?
-    var userNameText: UILabel?
     var delegate: AlertProtocol?
+
+    @IBOutlet var userNameField: UITextField?
+    var loginTextField: UITextField?
 
 //will initiate the call by saving session
 //if there is a session already existing, do not save,
@@ -93,9 +94,9 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 //                showAlert(msg)        question
             }
         }
-            }
-    
-    
+    }
+
+
 
     
     
@@ -104,20 +105,43 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 //    //login prompt
     class func showUserTitlePrompt() {
         
-        let userNameAlert = UIAlertController(title: "LiveSessions", message:"Enter your name", preferredStyle: UIAlertControllerStyle.Alert)
-        userNameAlert.addTextFieldWithConfigurationHandler(nil)
+        //present the AlertViewController
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
-            print("User click Ok button")  })
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {(alert: UIAlertAction!) in
-            print("User click Cancel button")  })
+//        let userNameAlert = UIAlertController(title: "LiveSessions", message:"Enter your name", preferredStyle: UIAlertControllerStyle.Alert)
+//        userNameAlert.addTextFieldWithConfigurationHandler(nil)
+//        
+//        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+//            print("User click Ok button")  })
+//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {(alert: UIAlertAction!) in
+//            print("User click Cancel button")  })
+//        
+//        userNameAlert.addAction(okAction)
+//        userNameAlert.addAction(cancelAction)
+//        
+//        
         
-        userNameAlert.addAction(okAction)
-        userNameAlert.addAction(cancelAction)
+        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            print("Cancel Button Pressed")
+        }
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        alertController.tag =
+        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            // Enter the textfiled customization code here.
+            loginTextField = textField
+            loginTextField?.placeholder = "Enter your login ID"
+        }
+        let textField = alertController.textFields![0]
+        textField.placeholder = "Enter your login ID"
+//        presentViewController(alertController, animated: true, completion: nil)
         
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.userTitle = userNameAlert.textFields![0].text
+        appDelegate.userTitle = alertController.textFields![0].text
         appDelegate.bFullyLoggedIn = true
         
         //fire appdelegate timer
@@ -137,6 +161,8 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         //    presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    optional func alertView(_alertView:uialertview
 //
 //    
 //    
