@@ -60,11 +60,15 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         loginButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
-        }
+//        let testObject = PFObject(className: "TestObject")
+//        testObject["foo"] = "bar"
+//        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//            print("Object has been saved.")}
+        
+            
+        ParseHelper.saveSessionToParse([:])
+            
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -286,10 +290,8 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "StreamingSegue"){
             let navController = segue.destinationViewController
-            let streamingVC = navController.topViewController as!
+//            let streamingVC = navController.topViewController as!
             
-            
-            if 
         }
     }
     

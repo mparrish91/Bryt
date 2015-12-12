@@ -90,33 +90,31 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg)
+//                showAlert(msg)        question
             }
         }
             }
     
     
+
     
-    // no way to present to VC also storage of text is messed up
-    //login prompt
+    
+//    
+//    // no way to present to VC also storage of text is messed up
+//    //login prompt
     class func showUserTitlePrompt() {
         
         let userNameAlert = UIAlertController(title: "LiveSessions", message:"Enter your name", preferredStyle: UIAlertControllerStyle.Alert)
         userNameAlert.addTextFieldWithConfigurationHandler(nil)
         
-        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
-            
-            userNameText.text = (alert.textFields![0] as UITextField).text})
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+            print("User click Ok button")  })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {(alert: UIAlertAction!) in
+            print("User click Cancel button")  })
         
+        userNameAlert.addAction(okAction)
+        userNameAlert.addAction(cancelAction)
         
-        userNameAlert.addAction(action)
-        
-        //second action cancels the alert view:
-        userNameAlert.addAction(UIAlertAction(
-            title: "Cancel",
-            style: UIAlertActionStyle.Cancel,
-            handler: nil
-            ))
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.userTitle = userNameAlert.textFields![0].text
@@ -139,70 +137,69 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         //    presentViewController(alert, animated: true, completion: nil)
         
     }
-    
-    
-    
-    //works
+//
+//    
+//    
+//    //works
     class func anonymousLogin() {
         let loggedInUser = PFUser.currentUser()
         
         if (loggedInUser != nil) {
-            showUserTitlePrompt()
+//            showUserTitlePrompt()
             return
         }
         
         PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
-            if (error != nil) {
+            if error != nil || user == nil {
                 let description = error?.localizedDescription
                 print("Failed to login anonymously. Please try again. \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg)
-                
+//                showAlert(msg)
             } else{
                 var loggedInUser = PFUser()
                 loggedInUser = user!
-                showUserTitlePrompt()
+//                showUserTitlePrompt()
             }
             
         })
     }
-
-    
-    class func showAlert(message: String){
-//        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//
+//    
+//    class func showAlert(message: String){
+////        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+////        
+////        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+////        
+//////        ViewController.presentViewController(<#T##UIViewController#>)
 //        
-//        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+//        if((delegate?.respondsToSelector("showAlert:")) != nil)
+//        {
+//            delegate?.showAlert(message)
+//        }
 //        
-////        ViewController.presentViewController(<#T##UIViewController#>)
-        
-        if((delegate?.respondsToSelector("showAlert:")) != nil)
-        {
-            delegate?.showAlert(message)
-        }
-        
-        
-    }
-
-    func userNameEntered(alert: UIAlertAction!){
-        // store the new word
-        self.textView2.text = deletedString + " " + self.newWordField.text
-    }
-    
-    func addTextField(textField: UITextField!){
-        // add the text field and make the result global
-        textField.placeholder = "test"
-//        self.newWordField = textField
-    }
-    
-    
-    
-    class func testMyAlert() {
-        anonymousLogin()
-        
-        
-        
-    }
-    
+//        
+//    }
+//
+//    func userNameEntered(alert: UIAlertAction!){
+//        // store the new word
+//        self.textView2.text = deletedString + " " + self.newWordField.text
+//    }
+//    
+//    func addTextField(textField: UITextField!){
+//        // add the text field and make the result global
+//        textField.placeholder = "test"
+////        self.newWordField = textField
+//    }
+//    
+//    
+//    
+//    class func testMyAlert() {
+//        anonymousLogin()
+//        
+//        
+//        
+//    }
+//    
 
     
 }
