@@ -152,8 +152,6 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         //will probably use somewhere else
         NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
 
-        
-
     }
     
     

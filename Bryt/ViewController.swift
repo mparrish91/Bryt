@@ -265,6 +265,44 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         
     }
     
+    func startUpdate() {
+//        let thisUser = ParseHelper.logg
+    }
+    
+    func saveUserToParse(user: PFUser) {
+        
+        var activeUser: PFObject
+        
+        let query = PFQuery(className: "ActiveUsers")
+        query.whereKey("user", equalTo: user.objectId!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+            //if user is active user already, just update the entry
+                //otherwise create it.
+                if objects?.count == 0 {
+                    activeUser = PFObject(className: "ActiveUsers")
+                }else{
+                    activeUser = objects![0]
+                }
+                
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                activeUser["userID"] = user.objectId
+                activeUser["userTitle"] = appDelegate.userTitle
+                
+                activeUser.saveInBackgroundWithBlock{ (success, error) -> Void in
+                    print("activeUser saved: \(success)")
+                }
+                
+                
+                appDelegate.sessionID = activeSession["sessionID"] as? String
+                appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
+                appDelegate.publisherToken = activeSession["publisherToken"] as? String
+                appDelegate.callerTitle = activeSession["callerTitle"] as? String
+                NSNotificationCenter.defaultCenter().postNotificationName("kSessionSavedNotification", object: nil)
+            
+        }
+    }
+    
     func startVideoChat(sender:AnyObject) {
         let button = UIButton()
         
@@ -294,6 +332,11 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             
         }
     }
+    
+
+    
+    
+    
     
 
 }
