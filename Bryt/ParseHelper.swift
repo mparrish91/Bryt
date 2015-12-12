@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import DBAlertController
 
 protocol AlertProtocol : NSObjectProtocol {
     func showAlert(message: String)
@@ -120,20 +121,22 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 //        
 //        
         
-        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
+        let alertController = DBAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
+            NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+
         })
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
             print("Cancel Button Pressed")
+            //setPollingTimer
         }
         alertController.addAction(ok)
         alertController.addAction(cancel)
-        alertController.tag =
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
             // Enter the textfiled customization code here.
-            loginTextField = textField
-            loginTextField?.placeholder = "Enter your login ID"
+//            loginTextField = textField
+//            loginTextField?.placeholder = "Enter your login ID"
         }
         let textField = alertController.textFields![0]
         textField.placeholder = "Enter your login ID"
@@ -148,21 +151,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         appDelegate.fireListeningTimer()
         NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
         
-        NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
-        
-        
+        alertController.show()
 
-    
-        
-
-    
-        
-        //present the alert:
-        //    presentViewController(alert, animated: true, completion: nil)
-        
     }
     
-    optional func alertView(_alertView:uialertview
 //
 //    
 //    
@@ -191,20 +183,12 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
 //
 //    
-//    class func showAlert(message: String){
-////        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
-////        
-////        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
-////        
-//////        ViewController.presentViewController(<#T##UIViewController#>)
-//        
-//        if((delegate?.respondsToSelector("showAlert:")) != nil)
-//        {
-//            delegate?.showAlert(message)
-//        }
-//        
-//        
-//    }
+    class func showAlert(message: String){
+        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+        alert.show()
+        
+    }
 //
 //    func userNameEntered(alert: UIAlertAction!){
 //        // store the new word

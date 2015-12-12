@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DBAlertController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Bryt.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -12,7 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>AAB35FB4DEC4AC8DC7A996D949C55B70</key>
+		<key>098058DB8AA265D704661FE96460EF62</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDA8A5E5894987CA87BFDCAFD2A76DE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

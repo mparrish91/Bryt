@@ -7,22 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		775D5ACF33281C3FA74C9E50427D65A8 /* Pods-Bryt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 834DDAB26660B155B37D5106BAC83835 /* Pods-Bryt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2217188DAA4F6B62708EE27608267D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		B6183BF5561656EBF60A36489972C6D8 /* Pods-Bryt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16028F5A456EB3D830E5CC7143B5010A /* Pods-Bryt-dummy.m */; };
+		4B8ECD5C0B1F0987D057E3559998DECA /* DBAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */; };
+		50C3A3D2DCFD481ACB44B08742765EDA /* Pods-Bryt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16028F5A456EB3D830E5CC7143B5010A /* Pods-Bryt-dummy.m */; };
+		70E9D6D8B5C50E08B5A6A0DBDEEF15EF /* DBAlertController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */; };
+		71D2CD11ED3304CDEB865707D61725ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		8096F9447C51434B9861CC9C01213526 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		98D4C7F2A0D82EE31C4ABC78314EC364 /* Pods-Bryt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 834DDAB26660B155B37D5106BAC83835 /* Pods-Bryt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A38EFBCD5397F421834C5AF4B230E663 /* DBAlertController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6943819F90908454BC27E1D868778BE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 098058DB8AA265D704661FE96460EF62;
+			remoteInfo = DBAlertController;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0262DBB3F7BB439A2DDFD541180039C3 /* Pods-Bryt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Bryt.release.xcconfig"; sourceTree = "<group>"; };
 		16028F5A456EB3D830E5CC7143B5010A /* Pods-Bryt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Bryt-dummy.m"; sourceTree = "<group>"; };
+		285DC37F8A52B599D3253DFA8DA1BDB1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3674A479147FF2E0143F11025C2C822B /* OpenTok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenTok.framework; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3F6BA7133CDA16EBF75FA8DA73F15F59 /* OpenTok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenTok.framework; sourceTree = "<group>"; };
+		4E73466D67E6000586659E82669CD079 /* DBAlertController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-prefix.pch"; sourceTree = "<group>"; };
+		62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DBAlertController.xcconfig; sourceTree = "<group>"; };
+		6F6AFD7B6CC3EF7E1D105083561B3B71 /* DBAlertController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = DBAlertController.modulemap; sourceTree = "<group>"; };
 		834DDAB26660B155B37D5106BAC83835 /* Pods-Bryt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Bryt-umbrella.h"; sourceTree = "<group>"; };
-		A3E597740B8A35733370690C3322A025 /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5330A31725DAFD44E049B62B389188F /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DBAlertController.swift; path = DBAlertController/Pod/DBAlertController.swift; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C5C2C73FBECBBF57D18AD7ED485A475B /* Pods-Bryt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Bryt.debug.xcconfig"; sourceTree = "<group>"; };
+		CA31612E033A0E3CB126E3E805D52EB8 /* DBAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DBAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DBAlertController-dummy.m"; sourceTree = "<group>"; };
 		CF3BE7F0CCE7FF155DBAB5661941C9C6 /* Pods-Bryt-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Bryt-resources.sh"; sourceTree = "<group>"; };
 		CF5F7B29849D8E7D61261BDBB6BAD30D /* Pods-Bryt-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Bryt-acknowledgements.plist"; sourceTree = "<group>"; };
+		DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-umbrella.h"; sourceTree = "<group>"; };
 		DEE21FB079E0A2B1F5D49540BCD836FF /* Pods-Bryt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Bryt.modulemap"; sourceTree = "<group>"; };
 		E990D783E5F6B076D081B9D68D58D09E /* Pods-Bryt-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Bryt-frameworks.sh"; sourceTree = "<group>"; };
 		F59C535CB18D627DF9C0321AA651220F /* Pods-Bryt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Bryt-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -30,31 +52,32 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		95F9BC6203AE5A86484D4CEE2D185049 /* Frameworks */ = {
+		7914061C0A8117F117D1B4CF76781F0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2217188DAA4F6B62708EE27608267D8 /* Foundation.framework in Frameworks */,
+				71D2CD11ED3304CDEB865707D61725ED /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8980F1077501C3DA6E1332EFA1E09A5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8096F9447C51434B9861CC9C01213526 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1570354C03EE6B1D34D1443346FC3367 /* Products */ = {
+		0C036CAA89779AD93E217A323106FC0A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3E597740B8A35733370690C3322A025 /* Pods_Bryt.framework */,
+				81B3CF5C7EDEBF00AAB99D23D9B5E418 /* DBAlertController */,
+				AEAAAE60E6F7B867B1743A40965F12C9 /* OpenTok */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6D5298F7A56BBBA6485A1835829A60B0 /* OpenTok */ = {
-			isa = PBXGroup;
-			children = (
-				E1658FF23B63AE05533C82B9122A463A /* Frameworks */,
-			);
-			path = OpenTok;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		748CB010C1BD8ADE3BF4B41E32414D68 /* Targets Support Files */ = {
@@ -65,15 +88,63 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		7851F4BFDF6922306DDE3B38916E1417 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6F6AFD7B6CC3EF7E1D105083561B3B71 /* DBAlertController.modulemap */,
+				62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */,
+				CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */,
+				4E73466D67E6000586659E82669CD079 /* DBAlertController-prefix.pch */,
+				DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */,
+				285DC37F8A52B599D3253DFA8DA1BDB1 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/DBAlertController";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				C5E6EBA5D78424BA468E339EC7E6C57E /* Pods */,
-				1570354C03EE6B1D34D1443346FC3367 /* Products */,
+				0C036CAA89779AD93E217A323106FC0A /* Pods */,
+				8FF1504D85B06E98CB58E7C6B47F928B /* Products */,
 				748CB010C1BD8ADE3BF4B41E32414D68 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		81B3CF5C7EDEBF00AAB99D23D9B5E418 /* DBAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */,
+				7851F4BFDF6922306DDE3B38916E1417 /* Support Files */,
+			);
+			path = DBAlertController;
+			sourceTree = "<group>";
+		};
+		8FF1504D85B06E98CB58E7C6B47F928B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA31612E033A0E3CB126E3E805D52EB8 /* DBAlertController.framework */,
+				A5330A31725DAFD44E049B62B389188F /* Pods_Bryt.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A367E43F36D77CA6F26261CA10442287 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3674A479147FF2E0143F11025C2C822B /* OpenTok.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AEAAAE60E6F7B867B1743A40965F12C9 /* OpenTok */ = {
+			isa = PBXGroup;
+			children = (
+				A367E43F36D77CA6F26261CA10442287 /* Frameworks */,
+			);
+			path = OpenTok;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -90,22 +161,6 @@
 				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		C5E6EBA5D78424BA468E339EC7E6C57E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6D5298F7A56BBBA6485A1835829A60B0 /* OpenTok */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E1658FF23B63AE05533C82B9122A463A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3F6BA7133CDA16EBF75FA8DA73F15F59 /* OpenTok.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FF9C6E480E1AD5D13AD303769DD95150 /* Pods-Bryt */ = {
@@ -129,32 +184,58 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		68A62AFFB7E631C699F25D882B6602DE /* Headers */ = {
+		4DCC66FD82EC46B4FC945D71DF4078B4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				775D5ACF33281C3FA74C9E50427D65A8 /* Pods-Bryt-umbrella.h in Headers */,
+				A38EFBCD5397F421834C5AF4B230E663 /* DBAlertController-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD4B5101792DD40C7AEBDF40D039318B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98D4C7F2A0D82EE31C4ABC78314EC364 /* Pods-Bryt-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AAB35FB4DEC4AC8DC7A996D949C55B70 /* Pods-Bryt */ = {
+		098058DB8AA265D704661FE96460EF62 /* DBAlertController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B629213CD3E72F5E60A2F87FEB884034 /* Build configuration list for PBXNativeTarget "Pods-Bryt" */;
+			buildConfigurationList = 8F78E87998E0549B82704668F9DB9135 /* Build configuration list for PBXNativeTarget "DBAlertController" */;
 			buildPhases = (
-				1651DD7C45B3D07EF546CABB305CFDFB /* Sources */,
-				95F9BC6203AE5A86484D4CEE2D185049 /* Frameworks */,
-				68A62AFFB7E631C699F25D882B6602DE /* Headers */,
+				CC564B68D3BDE71BD673E5D289B06B27 /* Sources */,
+				7914061C0A8117F117D1B4CF76781F0C /* Frameworks */,
+				4DCC66FD82EC46B4FC945D71DF4078B4 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = DBAlertController;
+			productName = DBAlertController;
+			productReference = CA31612E033A0E3CB126E3E805D52EB8 /* DBAlertController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DDA8A5E5894987CA87BFDCAFD2A76DE2 /* Pods-Bryt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16783097DEF2D24510FF3BD2A828FFCA /* Build configuration list for PBXNativeTarget "Pods-Bryt" */;
+			buildPhases = (
+				4732D17977E4AFCB2FC67E9CEC150A21 /* Sources */,
+				8980F1077501C3DA6E1332EFA1E09A5B /* Frameworks */,
+				CD4B5101792DD40C7AEBDF40D039318B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29890F4D23EBD45406C2E01866FC7F01 /* PBXTargetDependency */,
+			);
 			name = "Pods-Bryt";
 			productName = "Pods-Bryt";
-			productReference = A3E597740B8A35733370690C3322A025 /* Pods_Bryt.framework */;
+			productReference = A5330A31725DAFD44E049B62B389188F /* Pods_Bryt.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -174,28 +255,74 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 1570354C03EE6B1D34D1443346FC3367 /* Products */;
+			productRefGroup = 8FF1504D85B06E98CB58E7C6B47F928B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAB35FB4DEC4AC8DC7A996D949C55B70 /* Pods-Bryt */,
+				098058DB8AA265D704661FE96460EF62 /* DBAlertController */,
+				DDA8A5E5894987CA87BFDCAFD2A76DE2 /* Pods-Bryt */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1651DD7C45B3D07EF546CABB305CFDFB /* Sources */ = {
+		4732D17977E4AFCB2FC67E9CEC150A21 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6183BF5561656EBF60A36489972C6D8 /* Pods-Bryt-dummy.m in Sources */,
+				50C3A3D2DCFD481ACB44B08742765EDA /* Pods-Bryt-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC564B68D3BDE71BD673E5D289B06B27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70E9D6D8B5C50E08B5A6A0DBDEEF15EF /* DBAlertController-dummy.m in Sources */,
+				4B8ECD5C0B1F0987D057E3559998DECA /* DBAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		29890F4D23EBD45406C2E01866FC7F01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DBAlertController;
+			target = 098058DB8AA265D704661FE96460EF62 /* DBAlertController */;
+			targetProxy = 6943819F90908454BC27E1D868778BE8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		0F896A98E4DC68B37124FC3918C304FF /* Debug */ = {
+		4864AEA3B06CE2A980992E2A04213D4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DBAlertController/DBAlertController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DBAlertController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DBAlertController/DBAlertController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = DBAlertController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7E38BFAA13F387740FF7367DF5E952D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5C2C73FBECBBF57D18AD7ED485A475B /* Pods-Bryt.debug.xcconfig */;
 			buildSettings = {
@@ -219,15 +346,16 @@
 				PRODUCT_NAME = Pods_Bryt;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		2E788C00589C61F35861756FF430989E /* Release */ = {
+		81492112E7836FEE532A82F9E7FFF985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0262DBB3F7BB439A2DDFD541180039C3 /* Pods-Bryt.release.xcconfig */;
+			baseConfigurationReference = 62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -236,24 +364,22 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Bryt/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/DBAlertController/DBAlertController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DBAlertController/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Bryt/Pods-Bryt.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_Bryt;
+				MODULEMAP_FILE = "Target Support Files/DBAlertController/DBAlertController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = DBAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -294,6 +420,36 @@
 			};
 			name = Debug;
 		};
+		CB167F7633BE10A4939A1D766110434A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0262DBB3F7BB439A2DDFD541180039C3 /* Pods-Bryt.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Bryt/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Bryt/Pods-Bryt.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_Bryt;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -331,6 +487,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		16783097DEF2D24510FF3BD2A828FFCA /* Build configuration list for PBXNativeTarget "Pods-Bryt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E38BFAA13F387740FF7367DF5E952D1 /* Debug */,
+				CB167F7633BE10A4939A1D766110434A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -340,11 +505,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B629213CD3E72F5E60A2F87FEB884034 /* Build configuration list for PBXNativeTarget "Pods-Bryt" */ = {
+		8F78E87998E0549B82704668F9DB9135 /* Build configuration list for PBXNativeTarget "DBAlertController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0F896A98E4DC68B37124FC3918C304FF /* Debug */,
-				2E788C00589C61F35861756FF430989E /* Release */,
+				81492112E7836FEE532A82F9E7FFF985 /* Debug */,
+				4864AEA3B06CE2A980992E2A04213D4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
