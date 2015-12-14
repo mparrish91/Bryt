@@ -76,6 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (appTimer == nil){
             return
             appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick"),userInfo: nil, repeats: true)
+            
+//            ParseHelper
+            print("first time")
         }
     }
     

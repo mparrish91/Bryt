@@ -76,6 +76,25 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }
     }
     
+    func initOutGoingCall()
+    {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let inputDict = NSMutableDictionary()
+        inputDict["callerID"] = ParseHelper().loggedInUser
+        inputDict["callerTitle"] = appDelegate.userTitle
+        inputDict["recieverID"] = self.callRecieverID
+        inputDict["isAudio"] = bAudio.toInt()
+        inputDict["isVideo"] = bVideo.toInt()
+
+        m_connectionAttempts = 1
+        ParseHelper.saveSessionToParse(inputDict)
+    }
+    
+    func sessionSaved() {
+        
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }

@@ -10,18 +10,14 @@ import Foundation
 import Parse
 import DBAlertController
 
-protocol AlertProtocol : NSObjectProtocol {
-    func showAlert(message: String)
-}
 
 
 class ParseHelper: NSObject {
     
-    var delegate: AlertProtocol?
-
-    @IBOutlet var userNameField: UITextField?
     var loginTextField: UITextField?
     var loggedInUser: PFUser
+    
+    var bPollingTimerOn: Bool
 
 
 //will initiate the call by saving session
@@ -223,11 +219,17 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 }
             }
         }
+        
     }
-
-
     
+    class func pollParseForActiveSessions() {
+        var activeSession: PFObject
+        
+        
+    }
 }
+
+
 
 
 extension Bool {
@@ -250,6 +252,8 @@ extension Bool {
             
         }
         
+    }
 }
 
-}
+
+
