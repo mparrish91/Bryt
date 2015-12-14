@@ -26,7 +26,7 @@ let Token = "T1==cGFydG5lcl9pZD00NTQwMzM0MiZzaWc9NmZmMmU1YjAyNmM1ZjgwZDE0OWZhZDA
 let SubscribeToSelf = false
 
 
-class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
+class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
     
     var session : OTSession?
     var publisher : OTPublisher?
@@ -36,8 +36,14 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
-    var m_userArray = NSMutableArray()
-    var m_recieverID =  String()
+   
+    
+    var bAudio: Bool
+    var bVideo: Bool
+    var callRecieverID: String
+    
+    var m_mode: int
+    var m_connectionAttempts: int
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,29 +51,6 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         
         // Step 1: As the view is loaded initialize a new instance of OTSession
         session = OTSession(apiKey: ApiKey, sessionId: SessionID, delegate: self)
-        
-        
-        
-        //Home Screen
-        let imageName = "studentStudying.jpg"
-        let image = UIImage(named: imageName)
-        
-        self.imageView.image = image
-        self.imageView.contentMode = UIViewContentMode .ScaleAspectFill
-        
-        loginButton.layer.cornerRadius = 5
-        loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor.whiteColor().CGColor
-        
-        
-//        let testObject = PFObject(className: "TestObject")
-//        testObject["foo"] = "bar"
-//        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-//            print("Object has been saved.")}
-        
-            
-        ParseHelper.saveSessionToParse([:])
-            
         
     }
 
@@ -79,6 +62,18 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     override func viewWillAppear(animated: Bool) {
         // Step 2: As the view comes into the foreground, begin the connection process.
         doConnect()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if callRecieverID != "" {
+            m_mode = streamingModeOutgoing
+            initOutGoingCall()
+            
+        }else{
+            m_mode = streamingModeOutgoing
+            m_connectionAttempts = 1
+            connectWithPublisherToken()
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -260,78 +255,11 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         }
     }
     
-    //Called in repsonse of kLoggedInNotification
-    func didLogin() {
-        
-    }
+
     
-    func startUpdate() {
-//        let thisUser = ParseHelper.logg
-    }
-    
-    func saveUserToParse(user: PFUser) {
         
-        var activeUser: PFObject
-        
-        let query = PFQuery(className: "ActiveUsers")
-        query.whereKey("user", equalTo: user.objectId!)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil {
-            //if user is active user already, just update the entry
-                //otherwise create it.
-                if objects?.count == 0 {
-                    activeUser = PFObject(className: "ActiveUsers")
-                }else{
-                    activeUser = objects![0]
-                }
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                activeUser["userID"] = user.objectId
-                activeUser["userTitle"] = appDelegate.userTitle
-                
-                activeUser.saveInBackgroundWithBlock{ (success, error) -> Void in
-                    print("activeUser saved: \(success)")
-                }
-                
-                
-                appDelegate.sessionID = activeSession["sessionID"] as? String
-                appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
-                appDelegate.publisherToken = activeSession["publisherToken"] as? String
-                appDelegate.callerTitle = activeSession["callerTitle"] as? String
-                NSNotificationCenter.defaultCenter().postNotificationName("kSessionSavedNotification", object: nil)
-            
-        }
-    }
-    
-    func startVideoChat(sender:AnyObject) {
-        let button = UIButton()
-        
-        if button.tag < 0 //out of bounds
-        {
-            showAlert("User is no longer online.")
-            return
-        }
-        
-        let dict = m_userArray[button.tag]
-        let recieverID = dict["userID"]
-        m_recieverID = recieverID!!.copy() as! String
-        goToStreamingVC()
-        
-    }
-    
-    
-    func goToStreamingVC()
-    {
-        performSegueWithIdentifier("StreamingSegue", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "StreamingSegue"){
-            let navController = segue.destinationViewController
-//            let streamingVC = navController.topViewController as!
-            
-        }
-    }
+       
+
     
 
     

@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		84CBF7B16A3FFEFD011545C9 /* Pods_Bryt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7016448606E2EC5B9428B670 /* Pods_Bryt.framework */; };
+		E10CA04D1C1D4AF400B6EA96 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */; };
+		E10CA0511C1D4B9000B6EA96 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */; };
 		E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63471BE3F05900BDDC76 /* AppDelegate.swift */; };
-		E12E634A1BE3F05900BDDC76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63491BE3F05900BDDC76 /* ViewController.swift */; };
+		E12E634A1BE3F05900BDDC76 /* StreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */; };
 		E12E634D1BE3F05900BDDC76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E634B1BE3F05900BDDC76 /* Main.storyboard */; };
 		E12E634F1BE3F05900BDDC76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E634E1BE3F05900BDDC76 /* Assets.xcassets */; };
 		E12E63521BE3F05900BDDC76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */; };
@@ -59,9 +61,11 @@
 /* Begin PBXFileReference section */
 		7016448606E2EC5B9428B670 /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40BF97C4E7D4758D696F014 /* Pods-Bryt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.debug.xcconfig"; sourceTree = "<group>"; };
+		E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E12E63441BE3F05900BDDC76 /* Bryt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bryt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E63471BE3F05900BDDC76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E12E63491BE3F05900BDDC76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingViewController.swift; sourceTree = "<group>"; };
 		E12E634C1BE3F05900BDDC76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E12E634E1BE3F05900BDDC76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E12E63511BE3F05900BDDC76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -209,8 +213,10 @@
 			isa = PBXGroup;
 			children = (
 				E12E63471BE3F05900BDDC76 /* AppDelegate.swift */,
-				E12E63491BE3F05900BDDC76 /* ViewController.swift */,
+				E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */,
+				E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */,
 				E168593A1C003872006F971E /* ParseHelper.swift */,
+				E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */,
 				E12E634B1BE3F05900BDDC76 /* Main.storyboard */,
 				E12E634E1BE3F05900BDDC76 /* Assets.xcassets */,
 				E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */,
@@ -429,8 +435,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E12E634A1BE3F05900BDDC76 /* ViewController.swift in Sources */,
+				E12E634A1BE3F05900BDDC76 /* StreamingViewController.swift in Sources */,
 				E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */,
+				E10CA04D1C1D4AF400B6EA96 /* ListViewController.swift in Sources */,
+				E10CA0511C1D4B9000B6EA96 /* LoginViewController.swift in Sources */,
 				E168593B1C003872006F971E /* ParseHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

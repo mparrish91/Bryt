@@ -21,6 +21,8 @@ class ParseHelper: NSObject {
 
     @IBOutlet var userNameField: UITextField?
     var loginTextField: UITextField?
+    var loggedInUser: PFUser
+
 
 //will initiate the call by saving session
 //if there is a session already existing, do not save,
@@ -78,7 +80,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
         
         activeSession.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
+            (success Bool, error: NSError?) -> Void in
             if (error == nil) {
                 print("sessionID: \(activeSession["sessionID"]), publisherToken: \(activeSession["publisherToken"]), subscriberToken: \(activeSession["subscriberToken"])")
                 
@@ -186,36 +188,46 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         alert.show()
         
     }
-//
-//    func userNameEntered(alert: UIAlertAction!){
-//        // store the new word
-//        self.textView2.text = deletedString + " " + self.newWordField.text
-//    }
-//    
-//    func addTextField(textField: UITextField!){
-//        // add the text field and make the result global
-//        textField.placeholder = "test"
-////        self.newWordField = textField
-//    }
-//    
-//    
-//    
-//    class func testMyAlert() {
-//        anonymousLogin()
-//        
-//        
-//        
-//    }
-//    
+    
+    class func saveUserToParse(user: PFUser) {
+        
+        var activeUser: PFObject
+        
+        let query = PFQuery(className: "ActiveUsers")
+        query.whereKey("user", equalTo: user.objectId!)
+        query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
+            if error == nil {
+                //if user is active user already, just update the entry
+                //otherwise create it.
+                if objects?.count == 0 {
+                    activeUser = PFObject(className: "ActiveUsers")
+                }else{
+                    activeUser = objects![0]
+                }
+                
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                activeUser["userID"] = user.objectId
+                activeUser["userTitle"] = appDelegate.userTitle
+                
+                activeUser.saveInBackgroundWithBlock{ (success, error) -> Void in
+                    
+                    if success {
+                        print("activeUser saved: \(success)")
+                        NSNotificationCenter.defaultCenter().postNotificationName("kSessionSavedNotification", object: nil)
+                    }else{
+                        let description = error?.localizedDescription
+                        print(" \(description)")
+                        let msg  = "Save to ActiveUsers failed. \(description)"
+                        self.showAlert(msg)
+                    }
+                }
+            }
+        }
+    }
+
 
     
 }
-
-
-
-
-
-
 
 
 extension Bool {
