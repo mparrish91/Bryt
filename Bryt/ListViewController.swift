@@ -109,5 +109,12 @@ func pullForNewUsers(bRefreshUI:Bool) {
         }
     }
     
+    
+    func didCallArrive() {
+        //pass blank because call has arrived, no need for recieverID
+        m_recieverID = ""
+        goToStreamingVC()
+    }
+    
 
 }

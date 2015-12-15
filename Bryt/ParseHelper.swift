@@ -14,10 +14,10 @@ import DBAlertController
 
 class ParseHelper: NSObject {
     
-    var loginTextField: UITextField?
-    var loggedInUser: PFUser
+    class var loginTextField: UITextField?
+    class var loggedInUser: PFUser
     
-    var bPollingTimerOn: Bool
+    class var bPollingTimerOn: Bool
 
 
 //will initiate the call by saving session
@@ -28,7 +28,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
     let recieverID = inputDict["recieverID"]
     
-    
+    loginTextField
     
     
     //check if the recipient is either the caller or receiver in one of the activesessions.
@@ -91,7 +91,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg)        
+                showAlert(msg, nil)
             }
         }
     }
@@ -168,7 +168,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("Failed to login anonymously. Please try again. \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg)
+                showAlert(msg, nil)
             } else{
                 var loggedInUser = PFUser()
                 loggedInUser = user!
@@ -177,15 +177,15 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             
         })
     }
+    class func showAlert(message: String, handler: ((UIAlertAction) -> Void)?))){
 
     
-    class func showAlert(message: String){
+    class func showAlert(message: String, handler: () -> void {
         let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in print("Foo")}))
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in handler}))
         
         // add code to handle the different button hits
         alert.show()
-        
     }
     
     class func saveUserToParse(user: PFUser) {
@@ -217,7 +217,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                         let description = error?.localizedDescription
                         print(" \(description)")
                         let msg  = "Save to ActiveUsers failed. \(description)"
-                        self.showAlert(msg)
+                        self.showAlert(msg, nil)
                     }
                 }
             }
@@ -228,10 +228,15 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     class func pollParseForActiveSessions() {
         var activeSession: PFObject
         
+        if bPollingTimerOn != nil {
+            return
+        }
+        
         var query = PFQuery(className:"ActiveSessions")
         
-        let currentUserID =
+        let currentUserID = loggedInUser.objectID
         query.whereKey("recieverID", equalTo: currentUserID)
+        
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
             if error == nil {
                 //if user is active user already, just update the entry
@@ -239,6 +244,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 if objects?.count == 0 {
+                    
                 }else{
                     let activeSession = objects[0] as! PFObject
                     appDelegate.sessionID = activeSession["sessionID"] as? String
@@ -246,15 +252,17 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     appDelegate.publisherToken = activeSession["publisherToken"] as? String
                     appDelegate.callerTitle = activeSession["callerTitle"] as? String
 
-                    setpo
+                    //done with backend object, remove it.
+                    
                     
                     let msg  = "Incoming call from, %@, \(appDelegate.callerTitle)"
-                    self.showAlert(msg)
+                    self.showAlert(msg,             NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil)
+ )
+                    //page 11  set  incoming notifcation = nil
                     
                 }else{
                     let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
-                    self.showAlert(msg)
-                    //create new seperate alerts and handle selction within closure
+                    self.showAlert(msg,nil)
                 }
         
     }

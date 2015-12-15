@@ -276,12 +276,29 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
 
     
+    func connectWithPublisherToken() {
+        print("connectWithpublisehrToken")
+        doConnect()
         
+
+    }
        
 
+    func connectWithSubscriberToken() {
+        print("connectWithSubscriberToken")
+        doConnect()
+    }
     
 
-    
+//    func doConnect(token: String, sessionID: String)
+//    {
+//        let session = OTSession(apiKey: ApiKey, sessionId: sessionID, delegate: self)
+//        
+//        session.addObserver(self, forKeyPath: "connectionCount", options: NSKeyValueObservingOptions.New, context: nil)
+//        
+//        session.connectWithToken(token, error: NSError?)
+//        
+//    }
     
     
     
