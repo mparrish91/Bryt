@@ -10,8 +10,12 @@
 import UIKit
 import Parse
 
-let videoWidth : CGFloat = 320
-let videoHeight : CGFloat = 240
+//let videoWidth : CGFloat = 320
+//let videoHeight : CGFloat = 240
+
+let navController = segue.destinationViewController as! UINavigationController
+let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
+let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height - navController.nav
 
 // *** Fill the following variables using your own Project info  ***
 // ***          https://dashboard.tokbox.com/projects            ***
@@ -36,7 +40,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
-   
+    
     
     var bAudio: Bool
     var bVideo: Bool
@@ -97,7 +101,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     override func prefersStatusBarHidden() -> Bool {
         return true
-    }
+            }
     
     // MARK: - OpenTok Methods
     
@@ -122,6 +126,12 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
      */
     func doPublish() {
         publisher = OTPublisher(delegate: self)
+        publisher?.publishAudio = bAudio
+        publisher?.publishVideo = bVideo
+        session?.publish(publisher)
+        
+        
+        
         
         var maybeError : OTError?
         session?.publish(publisher, error: &maybeError)
@@ -131,7 +141,14 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }
         
         view.addSubview(publisher!.view)
-        publisher!.view.frame = CGRect(x: 0.0, y: 0, width: videoWidth, height: videoHeight)
+        publisher!.view.frame = CGRect(x: 5.0, y: 5.0, width: videoWidth, height: videoHeight)
+        
+        print(publisher?.view.frame.origin.x, publisher?.view.frame.origin.y, publisher?.view.frame.size.width, publisher?.view.frame.size.height)
+        
+        publisher?.view.layer.cornerRadius = 10.0
+        publisher?.view.layer.masksToBounds = true
+        publisher?.view.layer.borderWidth = 5.0
+        publisher?.view.layer.borderWidth = UIColor.yellowColor().CGColor
     }
     
     /**
@@ -172,6 +189,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func sessionDidConnect(session: OTSession) {
         NSLog("sessionDidConnect (\(session.sessionId))")
+        NSLog("connectionId (\(session.connection.connectionId))")
+        NSLog("creationTime (\(session.connection.creationTime))")
+
         
         // Step 2: We have successfully connected, now instantiate a publisher and
         // begin pushing A/V streams into OpenTok.
@@ -219,11 +239,40 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         if let view = subscriber?.view {
             view.frame =  CGRect(x: 0.0, y: videoHeight, width: videoWidth, height: videoHeight)
             self.view.addSubview(view)
+            
+            print("screenheight"/(videoHeight))
+            print("navheight"/(videoHeight))
+            
+            if publisher {
+                view.bringSubviewToFront(publisher?.view)
+            }
+
         }
+        
+        subscriber?.view.layer.cornerRadius = 10.0
+        subscriber?.view.layer.masksToBounds = true
+        subscriber?.view.layer.borderWidth = 5.0
+        subscriber?.view.layer.borderWidth = UIColor.grayColor().CGColor
     }
     
     func subscriber(subscriber: OTSubscriberKit, didFailWithError error : OTError) {
         NSLog("subscriber %@ didFailWithError %@", subscriber.stream.streamId, error)
+        print("code: \(error.localizedDescription)")
+    }
+    
+    @IBAction doneStreaming() {
+        self dis
+    
+    }
+    
+    func disConnectAndGoBack(){
+        doUnsubscribe()
+        ParseHelper.del
+        
+        //set the polling on
+        ParseHelper()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     }
     
     // MARK: - OTPublisher delegate callbacks
