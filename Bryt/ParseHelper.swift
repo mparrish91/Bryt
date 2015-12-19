@@ -98,23 +98,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
 
     
-//      login prompt
     class func showUserTitlePrompt() {
-        
-        //present the AlertViewController
-        
-//        let userNameAlert = UIAlertController(title: "LiveSessions", message:"Enter your name", preferredStyle: UIAlertControllerStyle.Alert)
-//        userNameAlert.addTextFieldWithConfigurationHandler(nil)
-//        
-//        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
-//            print("User click Ok button")  })
-//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {(alert: UIAlertAction!) in
-//            print("User click Cancel button")  })
-//        
-//        userNameAlert.addAction(okAction)
-//        userNameAlert.addAction(cancelAction)
-//        
-//        
         
         let alertController = DBAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
@@ -177,15 +161,14 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             
         })
     }
-    class func showAlert(message: String, handler: ((UIAlertAction) -> Void)?))){
 
     
-    class func showAlert(message: String, handler: () -> void {
+    class func showAlert(message: String, completionClosure:(action: UIAlertAction) -> ()){
         let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in handler}))
-        
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
+    
         // add code to handle the different button hits
-        alert.show()
+        alert.show()te
     }
     
     class func saveUserToParse(user: PFUser) {
@@ -265,6 +248,18 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     self.showAlert(msg,nil)
                 }
         
+    }
+    }
+    }
+    
+    
+    class func deleteActiveSession() {
+    
+        print("deleteActiveSession")
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+        let activeSessionID = app
+    
     }
 }
 
