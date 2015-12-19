@@ -158,12 +158,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="p1Y-MT-vFF"/>
                     <connections>
+                        <outlet property="m_userTableView" destination="R1Y-tD-0Uy" id="exz-Fe-TU1"/>
                         <segue destination="JSi-zX-XOR" kind="show" identifier="StreamingSegue" id="yK8-VP-wmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8Q-N0-nVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771" y="1437"/>
+            <point key="canvasLocation" x="1269" y="1430"/>
         </scene>
         <!--Streaming View Controller-->
         <scene sceneID="ZOi-mc-C7L">
@@ -199,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaS-Zo-dh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3439" y="1430"/>
+            <point key="canvasLocation" x="1993" y="1781"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="6kP-pZ-tJ4">
@@ -312,7 +313,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mMz-UD-WRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2627" y="1430"/>
+            <point key="canvasLocation" x="1993" y="1437"/>
         </scene>
     </scenes>
     <resources>

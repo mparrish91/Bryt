@@ -96,6 +96,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     func sessionSaved() {
+        connectWithSubscriberToken()
         
     }
     

@@ -84,13 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick"),userInfo: nil, repeats: true)
             
 //            ParseHelper
-            print("first time")
+            print("fired timer")
         }
     }
     
     func onTick(timer: NSTimer){
-        print("OnTick")
-//        ParseHelper.pollParseForActiveSessions
+        print("OnTick")        
+        ParseHelper.pollParseForActiveSessions()
     }
 
 

@@ -28,9 +28,6 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
     let recieverID = inputDict["recieverID"]
     
-    loginTextField
-    
-    
     //check if the recipient is either the caller or receiver in one of the activesessions.
     let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
     var query = PFQuery(className:"ActiveSessions", predicate:predicate)
@@ -43,10 +40,8 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             print("No session with recieverID exists.")
             storeToParse(inputDict)
         }
-    
     }
     }
-    
     
     class func storeToParse(inputDict:Dictionary<String, AnyObject>) {
         
@@ -103,38 +98,25 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let alertController = DBAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
-            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.userTitle = alertController.textFields![0].text
             appDelegate.bFullyLoggedIn = true
             
-            //fire appdelegat timer
+            //fire appdelegate timer
             appDelegate.fireListeningTimer()
             NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
-
-
-        })
+        }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
             print("Cancel Button Pressed")
-            //setPollingTimer
         }
+        
         alertController.addAction(ok)
         alertController.addAction(cancel)
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
-            // Enter the textfiled customization code here.
-//            loginTextField = textField
-//            loginTextField?.placeholder = "Enter your login ID"
+//            textField.placeholder = "Enter your login ID"
         }
-        let textField = alertController.textFields![0]
-        textField.placeholder = "Enter your login ID"
-        
         alertController.show()
-
-        
-        
-        //will probably use somewhere else
-        NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
-
     }
     
     
@@ -168,13 +150,11 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
     
         // add code to handle the different button hits
-        alert.show()te
+        alert.show()
     }
     
     class func saveUserToParse(user: PFUser) {
-        
         var activeUser: PFObject
-        
         let query = PFQuery(className: "ActiveUsers")
         query.whereKey("user", equalTo: user.objectId!)
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
@@ -236,6 +216,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     appDelegate.callerTitle = activeSession["callerTitle"] as? String
 
                     //done with backend object, remove it.
+                    deleteActiveSession()
                     
                     
                     let msg  = "Incoming call from, %@, \(appDelegate.callerTitle)"

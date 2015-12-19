@@ -15,12 +15,14 @@ class ListViewController: UIViewController {
     var m_userArray = NSMutableArray()
     var m_recieverID =  String()
 
+    @IBOutlet weak var m_userTableView: UITableView!
 
 //Called in repsonse of kLoggedInNotification
 func didLogin() {
     
+    //not accounting for location...calls parse wrapper for storing to ActiveUsers table
     let thisUser = ParseHelper().loggedInUser
-    ParseHelper.save
+    ParseHelper.saveUserToParse(thisUser)
     
 }
     
@@ -56,11 +58,9 @@ func pullForNewUsers(bRefreshUI:Bool) {
                     m_userArray.addObject(dict)
                 }
                 
-                //when done, refresh the table view
-                
                 if (bRefreshUI)
                 {
-                    //                    m_userTableView.reloadData
+                    m_userTableView.reloadData()
                 }else{
                     print("%@"/(error?.description))
                 }
@@ -79,7 +79,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
             return
         }
         
-        let dict = m_userArray[button.tag]
+        let dict = m_userArray[button.tag] as! NSMutableDictionary
         let recieverID = dict["userID"]
         m_recieverID = recieverID!.copy() as! String
         goToStreamingVC()
