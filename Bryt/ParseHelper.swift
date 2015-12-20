@@ -218,15 +218,14 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     //done with backend object, remove it.
                     deleteActiveSession()
                     
-                    
                     let msg  = "Incoming call from, %@, \(appDelegate.callerTitle)"
-                    self.showAlert(msg,             NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil)
- )
-                    //page 11  set  incoming notifcation = nil
                     
-                }else{
-                    let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
-                    self.showAlert(msg,nil)
+                    //create new alert message from scratch because need to set polling timer for cancel 
+                    self.showAlert(msg,             NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil))
+                }
+            }else{
+                let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
+                self.showAlert(msg,nil)
                 }
         
     }

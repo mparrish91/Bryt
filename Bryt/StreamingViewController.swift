@@ -39,6 +39,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var disconnectButton: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     
     
@@ -76,7 +78,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }else{
             m_mode = streamingModeOutgoing
             m_connectionAttempts = 1
-            connectWithPublisherToken()
+            connectWithToken()
         }
     }
     
@@ -96,7 +98,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     func sessionSaved() {
-        connectWithSubscriberToken()
+        connectWithToken()
         
     }
     
@@ -143,6 +145,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         view.addSubview(publisher!.view)
         publisher!.view.frame = CGRect(x: 5.0, y: 5.0, width: videoWidth, height: videoHeight)
+        view.bringSubviewToFront(disconnectButton)
+        view.bringSubviewToFront(statusLabel)
         
         print(publisher?.view.frame.origin.x, publisher?.view.frame.origin.y, publisher?.view.frame.size.width, publisher?.view.frame.size.height)
         
@@ -192,6 +196,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         NSLog("sessionDidConnect (\(session.sessionId))")
         NSLog("connectionId (\(session.connection.connectionId))")
         NSLog("creationTime (\(session.connection.creationTime))")
+
+        disconnectButton.hidden = false
+        view.bringSubviewToFront(disconnectButton)
+        statusLabel.text = "Connected, waiting for stream..."
+        view.bringSubviewToFront(statusLabel)
 
         
         // Step 2: We have successfully connected, now instantiate a publisher and
@@ -244,6 +253,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             print("screenheight"/(videoHeight))
             print("navheight"/(videoHeight))
             
+            view.bringSubviewToFront(disconnectButton)
+            
             if publisher {
                 view.bringSubviewToFront(publisher?.view)
             }
@@ -254,6 +265,12 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         subscriber?.view.layer.masksToBounds = true
         subscriber?.view.layer.borderWidth = 5.0
         subscriber?.view.layer.borderWidth = UIColor.grayColor().CGColor
+        
+        statusLabel.text = "Connected, waiting for stream..."
+        view.bringSubviewToFront(statusLabel)
+        
+
+    
     }
     
     func subscriber(subscriber: OTSubscriberKit, didFailWithError error : OTError) {
@@ -300,8 +317,17 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func publisher(publisher: OTPublisherKit, didFailWithError error: OTError) {
         NSLog("publisher didFailWithError %@", error)
+        NSLog("publisher didFailWithError %@", error)
+        NSLog("publisher didFailWithError %@", error)
+        
+        statusLabel.text = "Error recieving video feed, disconnecting..."
+        view.bringSubviewToFront(statusLabel)
+        
+
+        
+
     }
-    
+
     // MARK: - Helpers
     
 //    func showAlert(message: String) {
@@ -326,32 +352,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
 
     
-    func connectWithPublisherToken() {
-        print("connectWithpublisehrToken")
+    func connectWithToken() {
+        print("connectWithToken")
         doConnect()
-        
 
-    }
-       
-
-    func connectWithSubscriberToken() {
-        print("connectWithSubscriberToken")
-        doConnect()
-    }
-    
-
-//    func doConnect(token: String, sessionID: String)
-//    {
-//        let session = OTSession(apiKey: ApiKey, sessionId: sessionID, delegate: self)
-//        
-//        session.addObserver(self, forKeyPath: "connectionCount", options: NSKeyValueObservingOptions.New, context: nil)
-//        
-//        session.connectWithToken(token, error: NSError?)
-//        
-//    }
-    
-    
-    
+} 
 
 }
 
