@@ -230,7 +230,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
     }
     }
-    }
+
+    class func setPollingTimer(bArg:BOOL) {
+        bPollingTimerOn = bArg
+}
     
     
     class func deleteActiveSession() {

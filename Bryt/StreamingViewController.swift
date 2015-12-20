@@ -128,6 +128,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
      * binds to the device camera and microphone, and will provide A/V streams
      * to the OpenTok session.
      */
+    
+    func doDisconnect() {
+        session?.disconnect()
+    }
+    
     func doPublish() {
         publisher = OTPublisher(delegate: self)
         publisher?.publishAudio = bAudio
@@ -189,6 +194,10 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             subscriber.view.removeFromSuperview()
             self.subscriber = nil
         }
+    }
+    
+    func doUnpublish() {
+        session?.unpublish(publisher)
     }
     
     // MARK: - OTSession delegate callbacks
@@ -286,11 +295,12 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }
     
     func disConnectAndGoBack(){
+        doUnpublish()
         doUnsubscribe()
-        ParseHelper.del
-        
-        //set the polling on
-        ParseHelper()
+        disconnectButton.hidden = true
+        //        ParseHelper
+
+                ParseHelper.setPollingTimer(true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
