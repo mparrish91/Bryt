@@ -81,7 +81,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             connectWithToken()
         }
     }
-    
+
+
     func initOutGoingCall()
     {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -155,7 +156,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         publisher?.view.layer.borderWidth = 5.0
         publisher?.view.layer.borderWidth = UIColor.yellowColor().CGColor
     }
-    
+
     /**
      * Instantiates a subscriber for the given stream and asynchronously begins the
      * process to begin receiving A/V content for this stream. Unlike doPublish,
@@ -269,19 +270,20 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         statusLabel.text = "Connected, waiting for stream..."
         view.bringSubviewToFront(statusLabel)
         
-
-    
     }
     
     func subscriber(subscriber: OTSubscriberKit, didFailWithError error : OTError) {
         NSLog("subscriber %@ didFailWithError %@", subscriber.stream.streamId, error)
         print("code: \(error.localizedDescription)")
+        
+        statusLabel.text = "Error recieving video feed, disconnecting..."
+        view.bringSubviewToFront(statusLabel)
+        callSelector(doneStreaming(), object: nil, delay: 5.0)
     }
     
-    @IBAction doneStreaming() {
-        self dis
-    
-    }
+    @IBAction func doneStreaming() {
+        disConnectAndGoBack()
+        }
     
     func disConnectAndGoBack(){
         doUnsubscribe()
@@ -291,8 +293,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         ParseHelper()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    }
-    
+
     // MARK: - OTPublisher delegate callbacks
     
     func publisher(publisher: OTPublisherKit, streamCreated stream: OTStream) {
@@ -315,6 +316,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }
     }
     
+    //fix
     func publisher(publisher: OTPublisherKit, didFailWithError error: OTError) {
         NSLog("publisher didFailWithError %@", error)
         NSLog("publisher didFailWithError %@", error)
@@ -322,21 +324,10 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         statusLabel.text = "Error recieving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
-        
-
-        
 
     }
 
     // MARK: - Helpers
-    
-//    func showAlert(message: String) {
-//        // show alertview on main UI
-//        dispatch_async(dispatch_get_main_queue()) {
-//            let al = UIAlertView(title: "OTError", message: message, delegate: nil, cancelButtonTitle: "OK")
-//        }
-//    }
-    
     
     func showAlert(message: String) {
         // show alertview on main UI
@@ -348,16 +339,35 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             
             self.presentViewController(al, animated: true, completion: nil)
         }
-    }
-    
+}
 
-    
+
     func connectWithToken() {
         print("connectWithToken")
         doConnect()
-
-} 
-
+        
+        self.callSelector(done, object: <#T##AnyObject?#>, delay: <#T##NSTimeInterval#>)
+}
 }
 
+
+
+
+extension NSObject {
+    
+    func callSelectorAsync(selector: Selector, object: AnyObject?, delay: NSTimeInterval) -> NSTimer {
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: selector, userInfo: object, repeats: false)
+        return timer
+    }
+    
+    func callSelector(selector: Selector, object: AnyObject?, delay: NSTimeInterval) {
+        
+        let delay = delay * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            NSThread.detachNewThreadSelector(selector, toTarget:self, withObject: object)
+        })
+    }
+}
 
