@@ -59,7 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         let backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
-            backgroundTask = UIBackgroundTaskInvalid)
+            application.endBackgroundTask(UIBackgroundTaskInvalid))
+            
+        //Start the long-running task and return immediately
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                
+            })
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

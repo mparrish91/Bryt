@@ -18,6 +18,7 @@ class ParseHelper: NSObject {
     class var loggedInUser: PFUser
     
     class var bPollingTimerOn: Bool
+    class var activeUserobjID: String
 
 
 //will initiate the call by saving session
@@ -244,6 +245,47 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let activeSessionID = app
     
     }
+}
+
+    func deleteActiveUser()
+        {
+            let activeUserobjID = self.activeUserobjID
+            
+            if activeUserobjID == nil || activeUserobjID == ""{
+                return
+            }
+            
+            var query = PFQuery(className:"ActiveUsers")
+           
+            query.whereKey("userID", equalTo: activeUserobjID!)
+            query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
+                if error == nil {
+
+                    
+                    
+                    if objects?.count == 0 {
+                        print("No such users exists")
+
+                        
+                    }else{
+                        print("Sucessfully retrieved the Active User")
+                        objc_allocate
+
+}
+                }
+            }
+}
+
+
+class func initData() {
+    if let objectsUnderDeletionQueue = NSMutableArray(){
+        print("Objectsunderdeletion not nil")
+    }
+}
+
+
+class func isUnderDeletion(argObjectID:id) {
+    return objects
 }
 
 
