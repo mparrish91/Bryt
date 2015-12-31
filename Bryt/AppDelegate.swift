@@ -29,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -65,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
             })
+        }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -96,8 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func onTick(timer: NSTimer){
         print("OnTick")        
         ParseHelper.pollParseForActiveSessions()
-    }
-
+        }
 
 }
 

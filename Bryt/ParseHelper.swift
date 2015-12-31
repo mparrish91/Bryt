@@ -11,14 +11,15 @@ import Parse
 import DBAlertController
 
 
-
 class ParseHelper: NSObject {
     
-    class var loginTextField: UITextField?
-    class var loggedInUser: PFUser
+    static var loginTextField: UITextField?
+    static var loggedInUser: PFUser
+
+    static var bPollingTimerOn: Bool
+    static var activeUserobjID: String
+    static var objectsUnderDeletionQueue: NSMutableArray
     
-    class var bPollingTimerOn: Bool
-    class var activeUserobjID: String
 
 
 //will initiate the call by saving session
@@ -106,7 +107,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             //fire appdelegate timer
             appDelegate.fireListeningTimer()
             NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
-        }
+        })
         
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
             print("Cancel Button Pressed")
@@ -201,7 +202,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let currentUserID = loggedInUser.objectID
         query.whereKey("recieverID", equalTo: currentUserID)
         
-        query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 //if user is active user already, just update the entry
                 //otherwise create it.
@@ -215,6 +216,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
                     appDelegate.publisherToken = activeSession["publisherToken"] as? String
                     appDelegate.callerTitle = activeSession["callerTitle"] as? String
+
 
                     //done with backend object, remove it.
                     deleteActiveSession()
@@ -232,10 +234,9 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
     }
 
-    class func setPollingTimer(bArg:BOOL) {
+    class func setPollingTimer(bArg:ObjCBool) {
         bPollingTimerOn = bArg
 }
-    
     
     class func deleteActiveSession() {
     
@@ -245,47 +246,56 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         let activeSessionID = app
     
     }
-}
 
-    func deleteActiveUser()
+
+    class func deleteActiveUser()
         {
             let activeUserobjID = self.activeUserobjID
-            
-            if activeUserobjID == nil || activeUserobjID == ""{
-                return
-            }
+//            
+//            if activeUserobjID == nil || activeUserobjID == ""{
+//                return
+//            }
             
             var query = PFQuery(className:"ActiveUsers")
            
-            query.whereKey("userID", equalTo: activeUserobjID!)
-            query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
-                if error == nil {
+            query.whereKey("userID", equalTo: activeUserobjID)
+            
+//            query.findObjectsInBackgroundWithBlock{(objects,error) -> Void in
+//                if error == nil {
+//                    
+//                    if objects.
+//
+//                    if objects?.count == 0 {
+//                        print("No such user exists")
+//                        
+//                        
+//    
+//                        
+//                    }else{
+////                        let object = objects[0] as! PFObject
+//                        let object = objects[0] as! PFObject
+//                        object.contains()
+//                        
+//                        print("Sucessfully retrieved the Active User")
+            
+    
+    }
 
-                    
-                    
-                    if objects?.count == 0 {
-                        print("No such users exists")
 
-                        
-                    }else{
-                        print("Sucessfully retrieved the Active User")
-                        objc_allocate
-
-}
-                }
-            }
-}
-
-
-class func initData() {
-    if let objectsUnderDeletionQueue = NSMutableArray(){
-        print("Objectsunderdeletion not nil")
+    class func initData() {
+        if let objectsUnderDeletionQueue = NSMutableArray(){
+            print("Objectsunderdeletion not nil")
+            
     }
 }
 
 
 class func isUnderDeletion(argObjectID:id) {
-    return objects
+    
+//properties not coming up
+    
+//    return objectsUnderDeletionQueue
+}
 }
 
 

@@ -77,8 +77,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="HMo-2H-e6p" id="vli-h9-R9G"/>
-                        <outlet property="loginButton" destination="a14-WF-uA3" id="kG6-m2-dP6"/>
+                        <outlet property="imageView" destination="HMo-2H-e6p" id="cQp-ih-fnY"/>
+                        <outlet property="loginButton" destination="a14-WF-uA3" id="H2k-5e-5kN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlg-Kr-xeb" userLabel="First Responder" sceneMemberID="firstResponder"/>

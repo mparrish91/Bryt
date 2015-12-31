@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import Parse
 
 class ListViewController: UIViewController {
     
-    var bAudioOnly:Bool
+    var bAudioOnly:Bool?
     
     var m_userArray = NSMutableArray()
     var m_recieverID =  String()

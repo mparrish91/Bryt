@@ -10,7 +10,11 @@ import Foundation
 
 
 class LoginViewController: UIViewController {
+    
+    
+    @IBOutlet weak var imageView: UIImageView!
 
+    @IBOutlet weak var loginButton: UIButton!
 
 override func viewDidLoad() {
     super.viewDidLoad()

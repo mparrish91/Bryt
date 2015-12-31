@@ -13,7 +13,6 @@ import Parse
 //let videoWidth : CGFloat = 320
 //let videoHeight : CGFloat = 240
 
-let navController = segue.destinationViewController as! UINavigationController
 let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
 let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height - navController.nav
 
@@ -44,12 +43,12 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     
     
-    var bAudio: Bool
-    var bVideo: Bool
-    var callRecieverID: String
+    var bAudio: Bool?
+    var bVideo: Bool?
+    var callRecieverID: String?
     
-    var m_mode: int
-    var m_connectionAttempts: int
+    var m_mode: Int?
+    var m_connectionAttempts: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +71,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     override func viewDidAppear(animated: Bool) {
         if callRecieverID != "" {
-            m_mode = streamingModeOutgoing
+//            m_mode = streamingModeOutgoing
             initOutGoingCall()
             
         }else{
-            m_mode = streamingModeOutgoing
+//            m_mode = streamingModeOutgoing
             m_connectionAttempts = 1
             connectWithToken()
         }
@@ -288,6 +287,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         statusLabel.text = "Error recieving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
         callSelector(doneStreaming(), object: nil, delay: 5.0)
+
     }
     
     @IBAction func doneStreaming() {
@@ -349,18 +349,16 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             
             self.presentViewController(al, animated: true, completion: nil)
         }
-}
+    }
+
 
 
     func connectWithToken() {
         print("connectWithToken")
         doConnect()
-        
-        self.callSelector(done, object: <#T##AnyObject?#>, delay: <#T##NSTimeInterval#>)
-}
-}
+    }
 
-
+}
 
 
 extension NSObject {
