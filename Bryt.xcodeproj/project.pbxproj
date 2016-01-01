@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		84CBF7B16A3FFEFD011545C9 /* Pods_Bryt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7016448606E2EC5B9428B670 /* Pods_Bryt.framework */; };
 		E10CA04D1C1D4AF400B6EA96 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */; };
-		E10CA0511C1D4B9000B6EA96 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */; };
 		E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63471BE3F05900BDDC76 /* AppDelegate.swift */; };
 		E12E634A1BE3F05900BDDC76 /* StreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */; };
-		E12E634D1BE3F05900BDDC76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E634B1BE3F05900BDDC76 /* Main.storyboard */; };
 		E12E634F1BE3F05900BDDC76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E634E1BE3F05900BDDC76 /* Assets.xcassets */; };
 		E12E63521BE3F05900BDDC76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */; };
 		E12E635D1BE3F05900BDDC76 /* BrytTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E635C1BE3F05900BDDC76 /* BrytTests.swift */; };
@@ -39,6 +37,8 @@
 		E16859371C002881006F971E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859361C002881006F971E /* Accounts.framework */; };
 		E16859391C002888006F971E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859381C002888006F971E /* Social.framework */; };
 		E168593B1C003872006F971E /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168593A1C003872006F971E /* ParseHelper.swift */; };
+		E1FDCD811C37423000D0B077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FDCD7E1C37423000D0B077 /* Main.storyboard */; };
+		E1FDCD821C37423000D0B077 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FDCD801C37423000D0B077 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +62,9 @@
 		7016448606E2EC5B9428B670 /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40BF97C4E7D4758D696F014 /* Pods-Bryt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.debug.xcconfig"; sourceTree = "<group>"; };
 		E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E12E63441BE3F05900BDDC76 /* Bryt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bryt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E63471BE3F05900BDDC76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingViewController.swift; sourceTree = "<group>"; };
-		E12E634C1BE3F05900BDDC76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E12E634E1BE3F05900BDDC76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E12E63511BE3F05900BDDC76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E12E63531BE3F05900BDDC76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +97,8 @@
 		E16859361C002881006F971E /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E16859381C002888006F971E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E168593A1C003872006F971E /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		E1FDCD7F1C37423000D0B077 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E1FDCD801C37423000D0B077 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FF9B28798EB4A055DEFCF8AE /* Pods-Bryt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bryt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bryt/Pods-Bryt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,12 +212,12 @@
 		E12E63461BE3F05900BDDC76 /* Bryt */ = {
 			isa = PBXGroup;
 			children = (
+				E1FDCD7E1C37423000D0B077 /* Main.storyboard */,
+				E1FDCD801C37423000D0B077 /* LoginViewController.swift */,
 				E12E63471BE3F05900BDDC76 /* AppDelegate.swift */,
 				E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */,
 				E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */,
 				E168593A1C003872006F971E /* ParseHelper.swift */,
-				E10CA0501C1D4B9000B6EA96 /* LoginViewController.swift */,
-				E12E634B1BE3F05900BDDC76 /* Main.storyboard */,
 				E12E634E1BE3F05900BDDC76 /* Assets.xcassets */,
 				E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */,
 				E12E63531BE3F05900BDDC76 /* Info.plist */,
@@ -360,9 +360,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1FDCD811C37423000D0B077 /* Main.storyboard in Resources */,
 				E12E63521BE3F05900BDDC76 /* LaunchScreen.storyboard in Resources */,
 				E12E634F1BE3F05900BDDC76 /* Assets.xcassets in Resources */,
-				E12E634D1BE3F05900BDDC76 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +438,7 @@
 				E12E634A1BE3F05900BDDC76 /* StreamingViewController.swift in Sources */,
 				E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */,
 				E10CA04D1C1D4AF400B6EA96 /* ListViewController.swift in Sources */,
-				E10CA0511C1D4B9000B6EA96 /* LoginViewController.swift in Sources */,
+				E1FDCD821C37423000D0B077 /* LoginViewController.swift in Sources */,
 				E168593B1C003872006F971E /* ParseHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,20 +475,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E12E634B1BE3F05900BDDC76 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E12E634C1BE3F05900BDDC76 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E12E63511BE3F05900BDDC76 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E1FDCD7E1C37423000D0B077 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1FDCD7F1C37423000D0B077 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
