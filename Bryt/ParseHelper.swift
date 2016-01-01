@@ -242,44 +242,68 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
         print("deleteActiveSession")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
-        let activeSessionID = app
-    
+        let activeSessionID = appDelegate.sessionID
+        
+        
+        if activeSessionID == nil || activeSessionID == ""{
+            return
+        }
+        
+        let query = PFQuery(className:"ActiveSessions")
+        query.whereKey("sessionID", equalTo: appDelegate.sessionID)
+        
+        query.getFirstObjectInBackgroundWithBlock {(object: PFObject?, error: NSError?) -> Void in
+            if error != nil || object == nil {
+                print("The getFirstObject request failed.")
+            } else {
+                // The find succeeded.
+                print("Successfully retrieved the object.")
+                object?.deleteInBackgroundWithBlock {(bool:succeeded, error: NSError) -> Void in
+                    if succeeded != nil && error == nil {
+                        print("Session deleted from parse")
+                    } else {
+                        // The find succeeded.
+                        print("\(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
+    
+                
+    
 
 
-    class func deleteActiveUser()
-        {
+    class func deleteActiveUser() {
             let activeUserobjID = self.activeUserobjID
-//            
-//            if activeUserobjID == nil || activeUserobjID == ""{
-//                return
-//            }
-            
+       
+            if activeUserobjID == nil || activeUserobjID == ""{
+                return
+            }
+        
             var query = PFQuery(className:"ActiveUsers")
-           
             query.whereKey("userID", equalTo: activeUserobjID)
             
-//            query.findObjectsInBackgroundWithBlock{(objects,error) -> Void in
-//                if error == nil {
-//                    
-//                    if objects.
-//
-//                    if objects?.count == 0 {
-//                        print("No such user exists")
-//                        
-//                        
-//    
-//                        
-//                    }else{
-////                        let object = objects[0] as! PFObject
-//                        let object = objects[0] as! PFObject
-//                        object.contains()
-//                        
-//                        print("Sucessfully retrieved the Active User")
-            
-    
+        query.getFirstObjectInBackgroundWithBlock {(object:PFObject?, error:NSError?)
+            if error != nil || object == nil {
+                print("The getFirstObject request failed.")
+            } else {
+                // The find succeeded.
+                print("Successfully retrieved the object.")
+                object?.deleteInBackgroundWithBlock {(bool:succeeded, error: NSError) -> Void in
+                    if succeeded != nil && error == nil {
+                        print("User deleted from parse")
+                    } else {
+                        // The find succeeded.
+                        print("\(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
+
+            
+
 
 
     class func initData() {
