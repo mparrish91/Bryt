@@ -77,7 +77,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         if button.tag < 0 //out of bounds
         {
-            showAlert("User is no longer online.", nil)
+            showAlert("User is no longer online.")
             
             return
         }
@@ -120,15 +120,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     
-     func showAlert(message: String){
-        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
-    
-        // add code to handle the different button hits
-        alert.show()
-    }
-    
-    func showAlertWithClosure(message: String, completionClosure:(action: UIAlertAction) -> ()){
+     func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
         let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
         

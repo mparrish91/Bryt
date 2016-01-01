@@ -74,7 +74,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
         
         activeSession.saveInBackgroundWithBlock {
-            (success Bool, error: NSError?) -> Void in
+            (success: Bool, error: NSError?) -> Void in
             if (error == nil) {
                 print("sessionID: \(activeSession["sessionID"]), publisherToken: \(activeSession["publisherToken"]), subscriberToken: \(activeSession["subscriberToken"])")
                 
@@ -88,7 +88,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg, nil)
+                showAlert(msg)
             }
         }
     }
@@ -121,9 +121,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         alertController.show()
     }
     
-    
-//    //works
-    class func anonymousLogin() {
+        class func anonymousLogin() {
         let loggedInUser = PFUser.currentUser()
         
         if (loggedInUser != nil) {
@@ -136,7 +134,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let description = error?.localizedDescription
                 print("Failed to login anonymously. Please try again. \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg, nil)
+                showAlert(msg)
             } else{
                 var loggedInUser = PFUser()
                 loggedInUser = user!
@@ -147,7 +145,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
 
     
-    class func showAlert(message: String, completionClosure:(action: UIAlertAction) -> ()){
+    class func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
         let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
     
@@ -156,7 +154,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
     
     class func saveUserToParse(user: PFUser) {
-        var activeUser: PFObject
+        var activeUser: PFObject?
         let query = PFQuery(className: "ActiveUsers")
         query.whereKey("user", equalTo: user.objectId!)
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
@@ -170,10 +168,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 }
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                activeUser["userID"] = user.objectId
-                activeUser["userTitle"] = appDelegate.userTitle
+                activeUser!["userID"] = user.objectId
+                activeUser!["userTitle"] = appDelegate.userTitle
                 
-                activeUser.saveInBackgroundWithBlock{ (success, error) -> Void in
+                activeUser!.saveInBackgroundWithBlock{ (success, error) -> Void in
                     
                     if success {
                         print("activeUser saved: \(success)")
@@ -182,7 +180,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                         let description = error?.localizedDescription
                         print(" \(description)")
                         let msg  = "Save to ActiveUsers failed. \(description)"
-                        self.showAlert(msg, nil)
+                        self.showAlert(msg)
                     }
                 }
             }
@@ -199,8 +197,9 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
         var query = PFQuery(className:"ActiveSessions")
         
-        let currentUserID = loggedInUser.objectID
-        query.whereKey("recieverID", equalTo: currentUserID)
+        let currentUserID = loggedInUser?.objectId
+        
+        query.whereKey("recieverID", equalTo: currentUserID!)
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
@@ -224,11 +223,11 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     let msg  = "Incoming call from, %@, \(appDelegate.callerTitle)"
                     
                     //create new alert message from scratch because need to set polling timer for cancel 
-                    self.showAlert(msg,             NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil))
+                    self.showAlert(msg, completionClosure:{ action in NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil)})
                 }
             }else{
                 let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
-                self.showAlert(msg,nil)
+                self.showAlert(msg)
                 }
         
     }
@@ -250,7 +249,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
         
         let query = PFQuery(className:"ActiveSessions")
-        query.whereKey("sessionID", equalTo: appDelegate.sessionID)
+        query.whereKey("sessionID", equalTo: appDelegate.sessionID!)
         
         query.getFirstObjectInBackgroundWithBlock {(object: PFObject?, error: NSError?) -> Void in
             if error != nil || object == nil {
@@ -258,12 +257,12 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             } else {
                 // The find succeeded.
                 print("Successfully retrieved the object.")
-                object?.deleteInBackgroundWithBlock {(bool:succeeded, error: NSError) -> Void in
+                object?.deleteInBackgroundWithBlock {(succeeded:Bool?, error: NSError?) -> Void in
                     if succeeded != nil && error == nil {
                         print("Session deleted from parse")
                     } else {
                         // The find succeeded.
-                        print("\(error.localizedDescription)")
+                        print(error!.localizedDescription)
                     }
                 }
             }
@@ -282,20 +281,20 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             }
         
             var query = PFQuery(className:"ActiveUsers")
-            query.whereKey("userID", equalTo: activeUserobjID)
+            query.whereKey("userID", equalTo: activeUserobjID!)
             
-        query.getFirstObjectInBackgroundWithBlock {(object:PFObject?, error:NSError?)
+        query.getFirstObjectInBackgroundWithBlock {(object:PFObject?, error:NSError?) -> Void in
             if error != nil || object == nil {
                 print("The getFirstObject request failed.")
             } else {
                 // The find succeeded.
                 print("Successfully retrieved the object.")
-                object?.deleteInBackgroundWithBlock {(bool:succeeded, error: NSError) -> Void in
+                object?.deleteInBackgroundWithBlock {(succeeded:Bool?, error: NSError?) -> Void in
                     if succeeded != nil && error == nil {
                         print("User deleted from parse")
                     } else {
                         // The find succeeded.
-                        print("\(error.localizedDescription)")
+                        print(error!.localizedDescription)
                     }
                 }
             }
@@ -307,11 +306,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
 
     class func initData() {
-        if let objectsUnderDeletionQueue = NSMutableArray(){
-            print("Objectsunderdeletion not nil")
+        objectsUnderDeletionQueue = NSMutableArray()
             
     }
-}
+
 
 
 class func isUnderDeletion(argObjectID:AnyObject) {

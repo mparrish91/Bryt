@@ -89,7 +89,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let inputDict = NSMutableDictionary()
+        var inputDict = Dictionary<String, AnyObject>()
         inputDict["callerID"] = ParseHelper.loggedInUser
         inputDict["callerTitle"] = appDelegate.userTitle
         inputDict["recieverID"] = self.callRecieverID
