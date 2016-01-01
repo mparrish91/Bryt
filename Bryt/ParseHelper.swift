@@ -14,11 +14,11 @@ import DBAlertController
 class ParseHelper: NSObject {
     
     static var loginTextField: UITextField?
-    static var loggedInUser: PFUser
+    static var loggedInUser: PFUser?
 
-    static var bPollingTimerOn: Bool
-    static var activeUserobjID: String
-    static var objectsUnderDeletionQueue: NSMutableArray
+    static var bPollingTimerOn: Bool?
+    static var activeUserobjID: String?
+    static var objectsUnderDeletionQueue: NSMutableArray?
     
 
 
@@ -211,7 +211,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 if objects?.count == 0 {
                     
                 }else{
-                    let activeSession = objects[0] as! PFObject
+                    let activeSession = objects![0] as! PFObject
                     appDelegate.sessionID = activeSession["sessionID"] as? String
                     appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
                     appDelegate.publisherToken = activeSession["publisherToken"] as? String
@@ -234,7 +234,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
     }
 
-    class func setPollingTimer(bArg:ObjCBool) {
+    class func setPollingTimer(bArg:Bool) {
         bPollingTimerOn = bArg
 }
     
@@ -290,7 +290,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 }
 
 
-class func isUnderDeletion(argObjectID:id) {
+class func isUnderDeletion(argObjectID:AnyObject) {
     
 //properties not coming up
     

@@ -13,8 +13,11 @@ import Parse
 //let videoWidth : CGFloat = 320
 //let videoHeight : CGFloat = 240
 
+
 let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
-let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height - navController.nav
+let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
+
+
 
 // *** Fill the following variables using your own Project info  ***
 // ***          https://dashboard.tokbox.com/projects            ***
@@ -87,11 +90,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let inputDict = NSMutableDictionary()
-        inputDict["callerID"] = ParseHelper().loggedInUser
+        inputDict["callerID"] = ParseHelper.loggedInUser
         inputDict["callerTitle"] = appDelegate.userTitle
         inputDict["recieverID"] = self.callRecieverID
-        inputDict["isAudio"] = bAudio.toInt()
-        inputDict["isVideo"] = bVideo.toInt()
+        inputDict["isAudio"] = bAudio!.toInt()
+        inputDict["isVideo"] = bVideo!.toInt()
 
         m_connectionAttempts = 1
         ParseHelper.saveSessionToParse(inputDict)
@@ -134,8 +137,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func doPublish() {
         publisher = OTPublisher(delegate: self)
-        publisher?.publishAudio = bAudio
-        publisher?.publishVideo = bVideo
+        publisher?.publishAudio = bAudio!
+        publisher?.publishVideo = bVideo!
         session?.publish(publisher)
         
         
@@ -158,7 +161,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         publisher?.view.layer.cornerRadius = 10.0
         publisher?.view.layer.masksToBounds = true
         publisher?.view.layer.borderWidth = 5.0
-        publisher?.view.layer.borderWidth = UIColor.yellowColor().CGColor
+        publisher?.view.layer.borderColor = UIColor.yellowColor().CGColor
     }
 
     /**
@@ -259,13 +262,13 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             view.frame =  CGRect(x: 0.0, y: videoHeight, width: videoWidth, height: videoHeight)
             self.view.addSubview(view)
             
-            print("screenheight"/(videoHeight))
-            print("navheight"/(videoHeight))
+            print("screenheight/(videoHeight)")
+            print("navheight(videoHeight)")
             
             view.bringSubviewToFront(disconnectButton)
             
-            if publisher {
-                view.bringSubviewToFront(publisher?.view)
+            if (publisher != nil) {
+                view.bringSubviewToFront((publisher?.view)!)
             }
 
         }
@@ -273,7 +276,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         subscriber?.view.layer.cornerRadius = 10.0
         subscriber?.view.layer.masksToBounds = true
         subscriber?.view.layer.borderWidth = 5.0
-        subscriber?.view.layer.borderWidth = UIColor.grayColor().CGColor
+        subscriber?.view.layer.borderColor = UIColor.grayColor().CGColor
         
         statusLabel.text = "Connected, waiting for stream..."
         view.bringSubviewToFront(statusLabel)
@@ -286,7 +289,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         statusLabel.text = "Error recieving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
-        callSelector(doneStreaming(), object: nil, delay: 5.0)
+        callSelector("doneStreaming", object: nil, delay: 5.0)
 
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import DBAlertController
 
 class ListViewController: UIViewController {
     
@@ -22,8 +23,8 @@ class ListViewController: UIViewController {
 func didLogin() {
     
     //not accounting for location...calls parse wrapper for storing to ActiveUsers table
-    let thisUser = ParseHelper().loggedInUser
-    ParseHelper.saveUserToParse(thisUser)
+    let thisUser = ParseHelper.loggedInUser
+    ParseHelper.saveUserToParse(thisUser!)
     
 }
     
@@ -38,14 +39,14 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
             if error == nil {
-                for object in objects {
+                for object in objects! {
                     //if for this user, skip it
-                    let userID = object["userID"]
-                    let currentUser = ParseHelper().loggedInUser.objectId
+                    let userID = object["userID"] as! String
+                    let currentUser = ParseHelper.loggedInUser!.objectId
                     print(userID)
-                    print(currentuser)
+                    print(currentUser)
                     
-                    if userID == currentUser {
+                    if userID == currentUser! {
                         print("skipping - current user")
                         continue
                     }
@@ -56,14 +57,14 @@ func pullForNewUsers(bRefreshUI:Bool) {
                     dict["userID"] = userID
                     dict["userTitle"] = userTitle
                     
-                    m_userArray.addObject(dict)
+                    self.m_userArray.addObject(dict)
                 }
                 
                 if (bRefreshUI)
                 {
-                    m_userTableView.reloadData()
+                   self.m_userTableView.reloadData()
                 }else{
-                    print("%@"/(error?.description))
+                    print("\(error?.description)")
                 }
                 
             }
@@ -76,7 +77,8 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         if button.tag < 0 //out of bounds
         {
-            showAlert("User is no longer online.")
+            showAlert("User is no longer online.", nil)
+            
             return
         }
         
@@ -97,9 +99,9 @@ func pullForNewUsers(bRefreshUI:Bool) {
         if (segue.identifier == "StreamingSegue"){
             let navController = segue.destinationViewController as! UINavigationController
             let streamingVC = navController.topViewController as! StreamingViewController
-            streamingVC.callRecieverID = m_recieverID.copy() as! String
+            streamingVC.callRecieverID = m_recieverID.copy() as? String
 
-            if bAudioOnly {
+            if (bAudioOnly != nil) {
                 streamingVC.bAudio = true
                 streamingVC.bVideo = false
             }else{
@@ -115,6 +117,23 @@ func pullForNewUsers(bRefreshUI:Bool) {
         //pass blank because call has arrived, no need for recieverID
         m_recieverID = ""
         goToStreamingVC()
+    }
+    
+    
+     func showAlert(message: String){
+        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
+    
+        // add code to handle the different button hits
+        alert.show()
+    }
+    
+    func showAlertWithClosure(message: String, completionClosure:(action: UIAlertAction) -> ()){
+        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
+        
+        // add code to handle the different button hits
+        alert.show()
     }
     
 
