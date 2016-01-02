@@ -18,6 +18,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var m_recieverID =  String()
 
     @IBOutlet weak var m_userTableView: UITableView!
+    
+    
+    override func viewDidLoad() {
+        ParseHelper.anonymousLogin()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didLogin", name: "kLoggedInNotification", object: nil)
+        
+        NSTimer.scheduledTimerWithTimeInterval(2.0,target: m_userTableView,selector: Selector("reloadData"),userInfo: nil, repeats: true)
+
+
+
+    }
 
 //Called in repsonse of kLoggedInNotification
 func didLogin() {
@@ -26,6 +39,8 @@ func didLogin() {
     let thisUser = ParseHelper.loggedInUser
     ParseHelper.saveUserToParse(thisUser!)
     
+    pullForNewUsers(true)
+    print(m_userArray)
 }
     
     
@@ -138,6 +153,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print(m_userArray)
         let dict = m_userArray.objectAtIndex(indexPath.row)
         let userTitle = dict.objectForKey("userTitle") as! String
         
@@ -164,7 +180,9 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("testing\(m_userArray.count)")
         return m_userArray.count
+        
     }
     
     

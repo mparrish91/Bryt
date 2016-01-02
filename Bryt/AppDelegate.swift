@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bFullyLoggedIn = false
         ParseHelper.initData()
         registerNotifs()
-        ParseHelper.anonymousLogin()
         
         
         
@@ -53,15 +52,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func registerNotifs() {
-//        let rootViewController = self.window?.rootViewController as UIViewController
         
-//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //if they have logged in run this skip
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        var firstVC = storyboard.instantiateViewControllerWithIdentifier("listvc") as! ListViewController
-//        
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
+//        self.window?.rootViewController = firstVC
+        
+        var firstVC = storyboard.instantiateViewControllerWithIdentifier("navvc") as! UINavigationController
+        self.window?.rootViewController = firstVC
+        
+        
 
     
     }
@@ -105,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (appTimer == nil){
             return
-            appTimer = NSTimer.scheduledTimerWithTimeInterval(12.0,target: self,selector: Selector("onTick:"),userInfo: nil, repeats: true)
+            appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick:"),userInfo: nil, repeats: true)
             
             ParseHelper.setPollingTimer(true)
             print("fired timer")

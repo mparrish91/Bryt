@@ -122,12 +122,18 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
     
         class func anonymousLogin() {
-        
-        if let loggedInUser = PFUser.currentUser() {
-            print(loggedInUser)
-            showUserTitlePrompt()
-            return
+            
+            self.loggedInUser = PFUser.currentUser()
+            if loggedInUser != nil{
+                showUserTitlePrompt()
+                return
+                
             }
+        
+//        if let loggedInUser = PFUser.currentUser() {
+//            showUserTitlePrompt()
+//            return
+//            }
         
 //        if (loggedInUser != nil) {
 //            loggedInUser = PFUser.currentUser()
@@ -143,7 +149,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
                 showAlert(msg)
             } else{
-                var loggedInUser = PFUser()
+                self.loggedInUser = PFUser()
                 loggedInUser = user!
                 showUserTitlePrompt()
             }
@@ -203,7 +209,6 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
         
         var query = PFQuery(className:"ActiveSessions")
-        
         
         let currentUserID = loggedInUser?.objectId
         
