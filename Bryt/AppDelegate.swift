@@ -42,9 +42,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        bFullyLoggedIn = false
+        ParseHelper.initData()
+        registerNotifs()
+        ParseHelper.anonymousLogin()
+        
         
         
         return true
+    }
+    
+    func registerNotifs() {
+//        let rootViewController = self.window?.rootViewController as UIViewController
+        
+//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        var firstVC = storyboard.instantiateViewControllerWithIdentifier("listvc") as! ListViewController
+//        
+//        
+//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
+
+    
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -70,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         self.bFullyLoggedIn = false
         ParseHelper.anonymousLogin()
+        ParseHelper.initData()
         
     }
 
@@ -85,15 +105,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (appTimer == nil){
             return
-            appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick"),userInfo: nil, repeats: true)
+            appTimer = NSTimer.scheduledTimerWithTimeInterval(8.0,target: self,selector: Selector("onTick:"),userInfo: nil, repeats: true)
             
-//            ParseHelper
+            ParseHelper.setPollingTimer(true)
             print("fired timer")
         }
     }
     
     func onTick(timer: NSTimer){
-        print("OnTick")        
+        print("onTick")
         ParseHelper.pollParseForActiveSessions()
         }
 

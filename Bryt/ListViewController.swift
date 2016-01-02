@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import DBAlertController
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var bAudioOnly:Bool?
     
@@ -100,7 +100,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
             let navController = segue.destinationViewController as! UINavigationController
             let streamingVC = navController.topViewController as! StreamingViewController
             streamingVC.callRecieverID = m_recieverID.copy() as? String
-
+ 
             if (bAudioOnly != nil) {
                 streamingVC.bAudio = true
                 streamingVC.bVideo = false
@@ -127,6 +127,46 @@ func pullForNewUsers(bRefreshUI:Bool) {
         // add code to handle the different button hits
         alert.show()
     }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let dict = m_userArray.objectAtIndex(indexPath.row)
+        let recieverID = dict.objectForKey("userID")
+        m_recieverID = recieverID!.copy() as! String
+        goToStreamingVC()
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let dict = m_userArray.objectAtIndex(indexPath.row)
+        let userTitle = dict.objectForKey("userTitle") as! String
+        
+        let cellIdentifier = "Cell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
+        
+        cell?.backgroundColor = UIColor.clearColor()
+        cell?.backgroundView = UIImageView(image: UIImage(named: "cellrow.png")?.stretchableImageWithLeftCapWidth(0, topCapHeight: 5))
+
+        
+        cell?.textLabel!.text = userTitle
+        cell?.textLabel?.font = UIFont(name: "Verdana", size: 13)
+        cell?.contentView.backgroundColor = UIColor.clearColor()
+        
+        
+        let videoCallButton = UIButton(type: UIButtonType.System)
+        videoCallButton.frame = CGRectMake(cell!.frame.size.width - 50, 10.0, 40.0, 40.0)
+        videoCallButton.tag = indexPath.row
+        videoCallButton.addTarget(self, action: "startVideoChat:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell?.addSubview(videoCallButton)
+    
+        return cell!
+
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return m_userArray.count
+    }
+    
     
 
 }

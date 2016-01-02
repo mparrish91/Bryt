@@ -197,6 +197,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
         var query = PFQuery(className:"ActiveSessions")
         
+        
         let currentUserID = loggedInUser?.objectId
         
         query.whereKey("recieverID", equalTo: currentUserID!)
@@ -218,11 +219,11 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
 
                     //done with backend object, remove it.
+                    setPollingTimer(false)
                     deleteActiveSession()
                     
-                    let msg  = "Incoming call from, %@, \(appDelegate.callerTitle)"
+                    let msg  = "Incoming call from, %@, Accept? \(appDelegate.callerTitle)"
                     
-                    //create new alert message from scratch because need to set polling timer for cancel 
                     self.showAlert(msg, completionClosure:{ action in NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil)})
                 }
             }else{
