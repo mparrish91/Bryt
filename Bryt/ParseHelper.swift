@@ -122,13 +122,20 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     }
     
         class func anonymousLogin() {
-        let loggedInUser = PFUser.currentUser()
         
-        if (loggedInUser != nil) {
+        if let loggedInUser = PFUser.currentUser() {
+            print(loggedInUser)
             showUserTitlePrompt()
             return
-        }
+            }
         
+//        if (loggedInUser != nil) {
+//            loggedInUser = PFUser.currentUser()
+//            print(loggedInUser)
+//            showUserTitlePrompt()
+//            return
+//        }
+//        
         PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
             if error != nil || user == nil {
                 let description = error?.localizedDescription
