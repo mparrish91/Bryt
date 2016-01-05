@@ -153,7 +153,6 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(m_userArray)
         let dict = m_userArray.objectAtIndex(indexPath.row)
         let userTitle = dict.objectForKey("userTitle") as! String
         
@@ -170,7 +169,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         
         let videoCallButton = UIButton(type: UIButtonType.System)
-        videoCallButton.frame = CGRectMake(cell!.frame.size.width - 50, 10.0, 40.0, 40.0)
+//        videoCallButton.frame = CGRectMake(cell!.frame.size.width - 50, 10.0, 40.0, 40.0)
         videoCallButton.tag = indexPath.row
         videoCallButton.addTarget(self, action: "startVideoChat:", forControlEvents: UIControlEvents.TouchUpInside)
         cell?.addSubview(videoCallButton)
