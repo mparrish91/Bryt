@@ -22,11 +22,12 @@ let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
 // *** Fill the following variables using your own Project info  ***
 // ***          https://dashboard.tokbox.com/projects            ***
 // Replace with your OpenTok API key
-let ApiKey = "45403342"
+let ApiKey = "45458232"
+
 // Replace with your generated session ID
-let SessionID = "2_MX40NTQwMzM0Mn5-MTQ0ODA3MTA0OTkwN345bms5T25DQ1FHc3dWWm43TUhwRFdHSkJ-UH4"
+let SessionID = "1_MX40NTQ1ODIzMn5-MTQ1MjEwNTk0MTA4NH5lZWIvaUs2RjFuZTBQNmxCdVpYWGdReGF-fg"
 // Replace with your generated token
-let Token = "T1==cGFydG5lcl9pZD00NTQwMzM0MiZzaWc9NmZmMmU1YjAyNmM1ZjgwZDE0OWZhZDAwNjgxM2E2ODVjYjM4MjJhNjpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5UUXdNek0wTW41LU1UUTBPREEzTVRBME9Ua3dOMzQ1Ym1zNVQyNURRMUZIYzNkV1dtNDNUVWh3UkZkSFNrSi1VSDQmY3JlYXRlX3RpbWU9MTQ0ODA3MTA3MiZub25jZT0wLjUyNDM3MjM3NzY3MTgzMDImZXhwaXJlX3RpbWU9MTQ0ODA3NDU1NyZjb25uZWN0aW9uX2RhdGE9"
+let Token = "T1==cGFydG5lcl9pZD00NTQ1ODIzMiZzaWc9ZTIxZjBhNTg1OTkyYWNjYzc5MTYyYTdkMTA1MWY5ZDdmNWRhZGYwODpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTFfTVg0ME5UUTFPREl6TW41LU1UUTFNakV3TlRrME1UQTROSDVsWldJdmFVczJSakZ1WlRCUU5teENkVnBZV0dkUmVHRi1mZyZjcmVhdGVfdGltZT0xNDUyMTA2MDk0Jm5vbmNlPTAuMzk3MjQwNzkwNTg3MDU2NjQmZXhwaXJlX3RpbWU9MTQ1NDY5Nzg1MSZjb25uZWN0aW9uX2RhdGE9"
 
 // Change to YES to subscribe to your own stream.
 let SubscribeToSelf = false

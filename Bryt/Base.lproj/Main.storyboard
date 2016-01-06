@@ -186,26 +186,5 @@
             </objects>
             <point key="canvasLocation" x="343" y="731"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pab-eu-bND">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2vs-Oo-QAP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajS-xi-Oi6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="JSi-zX-XOR" kind="relationship" relationship="rootViewController" id="jIf-Zk-uzO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mMz-UD-WRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1779" y="731"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="yK8-VP-wmF"/>
-    </inferredMetricsTieBreakers>
 </document>

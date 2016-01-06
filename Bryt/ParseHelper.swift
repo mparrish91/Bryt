@@ -56,7 +56,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         activeSession["isAudio"] = bAudio?.toInt()
         
         let bVideo = inputDict["isAudio"]?.boolValue
-        activeSession["isVideo"] = bVideo?.toInt()
+        activeSession["isVideo"] = bVideo                //? why was this converted to NSNumber in tutorial
 
         
         let recieverID = inputDict["receiverID"]

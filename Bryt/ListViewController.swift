@@ -176,8 +176,10 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "StreamingSegue"){
-            let navController = segue.destinationViewController as! UINavigationController
-            let streamingVC = navController.topViewController as! StreamingViewController
+//            let navController = segue.destinationViewController as! UINavigationController
+//            let streamingVC = navController.topViewController as! StreamingViewController
+            
+            let streamingVC = segue.destinationViewController as! StreamingViewController
             streamingVC.callRecieverID = m_recieverID.copy() as? String
             
             if (bAudioOnly != nil) {
