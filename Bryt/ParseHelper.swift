@@ -8,8 +8,6 @@
 
 import Foundation
 import Parse
-import DBAlertController
-
 
 class ParseHelper: NSObject {
     
@@ -97,7 +95,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
     class func showUserTitlePrompt() {
         
-        let alertController = DBAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -118,7 +116,8 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
 //            textField.placeholder = "Enter your login ID"
         }
-        alertController.show()
+		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+		ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
     }
     
         class func anonymousLogin() {
@@ -159,11 +158,12 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
     
     class func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
-        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
     
         // add code to handle the different button hits
-        alert.show()
+		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+		ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
     class func saveUserToParse(user: PFUser) {
