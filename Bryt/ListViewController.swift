@@ -8,7 +8,6 @@
 
 import Foundation
 import Parse
-import DBAlertController
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -96,11 +95,12 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     
      func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
-        let alert = DBAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
         
         // add code to handle the different button hits
-        alert.show()
+		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+		ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
     
