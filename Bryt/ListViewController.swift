@@ -85,47 +85,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
             }
     }
     }
-    
 
-    func startVideoChat(sender:AnyObject) {
-        let button = UIButton()
-        
-        if button.tag < 0 //out of bounds
-        {
-            showAlert("User is no longer online.")
-            
-            return
-        }
-        
-        let dict = m_userArray[button.tag] as! NSMutableDictionary
-        let recieverID = dict["userID"]
-        m_recieverID = recieverID!.copy() as! String
-        goToStreamingVC()
-        
-    }
-    
-    
-    func goToStreamingVC()
-    {
-        performSegueWithIdentifier("StreamingSegue", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "StreamingSegue"){
-            let navController = segue.destinationViewController as! UINavigationController
-            let streamingVC = navController.topViewController as! StreamingViewController
-            streamingVC.callRecieverID = m_recieverID.copy() as? String
- 
-            if (bAudioOnly != nil) {
-                streamingVC.bAudio = true
-                streamingVC.bVideo = false
-            }else{
-                streamingVC.bAudio = true
-                streamingVC.bVideo = true
-            }
-            
-        }
-    }
     
     
     func didCallArrive() {
@@ -158,21 +118,26 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
-        
         cell?.backgroundColor = UIColor.clearColor()
-        cell?.backgroundView = UIImageView(image: UIImage(named: "cellrow.png")?.stretchableImageWithLeftCapWidth(0, topCapHeight: 5))
-
         
         cell?.textLabel!.text = userTitle
         cell?.textLabel?.font = UIFont(name: "Verdana", size: 13)
         cell?.contentView.backgroundColor = UIColor.clearColor()
         
         
-        let videoCallButton = UIButton(type: UIButtonType.System)
-//        videoCallButton.frame = CGRectMake(cell!.frame.size.width - 50, 10.0, 40.0, 40.0)
+        let videoCallButton = UIButton(type: UIButtonType.System) 
+        videoCallButton.backgroundColor = UIColor.orangeColor()
+
+        videoCallButton.frame = CGRectMake(cell!.bounds.size.width - 50,
+            10,
+            40,
+            40)
+
+        
         videoCallButton.tag = indexPath.row
         videoCallButton.addTarget(self, action: "startVideoChat:", forControlEvents: UIControlEvents.TouchUpInside)
-        cell?.addSubview(videoCallButton)
+        videoCallButton.setImage(UIImage(named: "phonecall.png"), forState: UIControlState.Normal)
+        cell?.contentView.addSubview(videoCallButton)
     
         return cell!
 
@@ -185,5 +150,45 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     
+    func startVideoChat(sender: UIButton!) {
+        print("start called")
+        let button = UIButton()
+        
+        if button.tag < 0 //out of bounds
+        {
+            showAlert("User is no longer online.")
+            
+            return
+        }
+        
+        let dict = m_userArray[button.tag] as! NSMutableDictionary
+        let recieverID = dict["userID"]
+        m_recieverID = recieverID!.copy() as! String
+        goToStreamingVC()
+        
+    }
+    
+    
+    func goToStreamingVC()
+    {
+        performSegueWithIdentifier("StreamingSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "StreamingSegue"){
+            let navController = segue.destinationViewController as! UINavigationController
+            let streamingVC = navController.topViewController as! StreamingViewController
+            streamingVC.callRecieverID = m_recieverID.copy() as? String
+            
+            if (bAudioOnly != nil) {
+                streamingVC.bAudio = true
+                streamingVC.bVideo = false
+            }else{
+                streamingVC.bAudio = true
+                streamingVC.bVideo = true
+            }
+            
+        }
+    }
 
 }

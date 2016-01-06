@@ -94,7 +94,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R1Y-tD-0Uy">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R1Y-tD-0Uy">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -114,6 +114,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R1Y-tD-0Uy" firstAttribute="bottom" secondItem="5ze-Ge-Dx3" secondAttribute="top" id="7HW-Fx-GTC"/>
+                            <constraint firstAttribute="trailing" secondItem="R1Y-tD-0Uy" secondAttribute="trailing" id="OHV-hW-9W0"/>
+                            <constraint firstItem="R1Y-tD-0Uy" firstAttribute="top" secondItem="Lyt-mT-GVM" secondAttribute="top" id="UdK-Gp-WSJ"/>
+                            <constraint firstItem="R1Y-tD-0Uy" firstAttribute="leading" secondItem="Lyt-mT-GVM" secondAttribute="leading" id="gRR-4q-TjZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="p1Y-MT-vFF"/>
                     <connections>

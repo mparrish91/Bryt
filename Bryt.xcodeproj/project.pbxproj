@@ -15,6 +15,7 @@
 		E12E63521BE3F05900BDDC76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */; };
 		E12E635D1BE3F05900BDDC76 /* BrytTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E635C1BE3F05900BDDC76 /* BrytTests.swift */; };
 		E12E63681BE3F05900BDDC76 /* BrytUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E63671BE3F05900BDDC76 /* BrytUITests.swift */; };
+		E14F5D021C3C8EAE0059E2C7 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14F5D011C3C8EAE0059E2C7 /* CustomTableViewCell.swift */; };
 		E168590A1BFFA697006F971E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16859091BFFA697006F971E /* VideoToolbox.framework */; };
 		E168590C1BFFA69E006F971E /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E168590B1BFFA69E006F971E /* GLKit.framework */; };
 		E168590E1BFFA6F3006F971E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E168590D1BFFA6F3006F971E /* CoreTelephony.framework */; };
@@ -74,6 +75,7 @@
 		E12E63631BE3F05900BDDC76 /* BrytUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrytUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E63671BE3F05900BDDC76 /* BrytUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrytUITests.swift; sourceTree = "<group>"; };
 		E12E63691BE3F05900BDDC76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E14F5D011C3C8EAE0059E2C7 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		E16859091BFFA697006F971E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		E168590B1BFFA69E006F971E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		E168590D1BFFA6F3006F971E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -217,6 +219,7 @@
 				E12E63471BE3F05900BDDC76 /* AppDelegate.swift */,
 				E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */,
 				E10CA04C1C1D4AF400B6EA96 /* ListViewController.swift */,
+				E14F5D011C3C8EAE0059E2C7 /* CustomTableViewCell.swift */,
 				E168593A1C003872006F971E /* ParseHelper.swift */,
 				E12E634E1BE3F05900BDDC76 /* Assets.xcassets */,
 				E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */,
@@ -435,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14F5D021C3C8EAE0059E2C7 /* CustomTableViewCell.swift in Sources */,
 				E12E634A1BE3F05900BDDC76 /* StreamingViewController.swift in Sources */,
 				E12E63481BE3F05900BDDC76 /* AppDelegate.swift in Sources */,
 				E10CA04D1C1D4AF400B6EA96 /* ListViewController.swift in Sources */,
