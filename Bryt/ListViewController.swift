@@ -20,6 +20,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         ParseHelper.anonymousLogin()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
@@ -77,15 +78,15 @@ func pullForNewUsers(bRefreshUI:Bool) {
                 if (bRefreshUI)
                 {
                    self.m_userTableView.reloadData()
-                }else{
+                }
+            }else{
                     print("\(error?.description)")
                 }
                 
             }
     }
-    }
 
-    
+
     
     func didCallArrive() {
         //pass blank because call has arrived, no need for recieverID
@@ -94,18 +95,18 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     
-     func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
+    func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
         let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
         
         // add code to handle the different button hits
-		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-		ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let dict = m_userArray.objectAtIndex(indexPath.row)
+        let dict = m_userArray[indexPath.row]
         let recieverID = dict.objectForKey("userID")
         m_recieverID = recieverID!.copy() as! String
         goToStreamingVC()
@@ -125,22 +126,22 @@ func pullForNewUsers(bRefreshUI:Bool) {
         cell?.contentView.backgroundColor = UIColor.clearColor()
         
         
-        let videoCallButton = UIButton(type: UIButtonType.System) 
+        let videoCallButton = UIButton(type: UIButtonType.System)
         videoCallButton.backgroundColor = UIColor.orangeColor()
-
+        
         videoCallButton.frame = CGRectMake(cell!.bounds.size.width - 50,
             10,
             40,
             40)
-
+        
         
         videoCallButton.tag = indexPath.row
         videoCallButton.addTarget(self, action: "startVideoChat:", forControlEvents: UIControlEvents.TouchUpInside)
         videoCallButton.setImage(UIImage(named: "phonecall.png"), forState: UIControlState.Normal)
         cell?.contentView.addSubview(videoCallButton)
-    
+        
         return cell!
-
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -176,8 +177,6 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "StreamingSegue"){
-//            let navController = segue.destinationViewController as! UINavigationController
-//            let streamingVC = navController.topViewController as! StreamingViewController
             
             let streamingVC = segue.destinationViewController as! StreamingViewController
             streamingVC.callRecieverID = m_recieverID.copy() as? String

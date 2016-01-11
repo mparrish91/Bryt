@@ -24,23 +24,23 @@ class ParseHelper: NSObject {
 //if there is a session already existing, do not save,
 //just pop an alert
 
-class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
-    
-    let recieverID = inputDict["recieverID"]
-    
-    //check if the recipient is either the caller or receiver in one of the activesessions.
-    let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
-    var query = PFQuery(className:"ActiveSessions", predicate:predicate)
-    
-    query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
-        if error == nil {
-            NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
-            return
-        } else {
-            print("No session with recieverID exists.")
-            storeToParse(inputDict)
+    class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
+        
+        let recieverID = inputDict["recieverID"]
+        
+        //check if the recipient is either the caller or receiver in one of the activesessions.
+        let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
+        var query = PFQuery(className:"ActiveSessions", predicate:predicate)
+        
+        query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
+            if error == nil {
+                NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
+                return
+            } else {
+                print("No session with recieverID exists.")
+                storeToParse(inputDict)
+            }
         }
-    }
     }
     
     class func storeToParse(inputDict:Dictionary<String, AnyObject>) {
@@ -57,13 +57,13 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
         let bVideo = inputDict["isAudio"]?.boolValue
         activeSession["isVideo"] = bVideo                //? why was this converted to NSNumber in tutorial
-
+        
         
         let recieverID = inputDict["receiverID"]
         if (recieverID != nil) {
             activeSession["recieverID"] = callerID
         }
-     
+        
         
         //callerTitle
         let callerTitle = inputDict["callerTitle"]
@@ -114,7 +114,6 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         alertController.addAction(ok)
         alertController.addAction(cancel)
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
-//            textField.placeholder = "Enter your login ID"
         }
 		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
 		ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
@@ -122,54 +121,39 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
     
         class func anonymousLogin() {
             
-            self.loggedInUser = PFUser.currentUser()
-            if loggedInUser != nil{
+            if let loggedInUser = PFUser.currentUser() {
                 showUserTitlePrompt()
                 return
+            }
+            PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
+                if error != nil || user == nil {
+                    let description = error?.localizedDescription
+                    print("Failed to login anonymously. Please try again. \(description)")
+                    let msg  = "Failed to save outgoing call session. Please try again \(description)"
+                    showAlert(msg)
+                } else{
+                    self.loggedInUser = PFUser()
+                    loggedInUser = user!
+                    showUserTitlePrompt()
+                }
                 
-            }
-        
-//        if let loggedInUser = PFUser.currentUser() {
-//            showUserTitlePrompt()
-//            return
-//            }
-        
-//        if (loggedInUser != nil) {
-//            loggedInUser = PFUser.currentUser()
-//            print(loggedInUser)
-//            showUserTitlePrompt()
-//            return
-//        }
-//        
-        PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
-            if error != nil || user == nil {
-                let description = error?.localizedDescription
-                print("Failed to login anonymously. Please try again. \(description)")
-                let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                showAlert(msg)
-            } else{
-                self.loggedInUser = PFUser()
-                loggedInUser = user!
-                showUserTitlePrompt()
-            }
-            
-        })
+            })
     }
 
     
     class func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
         let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
-    
+        
         // add code to handle the different button hits
-		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-		ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
     class func saveUserToParse(user: PFUser) {
         var activeUser: PFObject?
         let query = PFQuery(className: "ActiveUsers")
-        query.whereKey("user", equalTo: user.objectId!)
+        query.whereKey("userID", equalTo: user.objectId!)
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
             if error == nil {
                 //if user is active user already, just update the entry
@@ -228,8 +212,8 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
                     appDelegate.subscriberToken = activeSession["subscriberToken"] as? String
                     appDelegate.publisherToken = activeSession["publisherToken"] as? String
                     appDelegate.callerTitle = activeSession["callerTitle"] as? String
-
-
+                    
+                    
                     //done with backend object, remove it.
                     setPollingTimer(false)
                     deleteActiveSession()
@@ -241,9 +225,9 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
             }else{
                 let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
                 self.showAlert(msg)
-                }
-        
-    }
+            }
+            
+        }
     }
 
     class func setPollingTimer(bArg:Bool) {
@@ -251,7 +235,7 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 }
     
     class func deleteActiveSession() {
-    
+        
         print("deleteActiveSession")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let activeSessionID = appDelegate.sessionID
@@ -287,15 +271,15 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
 
 
     class func deleteActiveUser() {
-            let activeUserobjID = self.activeUserobjID
-       
-            if activeUserobjID == nil || activeUserobjID == ""{
-                return
-            }
+        let activeUserobjID = self.activeUserobjID
         
-            var query = PFQuery(className:"ActiveUsers")
-            query.whereKey("userID", equalTo: activeUserobjID!)
-            
+        if activeUserobjID == nil || activeUserobjID == ""{
+            return
+        }
+        
+        var query = PFQuery(className:"ActiveUsers")
+        query.whereKey("userID", equalTo: activeUserobjID!)
+        
         query.getFirstObjectInBackgroundWithBlock {(object:PFObject?, error:NSError?) -> Void in
             if error != nil || object == nil {
                 print("The getFirstObject request failed.")
@@ -314,13 +298,10 @@ class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         }
     }
 
-            
-
 
 
     class func initData() {
         objectsUnderDeletionQueue = NSMutableArray()
-            
     }
 
 
