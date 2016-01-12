@@ -18,6 +18,58 @@ class ParseHelper: NSObject {
     static var activeUserobjID: String?
     static var objectsUnderDeletionQueue: NSMutableArray?
     
+    
+    class func anonymousLogin() {
+        
+        var loggedInUser = PFUser.currentUser()
+        if loggedInUser != nil {
+            showUserTitlePrompt()
+            return
+        }
+        PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
+            if error != nil || user == nil {
+                let description = error?.localizedDescription
+                print("Failed to login anonymously. Please try again. \(description)")
+                let msg  = "Failed to save outgoing call session. Please try again \(description)"
+                showAlert(msg)
+            } else{
+                self.loggedInUser = PFUser()
+                loggedInUser = user!
+                showUserTitlePrompt()
+            }
+            
+        })
+    }
+    
+    class func showUserTitlePrompt() {
+        
+        print(loggedInUser)
+
+        
+        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.userTitle = alertController.textFields![0].text
+            appDelegate.bFullyLoggedIn = true
+            
+            //fire appdelegate timer
+            appDelegate.fireListeningTimer()
+            print(loggedInUser)
+            NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            print("Cancel Button Pressed")
+        }
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+        }
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+    }
 
 
 //will initiate the call by saving session
@@ -90,55 +142,10 @@ class ParseHelper: NSObject {
             }
         }
     }
-
+    
 
     
-    class func showUserTitlePrompt() {
-        
-        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
-        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            print("Ok Button Pressed")
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.userTitle = alertController.textFields![0].text
-            appDelegate.bFullyLoggedIn = true
-            
-            //fire appdelegate timer
-            appDelegate.fireListeningTimer()
-            NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
-            print("Cancel Button Pressed")
-        }
-        
-        alertController.addAction(ok)
-        alertController.addAction(cancel)
-        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
-        }
-		let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-		ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-        class func anonymousLogin() {
-            
-            if let loggedInUser = PFUser.currentUser() {
-                showUserTitlePrompt()
-                return
-            }
-            PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
-                if error != nil || user == nil {
-                    let description = error?.localizedDescription
-                    print("Failed to login anonymously. Please try again. \(description)")
-                    let msg  = "Failed to save outgoing call session. Please try again \(description)"
-                    showAlert(msg)
-                } else{
-                    self.loggedInUser = PFUser()
-                    loggedInUser = user!
-                    showUserTitlePrompt()
-                }
-                
-            })
-    }
+
 
     
     class func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {

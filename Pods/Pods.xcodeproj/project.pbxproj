@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B8ECD5C0B1F0987D057E3559998DECA /* DBAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */; };
 		50C3A3D2DCFD481ACB44B08742765EDA /* Pods-Bryt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16028F5A456EB3D830E5CC7143B5010A /* Pods-Bryt-dummy.m */; };
-		70E9D6D8B5C50E08B5A6A0DBDEEF15EF /* DBAlertController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */; };
+		70E9D6D8B5C50E08B5A6A0DBDEEF15EF /* DBAlertController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B826C1E1BB6996524BE52BC9BDA4609B /* DBAlertController-dummy.m */; };
 		71D2CD11ED3304CDEB865707D61725ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		8096F9447C51434B9861CC9C01213526 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		94CEAF7FE9A712575FDAFD2B0C3448EF /* DBAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65F24CDB728948E18574D2EA5F47423 /* DBAlertController.swift */; };
 		98D4C7F2A0D82EE31C4ABC78314EC364 /* Pods-Bryt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 834DDAB26660B155B37D5106BAC83835 /* Pods-Bryt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A38EFBCD5397F421834C5AF4B230E663 /* DBAlertController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A38EFBCD5397F421834C5AF4B230E663 /* DBAlertController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 50172D0CCDE247EEC74BAEB3BBCA668B /* DBAlertController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,23 +29,23 @@
 /* Begin PBXFileReference section */
 		0262DBB3F7BB439A2DDFD541180039C3 /* Pods-Bryt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Bryt.release.xcconfig"; sourceTree = "<group>"; };
 		16028F5A456EB3D830E5CC7143B5010A /* Pods-Bryt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Bryt-dummy.m"; sourceTree = "<group>"; };
-		285DC37F8A52B599D3253DFA8DA1BDB1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3674A479147FF2E0143F11025C2C822B /* OpenTok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenTok.framework; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4E73466D67E6000586659E82669CD079 /* DBAlertController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-prefix.pch"; sourceTree = "<group>"; };
-		62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DBAlertController.xcconfig; sourceTree = "<group>"; };
-		6F6AFD7B6CC3EF7E1D105083561B3B71 /* DBAlertController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = DBAlertController.modulemap; sourceTree = "<group>"; };
+		41E811AB52E7CE47373ED5F6E2562809 /* DBAlertController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = DBAlertController.modulemap; sourceTree = "<group>"; };
+		50172D0CCDE247EEC74BAEB3BBCA668B /* DBAlertController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-umbrella.h"; sourceTree = "<group>"; };
+		669CC7BA40F43BF5415D4C70DB32BAD8 /* DBAlertController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DBAlertController.xcconfig; sourceTree = "<group>"; };
 		834DDAB26660B155B37D5106BAC83835 /* Pods-Bryt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Bryt-umbrella.h"; sourceTree = "<group>"; };
+		86C89E970DC8CE4FCBB3E5F78ABA6FC0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5330A31725DAFD44E049B62B389188F /* Pods_Bryt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bryt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DBAlertController.swift; path = DBAlertController/Pod/DBAlertController.swift; sourceTree = "<group>"; };
+		B826C1E1BB6996524BE52BC9BDA4609B /* DBAlertController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DBAlertController-dummy.m"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C5C2C73FBECBBF57D18AD7ED485A475B /* Pods-Bryt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Bryt.debug.xcconfig"; sourceTree = "<group>"; };
 		CA31612E033A0E3CB126E3E805D52EB8 /* DBAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DBAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DBAlertController-dummy.m"; sourceTree = "<group>"; };
 		CF3BE7F0CCE7FF155DBAB5661941C9C6 /* Pods-Bryt-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Bryt-resources.sh"; sourceTree = "<group>"; };
 		CF5F7B29849D8E7D61261BDBB6BAD30D /* Pods-Bryt-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Bryt-acknowledgements.plist"; sourceTree = "<group>"; };
-		DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-umbrella.h"; sourceTree = "<group>"; };
+		D96F627234C4DB2B633C8BDA0D6E7FB5 /* DBAlertController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DBAlertController-prefix.pch"; sourceTree = "<group>"; };
 		DEE21FB079E0A2B1F5D49540BCD836FF /* Pods-Bryt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Bryt.modulemap"; sourceTree = "<group>"; };
+		E65F24CDB728948E18574D2EA5F47423 /* DBAlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DBAlertController.swift; path = Source/DBAlertController.swift; sourceTree = "<group>"; };
 		E990D783E5F6B076D081B9D68D58D09E /* Pods-Bryt-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Bryt-frameworks.sh"; sourceTree = "<group>"; };
 		F59C535CB18D627DF9C0321AA651220F /* Pods-Bryt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Bryt-acknowledgements.markdown"; sourceTree = "<group>"; };
 		FE7BE2FC679ADDF462C05987668F28C6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,10 +74,19 @@
 		0C036CAA89779AD93E217A323106FC0A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				81B3CF5C7EDEBF00AAB99D23D9B5E418 /* DBAlertController */,
+				4C02588DDAB029FC01405D57BF86A865 /* DBAlertController */,
 				AEAAAE60E6F7B867B1743A40965F12C9 /* OpenTok */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4C02588DDAB029FC01405D57BF86A865 /* DBAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				E65F24CDB728948E18574D2EA5F47423 /* DBAlertController.swift */,
+				D1903E1B7721E3DCA972E40256D213F3 /* Support Files */,
+			);
+			path = DBAlertController;
 			sourceTree = "<group>";
 		};
 		748CB010C1BD8ADE3BF4B41E32414D68 /* Targets Support Files */ = {
@@ -86,20 +95,6 @@
 				FF9C6E480E1AD5D13AD303769DD95150 /* Pods-Bryt */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		7851F4BFDF6922306DDE3B38916E1417 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6F6AFD7B6CC3EF7E1D105083561B3B71 /* DBAlertController.modulemap */,
-				62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */,
-				CE06CB51C86C56208AA7F2BCB5DE5A1E /* DBAlertController-dummy.m */,
-				4E73466D67E6000586659E82669CD079 /* DBAlertController-prefix.pch */,
-				DB5E0C6207421CEF83F2E41C8E84D393 /* DBAlertController-umbrella.h */,
-				285DC37F8A52B599D3253DFA8DA1BDB1 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/DBAlertController";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -111,15 +106,6 @@
 				8FF1504D85B06E98CB58E7C6B47F928B /* Products */,
 				748CB010C1BD8ADE3BF4B41E32414D68 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		81B3CF5C7EDEBF00AAB99D23D9B5E418 /* DBAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				B0A3AA41A2F04A45006143FE54E90786 /* DBAlertController.swift */,
-				7851F4BFDF6922306DDE3B38916E1417 /* Support Files */,
-			);
-			path = DBAlertController;
 			sourceTree = "<group>";
 		};
 		8FF1504D85B06E98CB58E7C6B47F928B /* Products */ = {
@@ -161,6 +147,20 @@
 				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		D1903E1B7721E3DCA972E40256D213F3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				41E811AB52E7CE47373ED5F6E2562809 /* DBAlertController.modulemap */,
+				669CC7BA40F43BF5415D4C70DB32BAD8 /* DBAlertController.xcconfig */,
+				B826C1E1BB6996524BE52BC9BDA4609B /* DBAlertController-dummy.m */,
+				D96F627234C4DB2B633C8BDA0D6E7FB5 /* DBAlertController-prefix.pch */,
+				50172D0CCDE247EEC74BAEB3BBCA668B /* DBAlertController-umbrella.h */,
+				86C89E970DC8CE4FCBB3E5F78ABA6FC0 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/DBAlertController";
 			sourceTree = "<group>";
 		};
 		FF9C6E480E1AD5D13AD303769DD95150 /* Pods-Bryt */ = {
@@ -279,7 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70E9D6D8B5C50E08B5A6A0DBDEEF15EF /* DBAlertController-dummy.m in Sources */,
-				4B8ECD5C0B1F0987D057E3559998DECA /* DBAlertController.swift in Sources */,
+				94CEAF7FE9A712575FDAFD2B0C3448EF /* DBAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +297,7 @@
 /* Begin XCBuildConfiguration section */
 		4864AEA3B06CE2A980992E2A04213D4E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */;
+			baseConfigurationReference = 669CC7BA40F43BF5415D4C70DB32BAD8 /* DBAlertController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -355,7 +355,7 @@
 		};
 		81492112E7836FEE532A82F9E7FFF985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62BFA2979416B162D9C07FF16166E564 /* DBAlertController.xcconfig */;
+			baseConfigurationReference = 669CC7BA40F43BF5415D4C70DB32BAD8 /* DBAlertController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;

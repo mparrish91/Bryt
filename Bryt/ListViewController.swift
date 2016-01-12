@@ -21,6 +21,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ParseHelper.anonymousLogin()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
@@ -28,16 +29,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         NSTimer.scheduledTimerWithTimeInterval(2.0,target: m_userTableView,selector: Selector("reloadData"),userInfo: nil, repeats: true)
 
-
-
     }
 
 //Called in repsonse of kLoggedInNotification
 func didLogin() {
     
     //not accounting for location...calls parse wrapper for storing to ActiveUsers table
-    let thisUser = ParseHelper.loggedInUser
-    ParseHelper.saveUserToParse(thisUser!)
+    guard let thisUser = ParseHelper.loggedInUser else { print("What! No logged in user!!!!! Error HELP ME!"); return }
+    ParseHelper.saveUserToParse(thisUser)
     
     pullForNewUsers(true)
     print(m_userArray)

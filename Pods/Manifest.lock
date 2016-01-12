@@ -1,13 +1,13 @@
 PODS:
-  - DBAlertController (0.1.3)
-  - OpenTok (2.6.1)
+  - DBAlertController (0.2.4)
+  - OpenTok (2.7.0)
 
 DEPENDENCIES:
   - DBAlertController
   - OpenTok (~> 2.6)
 
 SPEC CHECKSUMS:
-  DBAlertController: 71caac70d53443aaefef2cc8301d31e40c39df51
-  OpenTok: 6c094ee06dc954a4327c0a736f494f0eaf35c48c
+  DBAlertController: 3d5e5eed512fd9abfbfb779eff1093f05796acdd
+  OpenTok: 56dbc82766bd925d7b19c4b4468534014eace65d
 
 COCOAPODS: 0.39.0
