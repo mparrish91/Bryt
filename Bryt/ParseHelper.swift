@@ -21,19 +21,18 @@ class ParseHelper: NSObject {
     
     class func anonymousLogin() {
         
-        var loggedInUser = PFUser.currentUser()
+        loggedInUser = PFUser.currentUser()
         if loggedInUser != nil {
             showUserTitlePrompt()
             return
         }
         PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
             if error != nil || user == nil {
-                let description = error?.localizedDescription
+                let descriptiony = error?.localizedDescription
                 print("Failed to login anonymously. Please try again. \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
                 showAlert(msg)
             } else{
-                self.loggedInUser = PFUser()
                 loggedInUser = user!
                 showUserTitlePrompt()
             }
@@ -76,21 +75,46 @@ class ParseHelper: NSObject {
 //if there is a session already existing, do not save,
 //just pop an alert
 
+//    class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
+//        
+//        let recieverID = inputDict["recieverID"]
+//        
+//        //check if the recipient is either the caller or receiver in one of the activesessions.
+//        let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
+//        var query = PFQuery(className:"ActiveSessions", predicate:predicate)
+//        
+//        query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
+//            if error == nil {
+//                NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
+//                return
+//            } else {
+//                print("No session with recieverID exists.")
+//                storeToParse(inputDict)
+//            }
+//        }
+//    }
+    
     class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
-        let recieverID = inputDict["recieverID"]
+        print("inputDict \(inputDict)")
+        
+        let receiverID = inputDict["receiverID"]
+        
+        storeToParse(inputDict)
         
         //check if the recipient is either the caller or receiver in one of the activesessions.
-        let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
+        let predicate = NSPredicate(format: "receiverID = %@ OR callerID = %@", argumentArray: [receiverID!,receiverID!])
         var query = PFQuery(className:"ActiveSessions", predicate:predicate)
         
         query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
-            if error == nil {
-                NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
-                return
-            } else {
-                print("No session with recieverID exists.")
+            
+            if object == nil {
+                print("No session with receiverID exists.")
                 storeToParse(inputDict)
+            }
+            else {
+                NSNotificationCenter.defaultCenter().postNotificationName("kReceiverBusyNotication", object: nil)
+                return
             }
         }
     }
@@ -105,22 +129,22 @@ class ParseHelper: NSObject {
         }
         
         let bAudio = inputDict["isAudio"]?.boolValue
-        activeSession["isAudio"] = bAudio?.toInt()
+        activeSession["isAudio"] = bAudio
         
         let bVideo = inputDict["isAudio"]?.boolValue
         activeSession["isVideo"] = bVideo                //? why was this converted to NSNumber in tutorial
         
         
-        let recieverID = inputDict["receiverID"]
-        if (recieverID != nil) {
-            activeSession["recieverID"] = callerID
+        let receiverID = inputDict["receiverID"]
+        if (receiverID != nil) {
+            activeSession["receiverID"] = recieverID
         }
         
         
         //callerTitle
         let callerTitle = inputDict["callerTitle"]
-        if (recieverID != nil) {
-            activeSession["CallerTitle"] = callerTitle
+        if (receiverID != nil) {
+            activeSession["callerTitle"] = callerTitle
         }
         
         activeSession.saveInBackgroundWithBlock {
@@ -203,7 +227,7 @@ class ParseHelper: NSObject {
         
         let currentUserID = loggedInUser?.objectId
         
-        query.whereKey("recieverID", equalTo: currentUserID!)
+        query.whereKey("receiverID", equalTo: currentUserID!)
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {

@@ -178,7 +178,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
         if (segue.identifier == "StreamingSegue"){
             
             let streamingVC = segue.destinationViewController as! StreamingViewController
-            streamingVC.callRecieverID = m_recieverID.copy() as? String
+            streamingVC.callReceiverID = m_recieverID.copy() as? String
             
             if (bAudioOnly != nil) {
                 streamingVC.bAudio = true

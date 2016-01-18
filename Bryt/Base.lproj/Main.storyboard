@@ -34,16 +34,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instant. Private. Fun." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwo-aB-LiW">
-                                <rect key="frame" x="185" y="249" width="231" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="231" id="lTJ-Tw-HxT"/>
-                                    <constraint firstAttribute="height" constant="31" id="uBf-0s-4RM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a14-WF-uA3">
                                 <rect key="frame" x="139" y="461" width="322" height="71"/>
                                 <constraints>
@@ -57,6 +47,16 @@
                                     <segue destination="f6i-UW-weS" kind="show" id="CjS-QS-qEC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instant. Private. Fun." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwo-aB-LiW">
+                                <rect key="frame" x="185" y="249" width="231" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="231" id="lTJ-Tw-HxT"/>
+                                    <constraint firstAttribute="height" constant="31" id="uBf-0s-4RM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

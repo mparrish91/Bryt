@@ -40,7 +40,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     var bAudio: Bool?
     var bVideo: Bool?
-    var callRecieverID: String?
+    var callReceiverID: String?
     
     var m_mode: Int?
     var m_connectionAttempts: Int?
@@ -57,7 +57,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     override func viewDidAppear(animated: Bool) {
-        if callRecieverID != "" {
+        if callReceiverID != "" {
             initOutGoingCall()
             
         }else{
@@ -72,11 +72,12 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         var inputDict = Dictionary<String, AnyObject>()
-        inputDict["callerID"] = ParseHelper.loggedInUser
+        inputDict["callerID"] = ParseHelper.loggedInUser?.objectId
         inputDict["callerTitle"] = appDelegate.userTitle
-        inputDict["recieverID"] = self.callRecieverID
-        inputDict["isAudio"] = bAudio!.toInt()
-        inputDict["isVideo"] = bVideo!.toInt()
+        inputDict["receiverID"] = self.callReceiverID
+        
+        inputDict["isAudio"] = bAudio
+        inputDict["isVideo"] = bVideo
         
         m_connectionAttempts = 1
         ParseHelper.saveSessionToParse(inputDict)
@@ -88,7 +89,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     override func prefersStatusBarHidden() -> Bool {
-        return true
+        return false
     }
     
     // MARK: - OpenTok Methods
@@ -267,7 +268,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         NSLog("subscriber %@ didFailWithError %@", subscriber.stream.streamId, error)
         print("code: \(error.localizedDescription)")
         
-        statusLabel.text = "Error recieving video feed, disconnecting..."
+        statusLabel.text = "Error receiving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
         callSelector("doneStreaming", object: nil, delay: 5.0)
         
