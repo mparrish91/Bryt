@@ -122,8 +122,6 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         publisher = OTPublisher(delegate: self)
         publisher?.publishAudio = bAudio!
         publisher?.publishVideo = bVideo!
-        session?.publish(publisher)
-        
         
         var maybeError : OTError?
         session?.publish(publisher, error: &maybeError)

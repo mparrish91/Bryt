@@ -137,7 +137,7 @@ class ParseHelper: NSObject {
         
         let receiverID = inputDict["receiverID"]
         if (receiverID != nil) {
-            activeSession["receiverID"] = recieverID
+            activeSession["receiverID"] = receiverID
         }
         
         
