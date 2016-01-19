@@ -12,13 +12,6 @@ import Parse
 
 
 
-let videoWidth : CGFloat = 320 - 50
-let videoHeight : CGFloat = 240 - 50
-
-
-//let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
-//let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
-
 //OpenTok
 let ApiKey = "45458232"
 let SessionID = "1_MX40NTQ1ODIzMn5-MTQ1MjEwNTk0MTA4NH5lZWIvaUs2RjFuZTBQNmxCdVpYWGdReGF-fg"
@@ -135,21 +128,18 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             return
         }
         
+        
         view.addSubview(video)
         video.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
         video.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
-        video.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
+        video.bottomAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
 
-        video.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+        video.trailingAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         video.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
 
         view.bringSubviewToFront(disconnectButton)
         view.bringSubviewToFront(statusLabel)
 
-        publisher?.view.layer.cornerRadius = 10.0
-        publisher?.view.layer.masksToBounds = true
-        publisher?.view.layer.borderWidth = 5.0
-        publisher?.view.layer.borderColor = UIColor.yellowColor().CGColor
     }
     
     /**
@@ -247,13 +237,13 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func subscriberDidConnectToStream(subscriberKit: OTSubscriberKit) {
         NSLog("subscriberDidConnectToStream (\(subscriberKit))")
         if let view = subscriber?.view {
-            view.frame =  CGRect(x: 0.0, y: videoHeight, width: videoWidth, height: videoHeight)
-            self.view.addSubview(view)
+            view.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
+            view.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
+            view.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
             
-            print("screenheight/(videoHeight)")
-            print("navheight(videoHeight)")
-            
-            view.bringSubviewToFront(disconnectButton)
+            view.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+            view.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
             
             if (publisher != nil) {
                 view.bringSubviewToFront((publisher?.view)!)
@@ -264,7 +254,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         subscriber?.view.layer.cornerRadius = 10.0
         subscriber?.view.layer.masksToBounds = true
         subscriber?.view.layer.borderWidth = 5.0
-        subscriber?.view.layer.borderColor = UIColor.grayColor().CGColor
+//        subscriber?.view.layer.borderColor = UIColor.grayColor().CGColor
         
         statusLabel.text = "Connected, waiting for stream..."
         view.bringSubviewToFront(statusLabel)
