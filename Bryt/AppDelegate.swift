@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        UIApplication.sharedApplication().idleTimerDisabled = true
         
         Parse.enableLocalDatastore()
         
@@ -45,8 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bFullyLoggedIn = false
         ParseHelper.initData()
         registerNotifs()
-        
-        
+        ParseHelper.anonymousLogin()
         return true
     }
     
@@ -56,35 +55,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        var firstVC = storyboard.instantiateViewControllerWithIdentifier("navvc") as! UINavigationController
-        self.window?.rootViewController = firstVC
+        var navController = storyboard.instantiateViewControllerWithIdentifier("navvc") as! UINavigationController
+        let firstVC = navController.viewControllers[0]
+        window?.rootViewController = firstVC
+        
+        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
         
     }
-
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
         
         var backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
             application.endBackgroundTask(UIBackgroundTaskInvalid))
-//            backgroundTask = UIBackgroundTaskInvalid
-
+            
             
             //Start the long-running task and return immediately
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
                 ParseHelper.deleteActiveSession()
                 ParseHelper.deleteActiveUser()
-//                backgroundTask = UIBackgroundTaskInvalid
-
+                
             })
         }
     }
+
+//    func applicationDidEnterBackground(application: UIApplication) {
+//        
+//        var backgroundTask = application.beginBackgroundTaskWithExpirationHandler ({
+//            application.endBackgroundTask(backgroundTask)
+//            backgroundTask = UIBackgroundTaskInvalid
+//        })
+//    
+//        //Start the long-running task and return immediately
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//            
+//            ParseHelper.deleteActiveSession()
+//            ParseHelper.deleteActiveUser()
+//            backgroundTask = UIBackgroundTaskInvalid
+//        }
+//    }
+
 
     func applicationWillEnterForeground(application: UIApplication) {
         self.bFullyLoggedIn = false
         ParseHelper.anonymousLogin()
         ParseHelper.initData()
-        
     }
 
     

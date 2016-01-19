@@ -12,7 +12,6 @@ import Parse
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var bAudioOnly:Bool?
-    
     var m_userArray = NSMutableArray()
     var m_receiverID =  String()
 
@@ -21,12 +20,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ParseHelper.anonymousLogin()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didLogin", name: "kLoggedInNotification", object: nil)
-        
         
         // FIXME: timer should be disabled when table view is not displayed
     

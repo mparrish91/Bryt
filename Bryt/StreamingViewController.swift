@@ -139,6 +139,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
 
         view.bringSubviewToFront(disconnectButton)
         view.bringSubviewToFront(statusLabel)
+        
+        //stopTimer
 
     }
     
