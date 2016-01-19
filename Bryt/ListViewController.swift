@@ -14,7 +14,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var bAudioOnly:Bool?
     
     var m_userArray = NSMutableArray()
-    var m_recieverID =  String()
+    var m_receiverID =  String()
 
     @IBOutlet weak var m_userTableView: UITableView!
     
@@ -89,7 +89,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
     
     func didCallArrive() {
         //pass blank because call has arrived, no need for recieverID
-        m_recieverID = ""
+        m_receiverID = ""
         goToStreamingVC()
     }
     
@@ -107,14 +107,15 @@ func pullForNewUsers(bRefreshUI:Bool) {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let dict = m_userArray[indexPath.row]
         let recieverID = dict.objectForKey("userID")
-        m_recieverID = recieverID!.copy() as! String
+        m_receiverID = recieverID!.copy() as! String
         goToStreamingVC()
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let dict = m_userArray.objectAtIndex(indexPath.row)
-        let userTitle = dict.objectForKey("userTitle") as! String
+        let dict = m_userArray.objectAtIndex(indexPath.row) as! [String:String]
+//        let userTitle = dict.objectForKey("userTitle") as! String
+        let userTitle = dict["userTitle"]
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
@@ -125,7 +126,10 @@ func pullForNewUsers(bRefreshUI:Bool) {
         cell?.contentView.backgroundColor = UIColor.clearColor()
         
         
-        let videoCallButton = UIButton(type: UIButtonType.System)
+        let videoCallButton = VideoCallButton(type: .System)
+        
+//        UIButton(type: UIButtonType.System) as! VideoCallButton
+        
         videoCallButton.backgroundColor = UIColor.orangeColor()
         
         videoCallButton.frame = CGRectMake(cell!.bounds.size.width - 50,
@@ -135,6 +139,10 @@ func pullForNewUsers(bRefreshUI:Bool) {
         
         
         videoCallButton.tag = indexPath.row
+        
+        videoCallButton.userIndex = indexPath.row
+        videoCallButton.userID = dict["userID"]
+        
         videoCallButton.addTarget(self, action: "startVideoChat:", forControlEvents: UIControlEvents.TouchUpInside)
         videoCallButton.setImage(UIImage(named: "phonecall.png"), forState: UIControlState.Normal)
         cell?.contentView.addSubview(videoCallButton)
@@ -150,20 +158,36 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     
-    func startVideoChat(sender: UIButton!) {
+    func startVideoChat(sender: VideoCallButton!) {
         print("start called")
-        let button = UIButton()
+//        let button = UIButton()
         
-        if button.tag < 0 //out of bounds
-        {
+//        if button.tag < 0 //out of bounds
+        
+        // FIXME: This probably won't work.
+        if sender.userIndex < 0 {
             showAlert("User is no longer online.")
             
             return
         }
         
-        let dict = m_userArray[button.tag] as! NSMutableDictionary
-        let recieverID = dict["userID"]
-        m_recieverID = recieverID!.copy() as! String
+        
+        // dictionary is wrong here
+//        let dict = m_userArray[button.tag] as! NSMutableDictionary
+//        print("button tag \(button.tag)")
+//        print("m user array \(m_userArray)")
+//        print("dict \(dict)")
+//        let receiverID = dict["userID"]
+//        m_receiverID = receiverID as! String
+        
+        
+        print("user ID from button \(sender.userID!)")
+        
+        if let uID = sender.userID {
+            m_receiverID = uID
+        }
+        
+        
         goToStreamingVC()
         
     }
@@ -178,7 +202,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
         if (segue.identifier == "StreamingSegue"){
             
             let streamingVC = segue.destinationViewController as! StreamingViewController
-            streamingVC.callReceiverID = m_recieverID.copy() as? String
+            streamingVC.callReceiverID = m_receiverID
             
             if (bAudioOnly != nil) {
                 streamingVC.bAudio = true

@@ -75,24 +75,6 @@ class ParseHelper: NSObject {
 //if there is a session already existing, do not save,
 //just pop an alert
 
-//    class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
-//        
-//        let recieverID = inputDict["recieverID"]
-//        
-//        //check if the recipient is either the caller or receiver in one of the activesessions.
-//        let predicate = NSPredicate(format: "recieverID = '%@' OR callerID = %@", argumentArray: [recieverID!,recieverID!])
-//        var query = PFQuery(className:"ActiveSessions", predicate:predicate)
-//        
-//        query.getFirstObjectInBackgroundWithBlock{ (object: PFObject?, error: NSError?) -> Void in
-//            if error == nil {
-//                NSNotificationCenter.defaultCenter().postNotificationName("kRecieverBusyNotication", object: nil)
-//                return
-//            } else {
-//                print("No session with recieverID exists.")
-//                storeToParse(inputDict)
-//            }
-//        }
-//    }
     
     class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
         
