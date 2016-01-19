@@ -231,9 +231,18 @@ class ParseHelper: NSObject {
                     setPollingTimer(false)
                     deleteActiveSession()
                     
-                    let msg  = "Incoming call from, %@, Accept? \(appDelegate.callerTitle)"
+                    let msg  = "Incoming call from, \(appDelegate.callerTitle), Accept?"
                     
-                    self.showAlert(msg, completionClosure:{ action in NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotication", object: nil)})
+                    let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                    let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+                    })
+
+                    alertController.addAction(ok)
+
+                    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                    
                 }
             }else{
                 let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"

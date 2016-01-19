@@ -10,12 +10,14 @@
 import UIKit
 import Parse
 
-//let videoWidth : CGFloat = 320
-//let videoHeight : CGFloat = 240
 
 
-let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
-let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
+let videoWidth : CGFloat = 320 - 50
+let videoHeight : CGFloat = 240 - 50
+
+
+//let videoWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
+//let videoHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
 
 //OpenTok
 let ApiKey = "45458232"
@@ -129,14 +131,21 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         if let error = maybeError {
             showAlert(error.localizedDescription)
         }
+        guard let video = publisher?.view else{
+            return
+        }
         
-        view.addSubview(publisher!.view)
-        publisher!.view.frame = CGRect(x: 5.0, y: 5.0, width: videoWidth, height: videoHeight)
+        view.addSubview(video)
+        video.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
+        video.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
+        video.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
+
+        video.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+        video.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
+
         view.bringSubviewToFront(disconnectButton)
         view.bringSubviewToFront(statusLabel)
-        
-        print(publisher?.view.frame.origin.x, publisher?.view.frame.origin.y, publisher?.view.frame.size.width, publisher?.view.frame.size.height)
-        
+
         publisher?.view.layer.cornerRadius = 10.0
         publisher?.view.layer.masksToBounds = true
         publisher?.view.layer.borderWidth = 5.0

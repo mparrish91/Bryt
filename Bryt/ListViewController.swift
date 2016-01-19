@@ -27,9 +27,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didLogin", name: "kLoggedInNotification", object: nil)
         
-        NSTimer.scheduledTimerWithTimeInterval(2.0,target: m_userTableView,selector: Selector("reloadData"),userInfo: nil, repeats: true)
+        
+        // FIXME: timer should be disabled when table view is not displayed
+    
+        NSTimer.scheduledTimerWithTimeInterval(5.0,target: self,selector: "pullForNewUsersWithRefresh",userInfo: nil, repeats: true)
 
     }
+    
+    
+    
 
 //Called in repsonse of kLoggedInNotification
 func didLogin() {
@@ -43,13 +49,19 @@ func didLogin() {
 }
     
     
-func pullForNewUsers(bRefreshUI:Bool) {
-    let query = PFQuery(className: "ActiveUsers")
+    func pullForNewUsersWithRefresh() {
+        pullForNewUsers(true)
+    }
+    
+    func pullForNewUsers(bRefreshUI:Bool) {
+        let query = PFQuery(className: "ActiveUsers")
         query.limit = 10000
         
         //delete all exiting rows, first from front end, then from data soruce
         m_userArray.removeAllObjects()
         //        m_userTableView.reloadData()
+        
+        //FIXME: change to only check for changes after creation.  only refresh table if new users
         
         query.findObjectsInBackgroundWithBlock {(objects, error) -> Void in
             if error == nil {
@@ -76,13 +88,13 @@ func pullForNewUsers(bRefreshUI:Bool) {
                 
                 if (bRefreshUI)
                 {
-                   self.m_userTableView.reloadData()
+                    self.m_userTableView.reloadData()
                 }
             }else{
-                    print("\(error?.description)")
-                }
-                
+                print("\(error?.description)")
             }
+            
+        }
     }
 
 
@@ -152,7 +164,6 @@ func pullForNewUsers(bRefreshUI:Bool) {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("testing\(m_userArray.count)")
         return m_userArray.count
         
     }
@@ -171,14 +182,7 @@ func pullForNewUsers(bRefreshUI:Bool) {
             return
         }
         
-        
-        // dictionary is wrong here
-//        let dict = m_userArray[button.tag] as! NSMutableDictionary
-//        print("button tag \(button.tag)")
-//        print("m user array \(m_userArray)")
-//        print("dict \(dict)")
-//        let receiverID = dict["userID"]
-//        m_receiverID = receiverID as! String
+
         
         
         print("user ID from button \(sender.userID!)")

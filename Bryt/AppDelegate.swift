@@ -64,12 +64,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(application: UIApplication) {
         
-        let backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
+        var backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
             application.endBackgroundTask(UIBackgroundTaskInvalid))
+//            backgroundTask = UIBackgroundTaskInvalid
+
             
             //Start the long-running task and return immediately
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
+                ParseHelper.deleteActiveSession()
+                ParseHelper.deleteActiveUser()
+//                backgroundTask = UIBackgroundTaskInvalid
+
             })
         }
     }
