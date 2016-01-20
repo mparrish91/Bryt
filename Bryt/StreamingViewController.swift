@@ -16,12 +16,10 @@ enum streamingMode: Int {
 }
 
 
-
-
 //OpenTok
 let ApiKey = "45458232"
-let SessionID = "2_MX40NTQ1ODIzMn5-MTQ1MzI3NTEwNTMzOH4vbkRTMXd5Y3dJK3ZMZXJGbUQ3U09YRUp-UH4"
-let Token = "T1==cGFydG5lcl9pZD00NTQ1ODIzMiZzaWc9ZTIxZjBhNTg1OTkyYWNjYzc5MTYyYTdkMTA1MWY5ZDdmNWRhZGYwODpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTFfTVg0ME5UUTFPREl6TW41LU1UUTFNakV3TlRrME1UQTROSDVsWldJdmFVczJSakZ1WlRCUU5teENkVnBZV0dkUmVHRi1mZyZjcmVhdGVfdGltZT0xNDUyMTA2MDk0Jm5vbmNlPTAuMzk3MjQwNzkwNTg3MDU2NjQmZXhwaXJlX3RpbWU9MTQ1NDY5Nzg1MSZjb25uZWN0aW9uX2RhdGE9"
+//let SessionID = "2_MX40NTQ1ODIzMn5-MTQ1MzI3NTEwNTMzOH4vbkRTMXd5Y3dJK3ZMZXJGbUQ3U09YRUp-UH4"
+//let Token = "T1==cGFydG5lcl9pZD00NTQ1ODIzMiZzaWc9ZTIxZjBhNTg1OTkyYWNjYzc5MTYyYTdkMTA1MWY5ZDdmNWRhZGYwODpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTFfTVg0ME5UUTFPREl6TW41LU1UUTFNakV3TlRrME1UQTROSDVsWldJdmFVczJSakZ1WlRCUU5teENkVnBZV0dkUmVHRi1mZyZjcmVhdGVfdGltZT0xNDUyMTA2MDk0Jm5vbmNlPTAuMzk3MjQwNzkwNTg3MDU2NjQmZXhwaXJlX3RpbWU9MTQ1NDY5Nzg1MSZjb25uZWN0aW9uX2RhdGE9"
 
 // Change to YES to subscribe to your own stream.
 let SubscribeToSelf = false
@@ -43,12 +41,23 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     var bVideo: Bool?
     var callReceiverID: String?
     
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
     var m_mode: Int?
     var m_connectionAttempts: Int?
     
+    
+    func goBack() {
+        statusLabel.hidden = true
+        self.performSelector("goBack", withObject: nil, afterDelay: 5.0)
+
+    }
+    
+    func 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        session = OTSession(apiKey: ApiKey, sessionId: SessionID, delegate: self)
+
         
     }
 
@@ -99,17 +108,34 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     // MARK: - OpenTok Methods
     
+    func sessionSaved() {
+        connectWithSubscriberToken()
+    }
+    
+    func connectWithPublisherToken {
+        print("connectWithPublisherToken")
+        doConnect(appDelegate.publisherToken, appDelegate.sessionID)
+
+    }
+    
+    func connectWithSubscriberToken {
+        print("connectWithSubscriberToken")
+        doConnect(appDelegate.subscriberToken, appDelegate.sessionID)
+
+    }
+    
     /**
     * Asynchronously begins the session connect process. Some time later, we will
     * expect a delegate method to call us back with the results of this action.
     */
-    func doConnect() {
-        if let session = self.session {
-            var maybeError : OTError?
-            session.connectWithToken(Token, error: &maybeError)
-            if let error = maybeError {
-                showAlert(error.localizedDescription)
-            }
+    func doConnect(token: String, sessionID: String) {
+        session = OTSession(apiKey: ApiKey, sessionId: appDelegate.sessionID, delegate: self)
+        session?.addObserver(self, forKeyPath: "connectionCount", options: NSKeyValueObservingOptions.New, context: nil)
+        
+        var maybeError : OTError?
+        session!.connectWithToken(token, error: &maybeError)
+        showAlert(error.localizedDescription)
+        
         }
     }
     
@@ -153,7 +179,16 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         //stopTimer
 
     }
-    
+
+func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: Dictionary, context: Void) {
+    if keyPath == "connectionCount" {
+        //this is kept blank for possible implementation
+        //in case one wants to handle more than 2 participants.
+    }
+}
+
+
+
     /**
      * Instantiates a subscriber for the given stream and asynchronously begins the
      * process to begin receiving A/V content for this stream. Unlike doPublish,
@@ -279,10 +314,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
 
         }
         
-        }
-        
     }
-    
+
     // MARK: - OTSubscriber delegate callbacks
     
     func subscriberDidConnectToStream(subscriberKit: OTSubscriberKit) {
@@ -392,6 +425,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         disConnectAndGoBack()
     }
 }
+
 
 
 extension NSObject {
