@@ -186,8 +186,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         publisher?.view.layer.cornerRadius = 10.0
         publisher?.view.layer.masksToBounds = true
-//        publisher?.view.layer.borderWidth = 5.0
-//
+
     }
 
     func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: [String : AnyObject], context: Void) {
@@ -437,7 +436,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     func publisher(publisher: OTPublisherKit, didFailWithError error: OTError) {
-        print(session?.sessionConnectionStatus.rawValue)
+        print(publisher)
         NSLog("publisher didFailWithError %@", error)
         NSLog("- error code: %@", error.code)
         NSLog("- description %@", error.description)
