@@ -201,7 +201,6 @@ class ParseHelper: NSObject {
                         
                         let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
                         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                            NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
                         })
                         
                         alertController.addAction(ok)
@@ -209,15 +208,29 @@ class ParseHelper: NSObject {
                         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
                         ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)                    }
                 }
+            }else {
+
+                let msg  = "Failed to save updated user. Please try again \(error?.description)"
+                
+                let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                })
+                
+                alertController.addAction(ok)
+                
+                let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+                ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                
             }
         }
         
     }
     
+    //poll parse ActiveSessions object for incoming calls
     class func pollParseForActiveSessions() {
         var activeSession: PFObject
         
-        if bPollingTimerOn != nil {
+        if bPollingTimerOn == false {
             return
         }
         
@@ -252,6 +265,9 @@ class ParseHelper: NSObject {
                     let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
                     let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+                        invalidateTimer()  //invalidate the Polling because we are in a call
+                        invalidateUserPull()
+                        
                     })
 
                     alertController.addAction(ok)
@@ -318,7 +334,7 @@ class ParseHelper: NSObject {
 
 
     class func deleteActiveUser() {
-        let activeUserobjID = self.activeUserobjID
+        var activeUserobjID = self.activeUserobjID
         
         if activeUserobjID == nil || activeUserobjID == ""{
             return
@@ -336,6 +352,7 @@ class ParseHelper: NSObject {
                 object?.deleteInBackgroundWithBlock {(succeeded:Bool?, error: NSError?) -> Void in
                     if succeeded != nil && error == nil {
                         print("User deleted from parse")
+                        activeUserobjID = nil
                     } else {
                         // The find succeeded.
                         print(error!.localizedDescription)
@@ -360,17 +377,26 @@ class ParseHelper: NSObject {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.appTimer?.invalidate()
         appDelegate.appTimer = nil
+    }
+
+    class func invalidateUserPull() {
+        print("invalidating User Pull")
+        bPollingTimerOn = false
+        
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var navController = storyboard.instantiateViewControllerWithIdentifier("navvc") as! UINavigationController
+        let listVC = navController.viewControllers[0] as! ListViewController
+        listVC.userPullTimer?.invalidate()
         
     }
 
 
-
-class func isUnderDeletion(argObjectID:AnyObject) {
+    class func isUnderDeletion(argObjectID:AnyObject) -> Bool {
+        
+        return (objectsUnderDeletionQueue?.containsObject(argObjectID))!
+    }
     
-//properties not coming up
     
-//    return objectsUnderDeletionQueue
-}
 }
 
 

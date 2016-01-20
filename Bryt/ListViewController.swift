@@ -14,6 +14,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var bAudioOnly:Bool?
     var m_userArray = NSMutableArray()
     var m_receiverID =  String()
+    var userPullTimer: NSTimer?
 
     @IBOutlet weak var m_userTableView: UITableView!
     
@@ -21,9 +22,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // FIXME: timer should be disabled when table view is not displayed
+        // FIXME: timer should be disabled when table view is not displayed.   er if in a call
     
-        NSTimer.scheduledTimerWithTimeInterval(5.0,target: self,selector: "pullForNewUsersWithRefresh",userInfo: nil, repeats: true)
+      userPullTimer = NSTimer.scheduledTimerWithTimeInterval(5.0,target: self,selector: "pullForNewUsersWithRefresh",userInfo: nil, repeats: true)
 
     }
     
@@ -170,7 +171,6 @@ func didLogin() {
             
             let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
             let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
             })
             
             alertController.addAction(ok)

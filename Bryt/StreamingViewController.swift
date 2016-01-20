@@ -30,7 +30,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var disconnectButton: UILabel!
+    @IBOutlet weak var disconnectButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     
     var bAudio: Bool?
@@ -281,8 +281,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         doUnpublish()
         doUnsubscribe()
         disconnectButton.hidden = true
-        //        ParseHelper
+        ParseHelper.deleteActiveSession()
         
+        //set the polling on
         ParseHelper.setPollingTimer(true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -338,6 +339,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         doConnect()
     }
     
+    @IBAction func touchDisconnect(sender: AnyObject) {
+        disConnectAndGoBack()
+    }
 }
 
 

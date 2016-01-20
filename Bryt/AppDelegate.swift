@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func registerNotifs() {
         
         //if they have logged in run this skip
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         var navController = storyboard.instantiateViewControllerWithIdentifier("navvc") as! UINavigationController
@@ -59,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kSessionSavedNotification", object: nil)
+
+
         
     }
     
