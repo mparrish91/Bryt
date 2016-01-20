@@ -322,7 +322,7 @@ class ParseHelper: NSObject {
                         print("Session deleted from parse")
                     } else {
                         // The find succeeded.
-                        print(error!.localizedDescription)
+                        print(error!.description)
                     }
                 }
             }

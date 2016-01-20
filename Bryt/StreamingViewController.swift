@@ -20,7 +20,7 @@ enum streamingMode: Int {
 
 //OpenTok
 let ApiKey = "45458232"
-let SessionID = "1_MX40NTQ1ODIzMn5-MTQ1MjEwNTk0MTA4NH5lZWIvaUs2RjFuZTBQNmxCdVpYWGdReGF-fg"
+let SessionID = "2_MX40NTQ1ODIzMn5-MTQ1MzI3NTEwNTMzOH4vbkRTMXd5Y3dJK3ZMZXJGbUQ3U09YRUp-UH4"
 let Token = "T1==cGFydG5lcl9pZD00NTQ1ODIzMiZzaWc9ZTIxZjBhNTg1OTkyYWNjYzc5MTYyYTdkMTA1MWY5ZDdmNWRhZGYwODpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTFfTVg0ME5UUTFPREl6TW41LU1UUTFNakV3TlRrME1UQTROSDVsWldJdmFVczJSakZ1WlRCUU5teENkVnBZV0dkUmVHRi1mZyZjcmVhdGVfdGltZT0xNDUyMTA2MDk0Jm5vbmNlPTAuMzk3MjQwNzkwNTg3MDU2NjQmZXhwaXJlX3RpbWU9MTQ1NDY5Nzg1MSZjb25uZWN0aW9uX2RhdGE9"
 
 // Change to YES to subscribe to your own stream.
@@ -55,14 +55,17 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     override func viewWillAppear(animated: Bool) {
         doConnect()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "sessionSaved", name:  "kSessionSavedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceiverBusyMsg", name: "kReceiverBusyNotification", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         if callReceiverID != "" {
-            m_mode = streamingmode
+            m_mode = streamingMode.streamingModeOutgoing.rawValue
             initOutGoingCall()
             
         }else{
+            m_mode = streamingMode.streamingModeIncoming.rawValue
             m_connectionAttempts = 1
             connectWithToken()
         }
@@ -249,6 +252,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         NSLog("session connectionDestroyed (\(connection.connectionId))")
     }
     
+    //FIXME: fixxx
     func session(session: OTSession, didFailWithError error: OTError) {
         NSLog("session didFailWithError (%@)", error)
         print("- description: \(error.localizedDescription)")
@@ -263,7 +267,18 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             errorMsg = "Session failed to connect - Reconnecting attempt \(m_connectionAttempts)"
             statusLabel.text = errorMsg
             view.bringSubviewToFront(statusLabel)
-            
+
+            self.performSelector("connectWithSubscriber", withObject: nil, afterDelay: 15)
+
+        }else {
+            m_connectionAttempts = 1
+            errorMsg = "Session failed to connect - disconnecting now)"
+            statusLabel.text = errorMsg
+            self.performSelector("doneStreaming:", withObject: nil, afterDelay: 10)
+
+
+        }
+        
         }
         
     }
