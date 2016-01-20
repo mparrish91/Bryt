@@ -180,8 +180,6 @@ func didLogin() {
             return
         }
         
-
-        
         
         print("user ID from button \(sender.userID!)")
         

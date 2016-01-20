@@ -37,7 +37,11 @@ class ParseHelper: NSObject {
                 alertController.addAction(ok)
                 
                 let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                
+                //delay presentation of alertviewcontroller
+                dispatch_async(dispatch_get_main_queue(), {
+                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                })
             } else{
                 loggedInUser = user!
                 showUserTitlePrompt()
@@ -69,7 +73,12 @@ class ParseHelper: NSObject {
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
         }
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+        
+        //delay presentation of alertviewcontroller
+        dispatch_async(dispatch_get_main_queue(), {
+            ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+        })
+//        ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
     }
 
 
@@ -112,7 +121,7 @@ class ParseHelper: NSObject {
         activeSession["isAudio"] = bAudio
         
         let bVideo = inputDict["isAudio"]?.boolValue
-        activeSession["isVideo"] = bVideo                //? why was this converted to NSNumber in tutorial
+        activeSession["isVideo"] = bVideo                
         
         
         let receiverID = inputDict["receiverID"]
@@ -151,7 +160,12 @@ class ParseHelper: NSObject {
                 alertController.addAction(ok)
                 
                 let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                
+                //delay presentation of alertviewcontroller
+                dispatch_async(dispatch_get_main_queue(), {
+                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                })
+                
 
             }
         }
@@ -206,7 +220,13 @@ class ParseHelper: NSObject {
                         alertController.addAction(ok)
                         
                         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                        ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)                    }
+                        
+                        //delay presentation of alertviewcontroller
+                        dispatch_async(dispatch_get_main_queue(), {
+                            ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                        })
+                    
+                    }
                 }
             }else {
 
@@ -219,7 +239,11 @@ class ParseHelper: NSObject {
                 alertController.addAction(ok)
                 
                 let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                
+                //delay presentation of alertviewcontroller
+                dispatch_async(dispatch_get_main_queue(), {
+                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                })
                 
             }
         }
@@ -273,7 +297,11 @@ class ParseHelper: NSObject {
                     alertController.addAction(ok)
 
                     let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                    
+                    //delay presentation of alertviewcontroller
+                    dispatch_async(dispatch_get_main_queue(), {
+                        ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                    })
                     
                 }
             }else{
@@ -287,7 +315,12 @@ class ParseHelper: NSObject {
                 alertController.addAction(ok)
                 
                 let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-                ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                
+                
+                //delay presentation of alertviewcontroller
+                dispatch_async(dispatch_get_main_queue(), {
+                    ad.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                })
             }
             
         }

@@ -17,9 +17,7 @@ enum streamingMode: Int {
 
 
 //OpenTok
-let ApiKey = "45458232"
-//let SessionID = "2_MX40NTQ1ODIzMn5-MTQ1MzI3NTEwNTMzOH4vbkRTMXd5Y3dJK3ZMZXJGbUQ3U09YRUp-UH4"
-//let Token = "T1==cGFydG5lcl9pZD00NTQ1ODIzMiZzaWc9ZTIxZjBhNTg1OTkyYWNjYzc5MTYyYTdkMTA1MWY5ZDdmNWRhZGYwODpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTFfTVg0ME5UUTFPREl6TW41LU1UUTFNakV3TlRrME1UQTROSDVsWldJdmFVczJSakZ1WlRCUU5teENkVnBZV0dkUmVHRi1mZyZjcmVhdGVfdGltZT0xNDUyMTA2MDk0Jm5vbmNlPTAuMzk3MjQwNzkwNTg3MDU2NjQmZXhwaXJlX3RpbWU9MTQ1NDY5Nzg1MSZjb25uZWN0aW9uX2RhdGE9"
+let ApiKey = "45403342"
 
 // Change to YES to subscribe to your own stream.
 let SubscribeToSelf = false
@@ -67,7 +65,6 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
 
     
     override func viewWillAppear(animated: Bool) {
-//        doConnect()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sessionSaved", name:  "kSessionSavedNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceiverBusyMsg", name: "kReceiverBusyNotification", object: nil)
     }
@@ -177,6 +174,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         }
         
         view.addSubview(video)
+        view.bringSubviewToFront(disconnectButton)
+        view.bringSubviewToFront(statusLabel)
+        
         video.translatesAutoresizingMaskIntoConstraints = false          //tells us we will let autolayout handle
         video.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
         video.bottomAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
@@ -184,9 +184,10 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         video.trailingAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         video.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
         
-        view.bringSubviewToFront(disconnectButton)
-        view.bringSubviewToFront(statusLabel)
-        
+        publisher?.view.layer.cornerRadius = 10.0
+        publisher?.view.layer.masksToBounds = true
+//        publisher?.view.layer.borderWidth = 5.0
+//
     }
 
     func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: [String : AnyObject], context: Void) {
@@ -382,10 +383,6 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             view.bringSubviewToFront(statusLabel)
         }
         
-        subscriber?.view.layer.cornerRadius = 10.0
-        subscriber?.view.layer.masksToBounds = true
-        subscriber?.view.layer.borderWidth = 5.0
-        
         statusLabel.text = "Connected and streaming..."
         view.bringSubviewToFront(statusLabel)
         
@@ -440,6 +437,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     func publisher(publisher: OTPublisherKit, didFailWithError error: OTError) {
+        print(session?.sessionConnectionStatus.rawValue)
         NSLog("publisher didFailWithError %@", error)
         NSLog("- error code: %@", error.code)
         NSLog("- description %@", error.description)
