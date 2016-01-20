@@ -215,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				E1FDCD7E1C37423000D0B077 /* Main.storyboard */,
+				E1C9389A1C4DDC6600790F0F /* VideoCallButton.swift */,
 				E1FDCD801C37423000D0B077 /* LoginViewController.swift */,
 				E12E63471BE3F05900BDDC76 /* AppDelegate.swift */,
 				E12E63491BE3F05900BDDC76 /* StreamingViewController.swift */,
@@ -224,7 +225,6 @@
 				E12E63501BE3F05900BDDC76 /* LaunchScreen.storyboard */,
 				E12E63531BE3F05900BDDC76 /* Info.plist */,
 				E168591C1BFFBC78006F971E /* Supporting Files */,
-				E1C9389A1C4DDC6600790F0F /* VideoCallButton.swift */,
 			);
 			path = Bryt;
 			sourceTree = "<group>";

@@ -357,7 +357,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             m_connectionAttempts = 1
             errorMsg = "Session failed to connect - disconnecting now)"
             statusLabel.text = errorMsg
-            self.performSelector("doneStreaming:", withObject: nil, afterDelay: 10)
+            self.performSelector("doneStreaming", withObject: nil, afterDelay: 10)
         }
     }
 
@@ -367,6 +367,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func subscriberDidConnectToStream(subscriberKit: OTSubscriberKit) {
         NSLog("subscriberDidConnectToStream (\(subscriberKit))")
+        NSLog("subscriberDidConnectToStream (\(subscriberKit.stream.connection.connectionId))")
+        
         if let view = subscriber?.view {
             view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
@@ -375,19 +377,19 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             
             view.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
             view.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-            
-            if (publisher != nil) {
-                view.bringSubviewToFront((publisher?.view)!)
-            }
-            
+        }
+        
+        if (publisher != nil) {
+            view.bringSubviewToFront((publisher?.view)!)
+            view.bringSubviewToFront(disconnectButton)
+            view.bringSubviewToFront(statusLabel)
         }
         
         subscriber?.view.layer.cornerRadius = 10.0
         subscriber?.view.layer.masksToBounds = true
         subscriber?.view.layer.borderWidth = 5.0
-//        subscriber?.view.layer.borderColor = UIColor.grayColor().CGColor
         
-        statusLabel.text = "Connected, waiting for stream..."
+        statusLabel.text = "Connected and streaming..."
         view.bringSubviewToFront(statusLabel)
         
     }
@@ -398,7 +400,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         statusLabel.text = "Error receiving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
-        callSelector("doneStreaming", object: nil, delay: 5.0)
+        self.performSelector("doneStreaming", withObject: nil, afterDelay: 5.0)
         
     }
     
@@ -421,6 +423,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func publisher(publisher: OTPublisherKit, streamCreated stream: OTStream) {
         NSLog("publisher streamCreated %@", stream)
+        NSLog("- publisher.session:  %@", publisher.session.sessionId)
+        NSLog("- publisher.name:  %@", publisher.name)
+
         
         // Step 3b: (if YES == subscribeToSelf): Our own publisher is now visible to
         // all participants in the OpenTok session. We will attempt to subscribe to
@@ -429,6 +434,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         if subscriber == nil && SubscribeToSelf {
             doSubscribe(stream)
         }
+        
+        statusLabel.text = "Started your camera feed....."
+        view.bringSubviewToFront(statusLabel)
     }
     
     func publisher(publisher: OTPublisherKit, streamDestroyed stream: OTStream) {
@@ -437,18 +445,19 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         if subscriber?.stream.streamId == stream.streamId {
             doUnsubscribe()
         }
+        statusLabel.text = "Stopping your camera feed..."
+        view.bringSubviewToFront(statusLabel)
     }
     
-    //fix
     func publisher(publisher: OTPublisherKit, didFailWithError error: OTError) {
         NSLog("publisher didFailWithError %@", error)
-        NSLog("publisher didFailWithError %@", error)
-        NSLog("publisher didFailWithError %@", error)
+        NSLog("- error code: %@", error.code)
+        NSLog("- description %@", error.description)
         
-        statusLabel.text = "Error recieving video feed, disconnecting..."
+        statusLabel.text = "Failed to share your camera feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
+        self.performSelector("doneStreaming", withObject: nil, afterDelay: 5.0 )
 
-        
     }
     
     // MARK: - Helpers

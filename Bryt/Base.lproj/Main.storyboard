@@ -143,24 +143,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egf-Hy-BJK">
-                                <rect key="frame" x="174" y="547" width="253" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Gy-pP-R1x">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Gy-pP-R1x">
                                 <rect key="frame" x="556" y="78" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="g8N-A3-aP4"/>
+                                    <constraint firstAttribute="height" constant="30" id="yYk-sF-0lZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="X">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="touchDisconnect:" destination="JSi-zX-XOR" eventType="touchUpInside" id="0z4-oy-ba4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egf-Hy-BJK">
+                                <rect key="frame" x="174" y="547" width="253" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="253" id="wGn-5X-L2u"/>
+                                    <constraint firstAttribute="height" constant="33" id="zdh-TH-c4V"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="egf-Hy-BJK" firstAttribute="centerX" secondItem="9Iz-5Y-EzP" secondAttribute="centerX" id="0eI-V5-GHZ"/>
+                            <constraint firstAttribute="trailing" secondItem="8Gy-pP-R1x" secondAttribute="trailing" constant="14" id="LAW-xq-xTx"/>
+                            <constraint firstItem="8Gy-pP-R1x" firstAttribute="top" secondItem="Pvp-fL-SdE" secondAttribute="bottom" constant="14" id="n8I-kb-lfD"/>
+                            <constraint firstItem="wk6-Wk-gBS" firstAttribute="top" secondItem="egf-Hy-BJK" secondAttribute="bottom" constant="20" id="ofy-y6-B28"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RM6-vF-5b6"/>
                     <connections>
