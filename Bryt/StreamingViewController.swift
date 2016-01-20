@@ -309,8 +309,17 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func session(session: OTSession, streamDestroyed stream: OTStream) {
         NSLog("session streamCreated (\(stream.streamId))")
         
-        if subscriber?.stream.streamId == stream.streamId {
+//        if subscriber?.stream.streamId == stream.streamId {
+//            doUnsubscribe()
+//        }
+        
+        if (SubscribeToSelf == false && subscriber != nil && subscriber?.stream.streamId == stream.streamId) {
             doUnsubscribe()
+            updateSubscriber()
+            statusLabel.text = "Stream dropped, disconnecting..."
+            view.bringSubviewToFront(statusLabel)
+            
+            self.performSelector("doneStreaming", withObject: nil, afterDelay: 5)
         }
     }
     
@@ -320,6 +329,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func session(session: OTSession, connectionDestroyed connection : OTConnection) {
         NSLog("session connectionDestroyed (\(connection.connectionId))")
+        
+        
     }
     
     func session(session: OTSession, didFailWithError error: OTError) {
@@ -341,18 +352,16 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
                 self.performSelector("connectWithSubscriberToken", withObject: nil, afterDelay: 15.0)
             }else {
                 self.performSelector("connectWithPublisherToken", withObject: nil, afterDelay: 15.0)
-
             }
         }else {
             m_connectionAttempts = 1
             errorMsg = "Session failed to connect - disconnecting now)"
             statusLabel.text = errorMsg
             self.performSelector("doneStreaming:", withObject: nil, afterDelay: 10)
-
-
         }
-        
     }
+
+
 
     // MARK: - OTSubscriber delegate callbacks
     
@@ -438,6 +447,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         statusLabel.text = "Error recieving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
+
         
     }
     
