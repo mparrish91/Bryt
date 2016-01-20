@@ -202,6 +202,18 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func sessionDidDisconnect(session : OTSession) {
         NSLog("Session disconnected (\( session.sessionId))")
+        
+        statusLabel.text = "Session disconnect..."
+        view.bringSubviewToFront(statusLabel)
+        
+        //for cases when the other party disconnected the session. Fire the timer again.
+        self.disconnectButton.hidden = true
+        
+        //set the polling on.
+        ParseHelper.setPollingTimer(true)
+        ParseHelper.deleteActiveSession()
+        self.dismissViewControllerAnimated(true, completion: nil)
+
     }
     
     func session(session: OTSession, streamCreated stream: OTStream) {
