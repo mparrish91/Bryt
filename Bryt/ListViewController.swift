@@ -98,15 +98,15 @@ func didLogin() {
         goToStreamingVC()
     }
     
-    
-    func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
-        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
-        
-        // add code to handle the different button hits
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-    }
+    //Not utilizing anymore
+//    func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
+//        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
+//        
+//        // add code to handle the different button hits
+//        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+//        ad.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+//    }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -143,7 +143,6 @@ func didLogin() {
             40)
         
         
-        videoCallButton.tag = indexPath.row
         
         videoCallButton.userIndex = indexPath.row
         videoCallButton.userID = dict["userID"]
@@ -164,13 +163,19 @@ func didLogin() {
     
     func startVideoChat(sender: VideoCallButton!) {
         print("start called")
-//        let button = UIButton()
         
-//        if button.tag < 0 //out of bounds
-        
-        // FIXME: This probably won't work.
+        // FIXME: This probably won't work.  1.19 Still Confused
         if sender.userIndex < 0 {
-            showAlert("User is no longer online.")
+            let msg = "User is no longer online."
+            
+            let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
+            })
+            
+            alertController.addAction(ok)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
             
             return
         }

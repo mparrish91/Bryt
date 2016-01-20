@@ -24,10 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var bFullyLoggedIn: Bool?
     
-    var currentLocation: CLLocation?
     weak var appTimer: NSTimer?
     
-
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -64,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    //FIXME: applicationdidenter background
     func applicationDidEnterBackground(application: UIApplication) {
         
         var backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(

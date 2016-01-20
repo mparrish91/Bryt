@@ -11,11 +11,9 @@ import Parse
 
 class ParseHelper: NSObject {
     
-    static var loginTextField: UITextField?
     static var loggedInUser: PFUser?
-
-    static var bPollingTimerOn: Bool?
     static var activeUserobjID: String?
+    static var bPollingTimerOn: Bool?
     static var objectsUnderDeletionQueue: NSMutableArray?
     
     
@@ -28,13 +26,12 @@ class ParseHelper: NSObject {
         }
         PFAnonymousUtils.logInWithBlock({ (user : PFUser?, error: NSError?) -> Void in
             if error != nil || user == nil {
-                let descriptiony = error?.localizedDescription
-                print("Failed to login anonymously. Please try again. \(description)")
-                let msg  = "Failed to save outgoing call session. Please try again \(description)"
+                let description = error?.localizedDescription
+                print("Anonymous login failed. \(description)")
+                let msg  = "Failed to login anonymously. Please try again \(description)"
                 
                 let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
                 let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                    NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
                 })
                 
                 alertController.addAction(ok)
@@ -51,9 +48,6 @@ class ParseHelper: NSObject {
     
     class func showUserTitlePrompt() {
         
-        print(loggedInUser)
-
-        
         let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
@@ -63,7 +57,6 @@ class ParseHelper: NSObject {
             
             //fire appdelegate timer
             appDelegate.fireListeningTimer()
-            print(loggedInUser)
             NSNotificationCenter.defaultCenter().postNotificationName("kLoggedInNotification", object: nil)
         })
         
@@ -83,15 +76,11 @@ class ParseHelper: NSObject {
 //will initiate the call by saving session
 //if there is a session already existing, do not save,
 //just pop an alert
-
-    
     class func saveSessionToParse(inputDict:Dictionary<String, AnyObject>) {
-        
-        print("inputDict \(inputDict)")
         
         let receiverID = inputDict["receiverID"]
         
-        storeToParse(inputDict)
+        //        storeToParse(inputDict)         not sure if i still need this
         
         //check if the recipient is either the caller or receiver in one of the activesessions.
         let predicate = NSPredicate(format: "receiverID = %@ OR callerID = %@", argumentArray: [receiverID!,receiverID!])
@@ -359,7 +348,19 @@ class ParseHelper: NSObject {
 
 
     class func initData() {
-        objectsUnderDeletionQueue = NSMutableArray()
+        if objectsUnderDeletionQueue == nil {
+            objectsUnderDeletionQueue = NSMutableArray()
+
+        }
+    }
+    
+    class func invalidateTimer() {
+        print("invalidating")
+        bPollingTimerOn = false
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.appTimer?.invalidate()
+        appDelegate.appTimer = nil
+        
     }
 
 
