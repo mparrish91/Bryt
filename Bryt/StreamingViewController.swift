@@ -42,7 +42,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     var callReceiverID: String?
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
+    
     var m_mode: Int?
     var m_connectionAttempts: Int?
     
@@ -50,20 +50,17 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func showReceiverBusyMsg() {
         statusLabel.text = "Receiver is busy on another call. Please try later."
         self.performSelector("goBack", withObject: nil, afterDelay: 5.0)
-
     }
     
     func goBack() {
         statusLabel.hidden = true
         dismissViewControllerAnimated(true, completion: nil)
-
     }
     
  
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bAudio = true
         
     }
@@ -79,15 +76,17 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         if callReceiverID != "" {
             m_mode = streamingMode.streamingModeOutgoing.rawValue
             initOutGoingCall()
+            //connect, publish/subscriber -> will be taken care by
+            //sessionSaved observed handler.
             
         }else{
             m_mode = streamingMode.streamingModeIncoming.rawValue
             m_connectionAttempts = 1
-            connectWithToken()
+            connectWithPublisherToken()
         }
     }
     
-    //FIXME: not sure if stream is set correct with the tuple
+    //FIXME: not sure if stream is set correctly with the tuple
     func updateSubscriber() {
         for (key, value) in session!.streams.enumerate() {
             let stream  = value.0 as! OTStream
@@ -130,13 +129,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func connectWithPublisherToken() {
         print("connectWithPublisherToken")
         doConnect(appDelegate.publisherToken!,sessionID: appDelegate.sessionID!)
-        
     }
     
     func connectWithSubscriberToken() {
         print("connectWithSubscriberToken")
         doConnect(appDelegate.subscriberToken!,sessionID: appDelegate.sessionID!)
-
     }
     
     /**
@@ -183,14 +180,13 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         video.translatesAutoresizingMaskIntoConstraints = false          //tells us we will let autolayout handle
         video.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
         video.bottomAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-
+        
         video.trailingAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         video.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-
+        
         view.bringSubviewToFront(disconnectButton)
         view.bringSubviewToFront(statusLabel)
         
-
     }
 
     func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: [String : AnyObject], context: Void) {
@@ -309,9 +305,9 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func session(session: OTSession, streamDestroyed stream: OTStream) {
         NSLog("session streamCreated (\(stream.streamId))")
         
-//        if subscriber?.stream.streamId == stream.streamId {
-//            doUnsubscribe()
-//        }
+        //        if subscriber?.stream.streamId == stream.streamId {
+        //            doUnsubscribe()
+        //        }
         
         if (SubscribeToSelf == false && subscriber != nil && subscriber?.stream.streamId == stream.streamId) {
             doUnsubscribe()
@@ -371,6 +367,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         if let view = subscriber?.view {
             view.addSubview(view)
+            disconnectButton.hidden = false
             view.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
             view.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
             view.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
@@ -396,7 +393,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func subscriber(subscriber: OTSubscriberKit, didFailWithError error : OTError) {
         NSLog("subscriber %@ didFailWithError %@", subscriber.stream.streamId, error)
-        print("code: \(error.localizedDescription)")
+        print("- code: \(error.code)")
+        print("- description: \(error.localizedDescription)")
         
         statusLabel.text = "Error receiving video feed, disconnecting..."
         view.bringSubviewToFront(statusLabel)
@@ -404,28 +402,20 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
     }
     
-    @IBAction func doneStreaming() {
-        disConnectAndGoBack()
+    func subscriberVideoEnabled(subscriber: OTSubscriberKit!, reason: OTSubscriberVideoEventReason) {
+        NSLog("subscriber starting to receive video %@", subscriber.stream.streamId)
+        statusLabel.text = "Receiving Stream..."
+        view.bringSubviewToFront(statusLabel)
     }
     
-    func disConnectAndGoBack(){
-        doUnpublish()
-        doUnsubscribe()
-        disconnectButton.hidden = true
-        ParseHelper.deleteActiveSession()
-        
-        //set the polling on
-        ParseHelper.setPollingTimer(true)
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+
     // MARK: - OTPublisher delegate callbacks
     
     func publisher(publisher: OTPublisherKit, streamCreated stream: OTStream) {
         NSLog("publisher streamCreated %@", stream)
         NSLog("- publisher.session:  %@", publisher.session.sessionId)
         NSLog("- publisher.name:  %@", publisher.name)
-
+        
         
         // Step 3b: (if YES == subscribeToSelf): Our own publisher is now visible to
         // all participants in the OpenTok session. We will attempt to subscribe to
@@ -460,6 +450,14 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
 
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    
+        statusLabel = nil
+        disconnectButton = nil
+    }
+    
+    
     // MARK: - Helpers
     
     func showAlert(message: String) {
@@ -473,33 +471,25 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     }
     
     
-    func connectWithToken() {
-        print("connectWithToken")
-        doConnect()
-    }
-    
     @IBAction func touchDisconnect(sender: AnyObject) {
         disConnectAndGoBack()
     }
-}
 
 
-
-extension NSObject {
     
-    func callSelectorAsync(selector: Selector, object: AnyObject?, delay: NSTimeInterval) -> NSTimer {
+    func disConnectAndGoBack(){
+        doUnpublish()
+        doDisconnect()
+        doUnsubscribe()  //not sure if I need this too
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: selector, userInfo: object, repeats: false)
-        return timer
-    }
-    
-    func callSelector(selector: Selector, object: AnyObject?, delay: NSTimeInterval) {
+        disconnectButton.hidden = true
+        ParseHelper.deleteActiveSession()
         
-        let delay = delay * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            NSThread.detachNewThreadSelector(selector, toTarget:self, withObject: object)
-        })
+        //set the polling on
+        ParseHelper.setPollingTimer(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
+
+
 
