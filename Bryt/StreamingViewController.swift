@@ -47,23 +47,30 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     var m_connectionAttempts: Int?
     
     
-    func goBack() {
-        statusLabel.hidden = true
+    func showReceiverBusyMsg() {
+        statusLabel.text = "Receiver is busy on another call. Please try later."
         self.performSelector("goBack", withObject: nil, afterDelay: 5.0)
 
     }
     
-    func 
+    func goBack() {
+        statusLabel.hidden = true
+        dismissViewControllerAnimated(true, completion: nil)
+
+    }
     
+ 
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        bAudio = true
         
     }
 
     
     override func viewWillAppear(animated: Bool) {
-        doConnect()
+//        doConnect()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sessionSaved", name:  "kSessionSavedNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceiverBusyMsg", name: "kReceiverBusyNotification", object: nil)
     }
@@ -77,6 +84,18 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             m_mode = streamingMode.streamingModeIncoming.rawValue
             m_connectionAttempts = 1
             connectWithToken()
+        }
+    }
+    
+    //FIXME: not sure if stream is set correct with the tuple
+    func updateSubscriber() {
+        for (key, value) in session!.streams.enumerate() {
+            let stream  = value.0 as! OTStream
+            
+            if stream.connection.connectionId != session?.connection.connectionId {
+                subscriber = OTSubscriber(stream: stream, delegate: self)
+                break
+            }
         }
     }
     
@@ -97,10 +116,6 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         ParseHelper.saveSessionToParse(inputDict)
     }
     
-    func sessionSaved() {
-        connectWithToken()
-        
-    }
     
     override func prefersStatusBarHidden() -> Bool {
         return false
@@ -112,15 +127,15 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         connectWithSubscriberToken()
     }
     
-    func connectWithPublisherToken {
+    func connectWithPublisherToken() {
         print("connectWithPublisherToken")
-        doConnect(appDelegate.publisherToken, appDelegate.sessionID)
-
+        doConnect(appDelegate.publisherToken!,sessionID: appDelegate.sessionID!)
+        
     }
     
-    func connectWithSubscriberToken {
+    func connectWithSubscriberToken() {
         print("connectWithSubscriberToken")
-        doConnect(appDelegate.subscriberToken, appDelegate.sessionID)
+        doConnect(appDelegate.subscriberToken!,sessionID: appDelegate.sessionID!)
 
     }
     
@@ -134,11 +149,11 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         
         var maybeError : OTError?
         session!.connectWithToken(token, error: &maybeError)
-        showAlert(error.localizedDescription)
-        
+        if let error = maybeError {
+            showAlert(error.localizedDescription)
         }
     }
-    
+
     /**
      * Sets up an instance of OTPublisher to use with this session. OTPubilsher
      * binds to the device camera and microphone, and will provide A/V streams
@@ -164,9 +179,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             return
         }
         
-        
         view.addSubview(video)
-        video.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
+        video.translatesAutoresizingMaskIntoConstraints = false          //tells us we will let autolayout handle
         video.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
         video.bottomAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
 
@@ -176,17 +190,15 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         view.bringSubviewToFront(disconnectButton)
         view.bringSubviewToFront(statusLabel)
         
-        //stopTimer
 
     }
 
-func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: Dictionary, context: Void) {
+    func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: [String : AnyObject], context: Void) {
     if keyPath == "connectionCount" {
         //this is kept blank for possible implementation
         //in case one wants to handle more than 2 participants.
     }
 }
-
 
 
     /**
@@ -196,16 +208,39 @@ func observeValueForKeyPath(keyPath: String, ofObject: AnyObject, change: Dictio
      * add the subscriber only after it has connected and begins receiving data.
      */
     func doSubscribe(stream : OTStream) {
-        if let session = self.session {
-            subscriber = OTSubscriber(stream: stream, delegate: self)
+        
+        if SubscribeToSelf == true  && stream.connection.connectionId == session?.connection.connectionId ||
+            SubscribeToSelf == false  && stream.connection.connectionId != session?.connection.connectionId
+        {
             
-            var maybeError : OTError?
-            session.subscribe(subscriber, error: &maybeError)
-            if let error = maybeError {
-                showAlert(error.localizedDescription)
+            if subscriber == nil {
+                subscriber = OTSubscriber(stream: stream, delegate: self)
+                subscriber?.subscribeToAudio = bAudio!
+                subscriber?.subscribeToVideo = bVideo!
+                
+                var maybeError : OTError?
+                session!.subscribe(subscriber, error: &maybeError)
+                if let error = maybeError {
+                    showAlert(error.localizedDescription)
+                    
+                }
             }
         }
     }
+    
+        
+        
+//        if let session = self.session {
+//            subscriber = OTSubscriber(stream: stream, delegate: self)
+//            subscriber?.subscribeToAudio = bAudio
+//            subscriber?.subscribeToVideo = bVideo
+//
+//            
+//            var maybeError : OTError?
+//            session.subscribe(subscriber, error: &maybeError)
+//            if let error = maybeError {
+//                showAlert(error.localizedDescription)
+
     
     /**
      * Cleans the subscriber from the view hierarchy, if any.
