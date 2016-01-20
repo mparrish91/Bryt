@@ -10,6 +10,12 @@
 import UIKit
 import Parse
 
+enum streamingMode: Int {
+    case streamingModeIncoming = 0
+    case streamingModeOutgoing = 1
+}
+
+
 
 
 //OpenTok
@@ -53,6 +59,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     override func viewDidAppear(animated: Bool) {
         if callReceiverID != "" {
+            m_mode = streamingmode
             initOutGoingCall()
             
         }else{
@@ -244,6 +251,21 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     
     func session(session: OTSession, didFailWithError error: OTError) {
         NSLog("session didFailWithError (%@)", error)
+        print("- description: \(error.localizedDescription)")
+        var errorMsg: String?
+        
+        if let attempts = m_connectionAttempts {
+            m_connectionAttempts = attempts
+        }
+        
+        if m_connectionAttempts < 10 {
+            m_connectionAttempts = m_connectionAttempts! + 1
+            errorMsg = "Session failed to connect - Reconnecting attempt \(m_connectionAttempts)"
+            statusLabel.text = errorMsg
+            view.bringSubviewToFront(statusLabel)
+            
+        }
+        
     }
     
     // MARK: - OTSubscriber delegate callbacks
