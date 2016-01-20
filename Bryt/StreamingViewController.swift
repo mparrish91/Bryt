@@ -283,7 +283,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     func sessionDidDisconnect(session : OTSession) {
         NSLog("Session disconnected (\( session.sessionId))")
         
-        statusLabel.text = "Session disconnect..."
+        statusLabel.text = "Session disconnected..."
         view.bringSubviewToFront(statusLabel)
         
         //for cases when the other party disconnected the session. Fire the timer again.
@@ -322,7 +322,6 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         NSLog("session connectionDestroyed (\(connection.connectionId))")
     }
     
-    //FIXME: fixxx
     func session(session: OTSession, didFailWithError error: OTError) {
         NSLog("session didFailWithError (%@)", error)
         print("- description: \(error.localizedDescription)")
@@ -337,9 +336,13 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
             errorMsg = "Session failed to connect - Reconnecting attempt \(m_connectionAttempts)"
             statusLabel.text = errorMsg
             view.bringSubviewToFront(statusLabel)
+            
+            if m_mode == streamingMode.streamingModeOutgoing.rawValue {
+                self.performSelector("connectWithSubscriberToken", withObject: nil, afterDelay: 15.0)
+            }else {
+                self.performSelector("connectWithPublisherToken", withObject: nil, afterDelay: 15.0)
 
-            self.performSelector("connectWithSubscriber", withObject: nil, afterDelay: 15)
-
+            }
         }else {
             m_connectionAttempts = 1
             errorMsg = "Session failed to connect - disconnecting now)"
