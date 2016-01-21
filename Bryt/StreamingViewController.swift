@@ -121,7 +121,8 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     // MARK: - OpenTok Methods
     
     func sessionSaved() {
-        connectWithSubscriberToken()
+//        connectWithSubscriberToken()
+        connectWithPublisherToken()
     }
     
     func connectWithPublisherToken() {
@@ -140,7 +141,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     */
     func doConnect(token: String, sessionID: String) {
         session = OTSession(apiKey: ApiKey, sessionId: appDelegate.sessionID, delegate: self)
-        session?.addObserver(self, forKeyPath: "connectionCount", options: NSKeyValueObservingOptions.New, context: nil)
+//        session?.addObserver(self, forKeyPath: "connectionCount", options: NSKeyValueObservingOptions.New, context: nil)
         
         var maybeError : OTError?
         session!.connectWithToken(token, error: &maybeError)

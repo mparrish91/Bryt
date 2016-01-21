@@ -120,28 +120,25 @@ func didLogin() {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let dict = m_userArray.objectAtIndex(indexPath.row) as! [String:String]
-//        let userTitle = dict.objectForKey("userTitle") as! String
         let userTitle = dict["userTitle"]
+        
+        print(m_userArray)
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
         cell?.backgroundColor = UIColor.clearColor()
         
         cell?.textLabel!.text = userTitle
-        cell?.textLabel?.font = UIFont(name: "Verdana", size: 13)
+        cell?.textLabel?.font = UIFont(name: "System", size: 20)
         cell?.contentView.backgroundColor = UIColor.clearColor()
         
         
         let videoCallButton = VideoCallButton(type: .System)
         
-//        UIButton(type: UIButtonType.System) as! VideoCallButton
-        
-        videoCallButton.backgroundColor = UIColor.orangeColor()
-        
         videoCallButton.frame = CGRectMake(cell!.bounds.size.width - 50,
             10,
-            40,
-            40)
+            20,
+            20)
         
         
         
