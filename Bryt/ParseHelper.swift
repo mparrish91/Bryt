@@ -30,7 +30,7 @@ class ParseHelper: NSObject {
                 print("Anonymous login failed. \(description)")
                 let msg  = "Failed to login anonymously. Please try again \(description)"
                 
-                let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                 let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                 })
                 
@@ -52,7 +52,7 @@ class ParseHelper: NSObject {
     
     class func showUserTitlePrompt() {
         
-        let alertController = UIAlertController(title: "LiveSessions", message: "Enter your name", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Bryt", message: "What's your name :)", preferredStyle: .Alert)
         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -152,7 +152,7 @@ class ParseHelper: NSObject {
                 print("savesession error!!! \(description)")
                 let msg  = "Failed to save outgoing call session. Please try again \(description)"
                 
-                let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                 let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
                 })
@@ -177,7 +177,7 @@ class ParseHelper: NSObject {
 
     //FIXME: showAlert convience method This never worked
 //    class func showAlert(message: String, completionClosure:((action: UIAlertAction) -> ())? = nil) {
-//        let alert = UIAlertController(title: "LiveSessions", message:message, preferredStyle: UIAlertControllerStyle.Alert)
+//        let alert = UIAlertController(title: "Bryt", message:message, preferredStyle: UIAlertControllerStyle.Alert)
 //        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:{(alert: UIAlertAction!) in completionClosure}))
 //        
 //        // add code to handle the different button hits
@@ -213,7 +213,7 @@ class ParseHelper: NSObject {
                         print(" \(description)")
                         let msg  = "Save to ActiveUsers failed. \(description)"
                         
-                        let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                         let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                         })
                         
@@ -232,7 +232,7 @@ class ParseHelper: NSObject {
 
                 let msg  = "Failed to save updated user. Please try again \(error?.description)"
                 
-                let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                 let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                 })
                 
@@ -286,7 +286,7 @@ class ParseHelper: NSObject {
                     
                     let msg  = "Incoming call from, \(appDelegate.callerTitle), Accept?"
                     
-                    let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                     let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
                         invalidateTimer()  //invalidate the Polling because we are in a call
@@ -307,7 +307,7 @@ class ParseHelper: NSObject {
             }else{
                 let msg  = "Failed to retrieve active session for incoming call.  Please try again. %@ \(error?.description)"
                 
-                let alertController = UIAlertController(title: "LiveSessions", message: msg, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Bryt", message: msg, preferredStyle: .Alert)
                 let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName("kIncomingCallNotification", object: nil)
                 })

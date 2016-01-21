@@ -56,24 +56,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let firstVC = navController.viewControllers[0]
 //        window?.rootViewController = firstVC
         
-        let firstVC = self.window!.rootViewController as! ListViewController
-        let nc = UINavigationController(rootViewController: firstVC)
+        let nc = self.window!.rootViewController as! UINavigationController
+        let listVC = nc.viewControllers[0] as! ListViewController
+
+//        let nc = UINavigationController(rootViewController: firstVC)
 
         
-        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(firstVC, selector: "didLogin", name: "kSessionSavedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(listVC, selector: "didCallArrive", name:  "kIncomingCallNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(listVC, selector: "didLogin", name: "kLoggedInNotification", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(listVC, selector: "didLogin", name: "kSessionSavedNotification", object: nil)
 
 
         
     }
     
     //FIXME: applicationdidenter background
+    
     func applicationDidEnterBackground(application: UIApplication) {
-        
-        var backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
-            application.endBackgroundTask(UIBackgroundTaskInvalid))
-            
             
             //Start the long-running task and return immediately
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -82,8 +81,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ParseHelper.deleteActiveUser()
                 
             })
-        }
     }
+    
+    
+//    func applicationDidEnterBackground(application: UIApplication) {
+//        
+//        var backgroundTask = application.beginBackgroundTaskWithExpirationHandler {(
+//            application.endBackgroundTask(UIBackgroundTaskInvalid))
+//            
+//            
+//            //Start the long-running task and return immediately
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//                
+//                ParseHelper.deleteActiveSession()
+//                ParseHelper.deleteActiveUser()
+//                
+//            })
+//        }
+//    }
 
 //    func applicationDidEnterBackground(application: UIApplication) {
 //        

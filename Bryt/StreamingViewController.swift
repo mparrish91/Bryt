@@ -60,6 +60,7 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
     override func viewDidLoad() {
         super.viewDidLoad()
         bAudio = true
+        navigationController?.navigationBar.hidden = true
         
     }
 
