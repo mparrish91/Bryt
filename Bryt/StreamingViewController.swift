@@ -367,15 +367,15 @@ class StreamingViewController: UIViewController, OTSessionDelegate, OTSubscriber
         NSLog("subscriberDidConnectToStream (\(subscriberKit))")
         NSLog("subscriberDidConnectToStream (\(subscriberKit.stream.connection.connectionId))")
         
-        if let view = subscriber?.view {
-            view.addSubview(view)
+        if let streamingview = subscriber?.view {
+            view.addSubview(streamingview)
             disconnectButton.hidden = false
-            view.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
-            view.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
-            view.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
+            streamingview.translatesAutoresizingMaskIntoConstraints = false                      //tells us we will let autolayout handle
+            streamingview.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
+            streamingview.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor).active = true
             
-            view.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-            view.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
+            streamingview.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+            streamingview.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
         }
         
         if (publisher != nil) {
