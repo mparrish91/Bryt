@@ -1,4 +1,4 @@
-# iPhone Video Chat app Completely in Swift
+# Swift iPhone Video Chat app
 
 Video chat is one of the most popular forms of communication on mobile
 
