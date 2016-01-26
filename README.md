@@ -10,8 +10,8 @@ Screenshots
 ==========
 
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/master/Screenshots/screenshot1.png" />
-  <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/master/Screenshots/screenshot.png" />
+  <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/master/Screenshots/screenshot1.PNG" />
+  <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/master/Screenshots/screenshot.PNG" />
 
 </p>
 
