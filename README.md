@@ -10,8 +10,8 @@ Screenshots
 ==========
 
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/mparrish91/calendar_module_swift/master/Screenshots/screenshot1.png" />
-  <img src ="https://raw.githubusercontent.com/mparrish91/calendar_module_swift/master/Screenshots/screenshot.png" />
+  <img src ="https://raw.githubusercontent.com/mparrish91/Parse-OpenTok-Video-Calling-app/master/Screenshots/screenshot1.png" />
+  <img src ="https://raw.githubusercontent.com/mparrish91/Parse-OpenTok-Video-Calling-app/master/Screenshots/screenshot.png" />
 
 </p>
 
