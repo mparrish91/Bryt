@@ -11,7 +11,7 @@ Screenshots
 
 <p align="center">
   <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/tree/master/Screenshots/screenshot1.PNG" />
-  <img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/tree/master/Screenshots/screenshot.PNG" />
+  <!--<img src ="https://raw.githubusercontent.com/mparrish91/parse-tokbox-videocallingapp/tree/master/Screenshots/screenshot.PNG" />-->
 
 </p>
 
