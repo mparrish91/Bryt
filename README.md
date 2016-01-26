@@ -1,6 +1,6 @@
 # iPhone Video Chat app
 
-Video chat is one of the most popular forms of communication on mobile, and is for productivity apps as well as social networking.
+Video chat is one of the most popular forms of communication on mobile
 
 Parse - authentication server
 TokBox - streaming application server
